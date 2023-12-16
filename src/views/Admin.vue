@@ -62,7 +62,7 @@ export default {
         <button @click="addRound">Dodaj kolo</button>
         <br>
         <br>
-        <div class="addPerson">
+        <div class="addPerson" v-if="this.popup">
             <input type="text" v-model="ime" placeholder="ime">
             <input type="text" v-model="prezime" placeholder="prezime">
             <input type="text" v-model="kategorija" placeholder="kategorija">
