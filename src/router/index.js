@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Liga from '../views/Liga.vue'
 import Admin from '../views/Admin.vue'
+import AdminLogin from '../views/AdminLogin.vue'
 import Rekordi from '../views/Rekordi.vue'
+import Onama from '../views/Onama.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,9 +25,19 @@ const router = createRouter({
       component: Admin
     },
     {
+      path: '/adminLogin',
+      name: 'adminLogin',
+      component: AdminLogin
+    },
+    {
       path: '/rekordi',
       name: 'rekordi',
       component: Rekordi
+    },
+    {
+      path: '/onama',
+      name: 'onama',
+      component: Onama
     },
   ]
 })

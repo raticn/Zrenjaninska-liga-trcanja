@@ -1,6 +1,8 @@
 <script>
 import axios from "axios"
 import { RouterLink, RouterView } from 'vue-router'
+import Nav from '../components/Nav.vue'
+
 
 export default {
     data() {
@@ -10,6 +12,9 @@ export default {
             kolo: null,
             popup: 0,
         }
+    },
+    components: {
+        Nav,
     },
     methods: {
         async round($event) {
@@ -32,9 +37,10 @@ export default {
 </script>
 
 <template>
+    <Nav />
     <h1>Zrenjaninska liga trčanja</h1>
+    <RouterLink aria-label="Link do stranice: Liga" to="/">home</RouterLink>
     <div class="kola">
-        <RouterLink aria-label="Link do stranice: Liga" to="/liga"></RouterLink>
         <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.kola" :key="index" :data-id="index">
             <p>{{ kolo.rez_kolo }}. kolo</p>
             <p>{{ kolo.dat_datum }}</p>
@@ -70,16 +76,18 @@ export default {
     width: 90%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .kolo{
-    width: 14%;
+    width: 13%;
     border: 2px solid #000;
     text-align: center;
     cursor: pointer;
+    margin-bottom: 2em;
 }
 .koloPopup{
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
