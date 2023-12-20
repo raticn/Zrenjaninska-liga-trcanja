@@ -1,6 +1,5 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faXmark, faArrowRightArrowLeft, faBars} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -87,6 +86,8 @@ export default {
     color: #000;
     width: 100%;
     z-index: 10;
+    border-bottom: 2px solid #1f3242;
+    box-shadow: 0 0 10px #1f3242;
 }
 .fixedNav{
     position: fixed;

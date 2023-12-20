@@ -3,7 +3,8 @@ import { RouterLink, RouterView } from 'vue-router'
 import Nav from '../components/Nav.vue'
 import axios from "axios"
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPersonRunning, faClock} from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faPersonRunning, faEnvelope, faClock} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
@@ -95,7 +96,7 @@ export default {
     document.querySelector(".rec3").classList.add("fromTop3")
   },
   created() {
-    library.add(faPersonRunning, faClock)
+    library.add(faPersonRunning, faEnvelope, faClock, faInstagram, faYoutube)
   }
 }
 </script>
@@ -227,7 +228,11 @@ export default {
                 <p>Poručuje da je tu za svakoga kada je sport u pitanju i da će vrlo rado pomoći novajlijama u atletici kao i onima koji žele da poboljšauju svoje rezultate.</p>
               </div>
             </div>
-            <p>Email: </p>
+            <div class="clan1Kontakt">
+              <p><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
+              <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
+              <a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon>Gostovanje na SANTOS kanalu</a>
+            </div>
           </div>
         </div>
         <div class="clan">
@@ -236,6 +241,16 @@ export default {
           <span>Osnivač i trener</span>
         </div>
       </div>
+    </div>
+  </section>
+  <section aria-label="Sekcija: Prijatelji lige">
+    <h2 class="prijateljiLigeHeading">Prijatelji lige</h2>
+    <div class="prijateljiLige">
+      <div class="eckaLogo">
+        <img src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
+        <p>Ulična trka Ečka</p>
+      </div>
+      <img class="asImg" src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
     </div>
   </section>
 </template>
@@ -561,6 +576,7 @@ align-items: center;
 .nasTimHeading{
   font-size: 3.5em;
   margin-top: .5em;
+  /* color: #ff0c46; */
 }
 .tim{
   width: 80%;
@@ -610,6 +626,18 @@ align-items: center;
   font-weight: 400;
   background-color: #fff;
   color: #1f3242;
+  padding-top: 3em;
+}
+.closeClan1{
+  position: absolute;
+  top: .3em;
+  right: .5em;
+  background-color: transparent;
+  border: none;
+  font-size: 4em;
+  font-weight: 900;
+  color: #1f3242;
+  cursor: pointer;
 }
 .clan1{
   display: flex;
@@ -632,6 +660,53 @@ align-items: center;
 }
 .oClanu a{
   color: #ff0c46;
+}
+.clan1Kontakt{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 2em auto;
+}
+.clan1Kontakt p, .clan1Kontakt a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+.popupIcon{
+  font-size: 3em;
+  margin-right: .2em;
+}
+.instagram{
+  color: #C13584;
+}
+.youtube{
+  color: #ff0202;
+}
+/*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
+
+
+/*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
+.prijateljiLigeHeading{
+  margin: 2em 0;
+}
+.prijateljiLige{
+  display: flex;
+  justify-content: space-around;
+}
+.eckaLogo{
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: 900;
+}
+.eckaLogo img{
+  width: 100%;
+}
+.asImg{
+  width: 15%;
 }
 /*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
 
