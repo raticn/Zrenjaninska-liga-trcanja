@@ -189,11 +189,11 @@ export default {
 .recordsWrapper .nav{
     position: fixed;
     background-color: #fff;
-    border-bottom: 2px solid #0b3c68;
-    box-shadow: 0 0 10px #0b3c68;
+    border-bottom: 2px solid #1f3242;
+    box-shadow: 0 0 10px #1f3242;
 }
 .recordsWrapper .nav li{
-    color: #0b3c68;
+    color: #1f3242;
 }
 .recordsWrapper h1{
     margin-top: 2.5em;

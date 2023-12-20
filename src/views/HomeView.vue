@@ -16,6 +16,7 @@ export default {
       kolo: null,
       popup: 0,
       id: 0,
+      clan1: true,
     }
   },
   components: {
@@ -151,11 +152,11 @@ export default {
     </div>
   </section>
   <section aria-label="Sekcija: Prethodna kola" id="kola">
-    <h2>Prethodna kola</h2>
+    <h2 class="kolaHeading">Prethodna kola</h2>
     <div class="kola">
         <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.poslednjaCetiri" :key="index" :data-id="id - index - 1">
-            <p>{{ kolo.rez_kolo }}. kolo</p>
-            <p>{{ kolo.dat_datum }}</p>
+            <p class="koloText">{{ kolo.rez_kolo }}. kolo</p>
+            <p class="koloDatum">{{ this.formatDate(kolo.dat_datum) }}</p>
         </div>
     </div>
     <div class="koloPopup" v-if="this.popup == this.kolo">
@@ -185,12 +186,55 @@ export default {
   </section>
   <section aria-label="Sekcija: Najava za 4. Uličnu trku Ečka">
     <div class="ecka">
-      <p class="eckaNajava">Primpremi se uz nas za <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com">4. Uličnu trku Ečka</a></p>
+      <p class="eckaNajava">Primpremi se uz nas za <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">4. Uličnu trku Ečka</a></p>
       <div class="odbrojavanjeWrapper">
           <p class="countDown" aria-live="polite" aria-atomic="true"></p>
           <a class="countDownBtn" aria-label="Prijavi se za 4. Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">Prijavi se za trku</a>
       </div>
       <div class="overlay"></div>
+    </div>
+  </section>
+  <section aria-label="Sekcija: Naš tim">
+    <div class="nasTim">
+      <h2 class="nasTimHeading">Naš tim</h2>
+      <div class="tim">
+        <div class="clan">
+          <img src="/nemanja.jpg" alt="član tima slika" class="clanImg">
+          <p class="clanIme">Nemanja Djurić</p>
+          <span class="clanZvanje">Osnivač i trener</span>
+          <button class="clanBtn" @click="this.clan1 = !this.clan1">Pročitaj o Nemanji</button>
+          <div class="clan1Popup" v-if="this.clan1">
+            <div class="clan1">
+              <img src="/trkaEcka.jpg" alt="">
+              <div class="oClanu">
+                <p>Đurić Nemanja je idejni tvorac <span class="bold">Zrenjaninske trkačke lige</span>, organizator <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">Ulične trke Ečke</a> i veliki zaljubljenik u sport, a posebno u ateletiku.</p>
+                <p>Po struci je Master pravnik, a svoju ljubav prema atletici je krunisao skorašnjim školovanjem i postao <span class="bold">operativni trener atletike</span>.</p>
+              </div>
+            </div>
+            <div class="clan1">
+              <img src="/nemanjaPariz.jpg" alt="">
+              <div class="oClanu">
+                <p>Bavi se sportom celog života - dugo godina se bavio plivanjem i  crossfitom, a svoju ljubav prema atletici je spoznao na studijama 2016. godine kada je istrčao svoju prvu trku. Od tada je ta ljubav počela sve više da jača i trčanje je postalo stil života.</p>
+                <p>Iza sebe ima preko <spna class="bold">350 istrčanih trka</spna>, učesnik je većine trka u Srbiji i širom sveta.</p>
+              </div>
+            </div>
+            <div class="clan1">
+              <img src="/nemanjaTrofeji.jpg" alt="">
+              <div class="oClanu">
+                <p>Nemanja je poslednje 2 godine bio <span class="bold">najbrži Zrenjaninac</span> i učestvovao je na svim trkama koje su se održavale u Zrenjaninu. Cilj mu je da svojim primerom motiviše što veći broj ljudi i pozove ih da krenu da se bave sportom.</p>
+                <p>Trčanje vidi kao platformu za lično usavršavanje na svim poljima, druženje i neraskidiva prijateljstva, ali pre svega kao blagu i blagotvornu aktivnost koja treba da koriguje, a ne da dalje produbljuje slabe tačke na telu.</p>
+                <p>Poručuje da je tu za svakoga kada je sport u pitanju i da će vrlo rado pomoći novajlijama u atletici kao i onima koji žele da poboljšauju svoje rezultate.</p>
+              </div>
+            </div>
+            <p>Email: </p>
+          </div>
+        </div>
+        <div class="clan">
+          <img src="/nemanja.jpg" alt="član tima slika" class="clanImg">
+          <p>Nemanja Djurić</p>
+          <span>Osnivač i trener</span>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -209,7 +253,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 100vh;
+  height: 97vh;
 }
 .rec1, .rec2, .rec3{
     position: absolute;
@@ -266,7 +310,7 @@ export default {
 
 /*----------------------------------------- NAJAVA SECTION --------------------------------------*/
 .najava{
-  background: linear-gradient(to right, #0b3c68, #ff0c46 );
+  background: linear-gradient(to right, #1f3242, #ff0c46 );
   width: 50%;
   border-radius: 20px;
   margin: 4em auto;
@@ -291,11 +335,11 @@ export default {
 }
 .prijavaBtn:hover{
   background-color: #fff;
-  color: #0b3c68;
+  color: #1f3242;
   transition: all .3s ease-in-out;
 
   /* color: transparent;
-  background-image: linear-gradient(to right, #ff0c46,#0b3c68);
+  background-image: linear-gradient(to right, #ff0c46,#1f3242);
   -webkit-background-clip: text;
   background-clip: text; */
 }
@@ -315,7 +359,7 @@ h2{
   margin: 2em auto;
 }
 .ukratkoText{
-  background-color: #0b3c68;
+  background-color: #1f3242;
   color: #fff;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -373,7 +417,7 @@ h2{
 .fazaIcon{
   height: 5em;
   margin-bottom: .5em;
-  color: #0b3c68;
+  color: #1f3242;
 }
 
 /*-----------------------------------END OF FAZE TRENINGA SECTION --------------------------------*/
@@ -409,14 +453,14 @@ h2{
   font-weight: 700;
 }
 .menColumn{
-  background-color: rgb(11, 62, 106, .8);
+  background-color: rgba(11, 62, 106, .8);
   font-size: 1.3em;
   padding: 15px;
   border-radius: 20px;
   width: 100%;
 }
 .womenColumn{
-  background-color: rgb(255, 10, 67, .8);
+  background-color: rgba(255, 10, 67, .8);
   font-size: 1.3em;
   padding: 15px;
   border-radius: 20px;
@@ -426,12 +470,16 @@ h2{
 
 
 /*---------------------------------------LAST ROUNDS SECTION ----------------------------*/
+.kolaHeading{
+  margin-top: 2em;
+}
 #kola .kola{
   width: 80%;
   margin: 2em auto;
 }
 #kola .kolo{
   width: 20%;
+  color: #fff;
 }
 /*-------------------------------------END OF LAST ROUNDS SECTION ----------------------------*/
 
@@ -444,7 +492,7 @@ h2{
   background-size: cover;
   height: 70vh;
   width: 60vw;
-  margin: 0 auto;
+  margin: 2em auto;
   padding-top: 8em;
   position: relative;
   border-radius: 20px;
@@ -477,7 +525,7 @@ h2{
   width: 40%;
   padding: 5px 0;
   border-radius: 20px;
-  color: #fff;
+  color: #1f3242;
   font-size: 2em;
   position: relative;
   z-index: 3;
@@ -485,10 +533,7 @@ h2{
   text-align: center;
   margin: 2em auto 0;
   text-decoration: none;
-}
-.countDownBtn:hover{
   background-color: #fff;
-  color: #0b3c68;
 }
 .overlay {
 content: "";
@@ -503,6 +548,90 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
-/*-------------------------------------END OF LAST ROUNDS SECTION ----------------------------*/
+/*-------------------------------------END OF PRIJAVA ZA EČKU SECTION ----------------------------*/
+
+
+/*----------------------------------------NAS TIM SECTION ---------------------------------------*/
+.nasTim{
+  background-color: #1f3242;
+  color: #fff;
+  margin-top: 4em;
+}
+.nasTimHeading{
+  font-size: 3.5em;
+  margin-top: .5em;
+}
+.tim{
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  margin: 2em auto;
+}
+.clan{
+  text-align: center;
+}
+.clanIme{
+  font-size: 1.8em;
+  font-weight: 900;
+}
+.clanZvanje{
+  font-size: 1.3em;
+}
+.clanBtn{
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin: .5em auto;
+  background-color: #fff;
+  border: 2px solid #fff;
+  color: #1f3242;
+  border-radius: 20px;
+  padding: 10px ;
+  font-size: 1.5em;
+  font-weight: 900;
+  cursor: pointer;
+}
+.clanImg{
+  background-image: url('/nemanja.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 40vh;
+  border-radius: 50%;
+}
+.clan1Popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  font-weight: 400;
+  background-color: #fff;
+  color: #1f3242;
+}
+.clan1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.5em;
+  line-height: 1.8em;
+}
+.clan1 img{
+  width: 40%;
+  border-radius: 20px;
+}
+.clan1:nth-child(2) {
+  flex-direction: row-reverse;
+}
+.oClanu{
+  width: 55%;
+}
+.oClanu a{
+  color: #ff0c46;
+}
+/*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
 
 </style>

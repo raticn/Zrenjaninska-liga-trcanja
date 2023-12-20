@@ -86,14 +86,14 @@ export default {
     align-items: center;
     color: #000;
     width: 100%;
-    z-index: 500;
+    z-index: 10;
 }
 .fixedNav{
     position: fixed;
     background-color: #fff;
 }
 .fixedNav li{
-    color: #0b3c68;
+    color: #1f3242;
 }
 li a{
     color: #fff;
@@ -115,6 +115,7 @@ li a{
 .navLink{
     list-style: none;
     font-size: 1.5em;
+    font-weight: 700;
     padding: 0.5em 1.5em;
     cursor: pointer;
     color: #fff;

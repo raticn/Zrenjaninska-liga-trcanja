@@ -88,11 +88,11 @@ export default {
 .liga .nav{
     position: fixed;
     background-color: #fff;
-    border-bottom: 2px solid #0b3c68;
-    box-shadow: 0 0 10px #0b3c68;
+    border-bottom: 2px solid #1f3242;
+    box-shadow: 0 0 10px #1f3242;
 }
 .liga .nav li{
-    color: #0b3c68;
+    color: #1f3242;
 }
 .liga h1{
     margin-top: 2.5em;
@@ -108,7 +108,7 @@ export default {
 }
 .kolo{
     width: 80%;
-    background-color: #0b3c68;
+    background-color: #1f3242;
     color: #ff0c46;
     font-weight: 700;
     text-align: center;
@@ -143,7 +143,7 @@ export default {
     border: none;
     font-size: 4em;
     font-weight: 900;
-    color: #0b3c68;
+    color: #1f3242;
     cursor: pointer;
 }
 .tabela{
@@ -152,7 +152,7 @@ export default {
     border-collapse: collapse;
 }
 td, th {
-    /* border: 1px solid #0b3c68; */
+    /* border: 1px solid #1f3242; */
     /* text-align: left; */
     /* padding: 8px; */
     width: 19%;
@@ -166,7 +166,7 @@ tr{
     color: #fff;
 }
 th {
-    color: #0b3c68;
+    color: #1f3242;
     font-size: 1.5em;
     font-weight: 900;
 }
