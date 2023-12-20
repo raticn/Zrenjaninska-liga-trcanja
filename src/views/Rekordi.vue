@@ -46,6 +46,7 @@ export default {
 <template>
     <div class="recordsWrapper">
         <Nav />
+        <h1>Rekordi</h1>
         <div class="topDistanca">
             <h2>distance</h2>
             <table class="tabela">
@@ -61,7 +62,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topDistanca" :key="index">
+                <tr v-for="(result, index) in this.topDistanca" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
@@ -88,7 +89,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topAll" :key="index">
+                <tr v-for="(result, index) in this.topAll" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
@@ -115,7 +116,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topM" :key="index">
+                <tr v-for="(result, index) in this.topM" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
@@ -142,7 +143,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topZ" :key="index">
+                <tr v-for="(result, index) in this.topZ" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
@@ -169,7 +170,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topGodina" :key="index">
+                <tr v-for="(result, index) in this.topGodina" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
@@ -183,3 +184,23 @@ export default {
         </div>
     </div>
 </template>
+
+<style>
+.recordsWrapper .nav{
+    position: fixed;
+    background-color: #fff;
+    border-bottom: 2px solid #0b3c68;
+    box-shadow: 0 0 10px #0b3c68;
+}
+.recordsWrapper .nav li{
+    color: #0b3c68;
+}
+.recordsWrapper h1{
+    margin-top: 2.5em;
+    text-align: center;
+    font-size: 4em;
+}
+.recordsWrapper h2{
+    margin-top: 1em;
+}
+</style>

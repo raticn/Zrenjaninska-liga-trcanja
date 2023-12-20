@@ -13,6 +13,18 @@ export default {
     components: {
         FontAwesomeIcon,
     },
+    mounted() {
+        window.addEventListener("scroll", function(){
+        const scrollHeight = window.pageYOffset
+        let nav = document.querySelector(".nav")
+        if(scrollHeight > 1 ){
+            nav.classList.add("fixedNav")
+        }
+        else{
+            nav.classList.remove("fixedNav")
+        }
+})
+    },
     created() {
         library.add(faXmark, faArrowRightArrowLeft, faBars)
     }
@@ -25,11 +37,11 @@ export default {
     <div class="nav">
         <img class="logo" src="../assets/zltLogo.svg"  alt="Zrenjaninska liga trcanja logo - slika">
         <ul class="navLista">
-            <li class="navLink" @click="this.$router.push('/')">Početna</li>
-            <li class="navLink" @click="this.$router.push('/liga')">Liga</li>
-            <li class="navLink" @click="this.$router.push('/rekordi')">Rekordi</li>
-            <li class="navLink" @click="this.$router.push('/onama')">O nama</li>
-            <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
+            <RouterLink aria-label="Link do stranice: Početna" to="/"><li class="navLink">Početna</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink">Liga</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">Rekordi</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">O nama</li></RouterLink>
+                        <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
             <li class="language" @click="">
                 <img class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
                 <FontAwesomeIcon class="changeLang" icon="fa-solid fa-arrow-right-arrow-left"></FontAwesomeIcon>
@@ -76,6 +88,13 @@ export default {
     width: 100%;
     z-index: 500;
 }
+.fixedNav{
+    position: fixed;
+    background-color: #fff;
+}
+.fixedNav li{
+    color: #0b3c68;
+}
 li a{
     color: #fff;
     text-decoration: none;
@@ -89,6 +108,9 @@ li a{
     display: flex;
     margin: 0;
     width: 90vw;
+}
+.navLista a{
+    text-decoration: none;
 }
 .navLink{
     list-style: none;
