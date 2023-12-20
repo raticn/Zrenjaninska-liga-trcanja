@@ -16,7 +16,7 @@ export default {
       kolo: null,
       popup: 0,
       id: 0,
-      clan1: true,
+      clan1: false,
     }
   },
   components: {
@@ -204,6 +204,7 @@ export default {
           <span class="clanZvanje">Osnivač i trener</span>
           <button class="clanBtn" @click="this.clan1 = !this.clan1">Pročitaj o Nemanji</button>
           <div class="clan1Popup" v-if="this.clan1">
+            <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
             <div class="clan1">
               <img src="/trkaEcka.jpg" alt="">
               <div class="oClanu">
@@ -623,7 +624,7 @@ align-items: center;
   width: 40%;
   border-radius: 20px;
 }
-.clan1:nth-child(2) {
+.clan1:nth-child(3) {
   flex-direction: row-reverse;
 }
 .oClanu{
