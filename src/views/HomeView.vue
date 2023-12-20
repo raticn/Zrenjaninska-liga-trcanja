@@ -18,6 +18,10 @@ export default {
       popup: 0,
       id: 0,
       clan1: false,
+      text: [],
+      textObj: {},
+      longText: {},
+      lang: "",
     }
   },
   components: {
@@ -45,10 +49,27 @@ export default {
       const formattedDate = `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year}`;
 
       return formattedDate;
-    }
+    },
+    async fetchText() {
+        this.lang = localStorage.getItem('lang');
+        try {
+            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
+                params: {
+                    language: this.lang
+                }
+            })
+            this.text = res.data.trazeniTekst
+            for (let item of this.text) {
+                this.textObj[item.tex_name] = item.tex_text
+                this.longText[item.tex_name] = item.tex_long
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
   },
   async mounted() {
-    localStorage.setItem('nav', 'pocetna')
+    this.fetchText()
     const cookies = document.cookie.split(";");
       for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
@@ -105,58 +126,58 @@ export default {
   <Nav />
   <section aria-label="Sekcija: Hero">
     <div class="heroWrapper">
-      <h1 class="heroText"><span class="rec1">ZRENJANINSKA</span> <span class="rec2">LIGA</span> <span class="rec3">TRČANJA</span></h1>
+      <h1 class="heroText"><span class="rec1">{{ this.textObj.animePrva }}</span> <span class="rec2">{{ this.textObj.animeDruga }}</span> <span class="rec3">{{ this.textObj.animeTreca }}</span></h1>
     </div>
   </section>
   <section aria-label="Sekcija: Najava za sledeće kolo">
     <div class="najava">
-      <h2>Pridružite nam se u trčanju!</h2>
-      <p class="datumNajave">{{ novoKolo  }}. kolo: {{ noviDatum }}</p>
-      <button class="prijavaBtn">Prijavi se</button>
+      <h2>{{ this.textObj.naslovPridruzi }}</h2>
+      <p class="datumNajave">{{ novoKolo  }}. {{ this.textObj.maKolo }}: {{ noviDatum }}</p>
+      <button class="prijavaBtn">{{ this.textObj.dugmeTekst }}</button>
     </div>
   </section>
   <section aria-label="Sekcija: Ukratko o nama">
     <div class="ukratkoOnama">
       <div class="ukratkoText">
-        <h2>Da li je ova liga namenjena i za <span class="highlight">početnike?</span></h2>
-        <p>Liga je otvorena za svakoga, bez obzira na to da li trčiš kao profesionalac ili si tek početnik. Ideja je jednostavna - trčimo, zabavljamo se i upoznajemo ljude koji imaju istu strast prema trčanju kao i mi sami. Tako da možeš trčati, ili čak i brzo hodati - nema presude. Različite staze od 1 km do 5 km su tu da svako nađe šta mu odgovara, mada je glavni cilj istrčati 5 km. Dakle, bez obzira da li ste prvi put obuli patike ili već imaš nekoliko medalja, dobrodošli ste!</p>
-        <RouterLink class="linkOnama" aria-label="Link do stranice: O nama" to="/onama">Pročitaj više o nama i našim pravilima</RouterLink>
+        <h2>{{ this.textObj.maUkrNaslov }} <span class="highlight">{{ this.textObj.maUkrNaslov1 }}</span></h2>
+        <p>{{ this.longText.maUkrP }}</p>
+        <RouterLink class="linkOnama" aria-label="Link do stranice: O nama" to="/onama">{{ this.longText.maUkrButton }}</RouterLink>
       </div>
       <img class="ukratkoImg" src="../assets/trcanje.jpg" alt="Trkači - slika">
     </div>
   </section>
   <section aria-label="Sekcija: Kako izgleda naš trening">
-    <h2 class="fazeTreningaHeading">Evo kako izgleda jedan naš trening:</h2>
+    <h2 class="fazeTreningaHeading">{{ this.textObj.maTreNaslov }}</h2>
     <div class="fazeTreninga">
       <div class="faza">
         <FontAwesomeIcon class="fazaIcon" icon="fa-solid fa-clock"></FontAwesomeIcon>
-        Dolaženje na trening 10-15 minuta ranije u sportskoj opremi
+        {{ this.textObj.maTreP01 }}
       </div>
       <div class="faza">
         <img class="fazaIcon" src="../assets/jumpingJacks.svg" alt="jumping jacks slika">
-        Rađenje vežbi zagrevanja i razgibavanja
+        {{ this.textObj.maTreP02 }}
       </div>
       <div class="faza">
         <FontAwesomeIcon class="fazaIcon" icon="fa-solid fa-person-running"></FontAwesomeIcon>
-        Trčanje u grupi 1km do 5km (cilj je istrčati 5km)
+        {{ this.textObj.maTreP03 }}
       </div>
       <div class="faza">
         <img class="fazaIcon" src="../assets/streching.svg" alt="jumping jacks slika">
-        Istezanje i upisivanje rezultata na stranicu
+        {{ this.textObj.maTreP04 }}
       </div>
     </div>
   </section>
   <section aria-label="Sekcija: Rezultati poslednjeg kola">
-    <h2 class="poslednjeKoloHeading">Rezultati iz poslednjeg kola</h2>
+    <h2 class="poslednjeKoloHeading">{{ this.textObj.naslovRezPosK }}</h2>
     <div class="poslednjeKolo" v-for="(res, index) in this.poslednjeKolo" :key="index">
-      <img :src="res.rez_kategorija == 'm' ? '/men.svg' : '/women.svg'" alt="trkač slika"><p :class="res.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'"><span class="bold">{{ res.rez_ime }} {{ res.rez_prezime }}</span> je <span>{{ res.rez_kategorija == 'm' ? ('istrčao') : ("istrčala") }}</span> <span class="bold">{{ res.rez_vreme }}</span> u {{ res.rez_kolo }}. kolu Zrenjaninske Lige Trčanja</p>
+      <img :src="res.rez_kategorija == 'm' ? '/men.svg' : '/women.svg'" alt="trkač slika"><p :class="res.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'"><span class="bold">{{ res.rez_ime }} {{ res.rez_prezime }}</span> <span v-if="this.lang == 'sr'">{{ res.rez_kategorija == 'm' ? ('je istrčao') : ("je istrčala") }}</span> <span v-if="this.lang == 'en'">ran</span> <span class="bold">{{ res.rez_vreme }}</span> {{ this.textObj.maU }} {{ res.rez_kolo }} {{ this.textObj.maZbrlj }}</p>
     </div>
   </section>
   <section aria-label="Sekcija: Prethodna kola" id="kola">
-    <h2 class="kolaHeading">Prethodna kola</h2>
+    <h2 class="kolaHeading">{{ this.textObj.maPretKNaslov }}</h2>
     <div class="kola">
         <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.poslednjaCetiri" :key="index" :data-id="id - index - 1">
-            <p class="koloText">{{ kolo.rez_kolo }}. kolo</p>
+            <p class="koloText">{{ kolo.rez_kolo }}. {{ this.textObj.maKolo }}</p>
             <p class="koloDatum">{{ this.formatDate(kolo.dat_datum) }}</p>
         </div>
     </div>
@@ -187,45 +208,45 @@ export default {
   </section>
   <section aria-label="Sekcija: Najava za 4. Uličnu trku Ečka">
     <div class="ecka">
-      <p class="eckaNajava">Primpremi se uz nas za <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">4. Uličnu trku Ečka</a></p>
+      <p class="eckaNajava">{{ this.textObj.maEckaNajava }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.maEckaLink }}</a></p>
       <div class="odbrojavanjeWrapper">
           <p class="countDown" aria-live="polite" aria-atomic="true"></p>
-          <a class="countDownBtn" aria-label="Prijavi se za 4. Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">Prijavi se za trku</a>
+          <a class="countDownBtn" aria-label="Prijavi se za 4. Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.textObj.maEckaPrijava }}</a>
       </div>
       <div class="overlay"></div>
     </div>
   </section>
   <section aria-label="Sekcija: Naš tim">
     <div class="nasTim">
-      <h2 class="nasTimHeading">Naš tim</h2>
+      <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
       <div class="tim">
         <div class="clan">
           <img src="/nemanja.jpg" alt="član tima slika" class="clanImg">
           <p class="clanIme">Nemanja Djurić</p>
-          <span class="clanZvanje">Osnivač i trener</span>
-          <button class="clanBtn" @click="this.clan1 = !this.clan1">Pročitaj o Nemanji</button>
+          <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
+          <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
           <div class="clan1Popup" v-if="this.clan1">
             <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
             <div class="clan1">
               <img src="/trkaEcka.jpg" alt="">
               <div class="oClanu">
-                <p>Đurić Nemanja je idejni tvorac <span class="bold">Zrenjaninske trkačke lige</span>, organizator <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">Ulične trke Ečke</a> i veliki zaljubljenik u sport, a posebno u ateletiku.</p>
-                <p>Po struci je Master pravnik, a svoju ljubav prema atletici je krunisao skorašnjim školovanjem i postao <span class="bold">operativni trener atletike</span>.</p>
+                <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
+                <p>{{ this.textObj.pup06 }} <span class="bold">{{ this.textObj.pup07 }}</span></p>
               </div>
             </div>
             <div class="clan1">
               <img src="/nemanjaPariz.jpg" alt="">
               <div class="oClanu">
-                <p>Bavi se sportom celog života - dugo godina se bavio plivanjem i  crossfitom, a svoju ljubav prema atletici je spoznao na studijama 2016. godine kada je istrčao svoju prvu trku. Od tada je ta ljubav počela sve više da jača i trčanje je postalo stil života.</p>
-                <p>Iza sebe ima preko <spna class="bold">350 istrčanih trka</spna>, učesnik je većine trka u Srbiji i širom sveta.</p>
+                <p>{{ this.longText.pup08 }}</p>
+                <p>{{ this.textObj.pup09 }} <span class="bold">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
               </div>
             </div>
             <div class="clan1">
               <img src="/nemanjaTrofeji.jpg" alt="">
               <div class="oClanu">
-                <p>Nemanja je poslednje 2 godine bio <span class="bold">najbrži Zrenjaninac</span> i učestvovao je na svim trkama koje su se održavale u Zrenjaninu. Cilj mu je da svojim primerom motiviše što veći broj ljudi i pozove ih da krenu da se bave sportom.</p>
-                <p>Trčanje vidi kao platformu za lično usavršavanje na svim poljima, druženje i neraskidiva prijateljstva, ali pre svega kao blagu i blagotvornu aktivnost koja treba da koriguje, a ne da dalje produbljuje slabe tačke na telu.</p>
-                <p>Poručuje da je tu za svakoga kada je sport u pitanju i da će vrlo rado pomoći novajlijama u atletici kao i onima koji žele da poboljšauju svoje rezultate.</p>
+                <p>{{ this.textObj.pup12 }} <span class="bold">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
+                <p>{{ this.textObj.pup15 }}</p>
+                <p>{{ this.textObj.pup16 }}</p>
               </div>
             </div>
             <div class="clan1Kontakt">
@@ -244,11 +265,11 @@ export default {
     </div>
   </section>
   <section aria-label="Sekcija: Prijatelji lige">
-    <h2 class="prijateljiLigeHeading">Prijatelji lige</h2>
+    <h2 class="prijateljiLigeHeading">{{ this.textObj.maPrijNaslov }}</h2>
     <div class="prijateljiLige">
       <div class="eckaLogo">
         <img src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
-        <p>Ulična trka Ečka</p>
+        <p>{{ this.textObj.maPrijP1 }}</p>
       </div>
       <img class="asImg" src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
     </div>
@@ -442,7 +463,7 @@ h2{
 /*-------------------------------------LAST ROUND RESULTS SECTION --------------------------------*/
 
 .poslednjeKolo{
-  width: 40%;
+  width: 45%;
   margin: .5em auto;
   color: #fff;
   border-radius: 20px;

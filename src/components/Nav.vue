@@ -2,6 +2,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faXmark, faArrowRightArrowLeft, faBars} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import axios from "axios"
 
 export default {
     data()  {
@@ -11,6 +12,39 @@ export default {
     },
     components: {
         FontAwesomeIcon,
+    },
+    methods: {
+        changeLang() {
+            if (localStorage.getItem("lang") == "sr") {
+                localStorage.setItem("lang", "en")
+                document.documentElement.lang = "en"
+                location.reload()
+            }
+            else {
+                localStorage.setItem("lang", "sr")
+                document.documentElement.lang = "sr"
+                location.reload()
+            }
+            // this.fetchText()
+        },
+    //     async fetchText() {
+    //     let lang = localStorage.getItem('lang');
+    //     try {
+    //         let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
+    //             params: {
+    //                 language: lang
+    //             }
+    //         })
+    //         this.text = res.data.trazeniTekst
+    //         for (let item of this.text) {
+    //             this.textObj[item.tex_name] = item.tex_text
+    //             this.longText[item.tex_name] = item.tex_long
+    //         }
+    //         console.log(this.text);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
     },
     mounted() {
         window.addEventListener("scroll", function(){
@@ -41,7 +75,7 @@ export default {
             <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">Rekordi</li></RouterLink>
             <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">O nama</li></RouterLink>
                         <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
-            <li class="language" @click="">
+            <li class="language" @click="changeLang">
                 <img class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
                 <FontAwesomeIcon class="changeLang" icon="fa-solid fa-arrow-right-arrow-left"></FontAwesomeIcon>
                 <img class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
@@ -86,12 +120,12 @@ export default {
     color: #000;
     width: 100%;
     z-index: 10;
-    border-bottom: 2px solid #1f3242;
-    box-shadow: 0 0 10px #1f3242;
 }
 .fixedNav{
     position: fixed;
     background-color: #fff;
+    border-bottom: 2px solid #1f3242;
+    box-shadow: 0 0 10px #1f3242;
 }
 .fixedNav li{
     color: #1f3242;
