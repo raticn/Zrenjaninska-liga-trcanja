@@ -4,15 +4,44 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faInstagram, faFacebook, faTiktok } from '@fortawesome/free-brands-svg-icons';
+import axios from 'axios';
 
 export default{
     components: {
         FontAwesomeIcon,
 
     },
+    data(){
+        return{
+            textObj: {},
+            longText: {},
+        }
+    },
+    methods:{
+        async fetchText() {
+        this.lang = localStorage.getItem('lang');
+        try {
+            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
+                params: {
+                    language: this.lang
+                }
+            })
+            this.text = res.data.trazeniTekst
+            for (let item of this.text) {
+                this.textObj[item.tex_name] = item.tex_text
+                this.longText[item.tex_name] = item.tex_long
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    },
     created() {
         library.add(faLocationDot, faPhone, faEnvelope, faInstagram, faFacebook, faTiktok)
-    }
+    },
+    async mounted(){
+        this.fetchText();
+    },
 }
 </script>
 
@@ -20,11 +49,17 @@ export default{
     <div class="footer">
         <div class="footer_wrapper">
             <div class="footer_info">
-                <p><FontAwesomeIcon class="footerIcons" icon="fa-solid fa-phone"></FontAwesomeIcon>+381 23 220698</p>
-                <p><FontAwesomeIcon class="footerIcons" icon="fa-solid fa-envelope"></FontAwesomeIcon>ligatrcanjazr@gmail.com</p>
+            <p>
+                <FontAwesomeIcon class="footerIcons" icon="fa-solid fa-phone"></FontAwesomeIcon>
+                <a href="tel:+38123220698">+381 23 220698</a>
+            </p>
+            <p>
+                <FontAwesomeIcon class="footerIcons" icon="fa-solid fa-envelope"></FontAwesomeIcon>
+                <a href="mailto:ligatrcanjazr@gmail.com">ligatrcanjazr@gmail.com</a>
+            </p>
             </div>
             <div class="socials">
-                <p>Pratite nas na društvenim mrežama</p>
+                <p>{{ this.longText.foPrat }}</p>
                 <div class="socialsLinks">
                     <p><a aria-label="Pogledajte nasu Instagram stranicu" href="https://www.instagram.com/" target="_blank">
                             <FontAwesomeIcon class="socialIcons" icon="fa-brands fa-instagram"></FontAwesomeIcon>
@@ -39,12 +74,12 @@ export default{
             </div>
             <div class="footer_links">
                 <ul class="quicklinks">
-                    <RouterLink to="/"> <li>Početna</li> </RouterLink>
-                    <RouterLink to="/liga"> <li>Liga</li> </RouterLink>
-                    <RouterLink to="/rekordi"><li>Rekordi</li></RouterLink> 
-                    <RouterLink to="/onama"><li>O nama</li></RouterLink>
-                    <RouterLink to="/kontakt"> <li>Kontakt</li> </RouterLink>
-                    <RouterLink to="/adminLogin"><li>Login</li></RouterLink>
+                    <RouterLink to="/"> <li>{{ this.longText.foPocetna }}</li> </RouterLink>
+                    <RouterLink to="/liga"> <li>{{ this.longText.foLiga }}</li> </RouterLink>
+                    <RouterLink to="/rekordi"><li>{{ this.longText.foRekordi }}</li></RouterLink> 
+                    <RouterLink to="/onama"><li>{{ this.longText.foOnama }}</li></RouterLink>
+                    <RouterLink to="/kontakt"> <li>{{ this.longText.foKontakt }}</li> </RouterLink>
+                    <RouterLink to="/adminLogin"><li>{{ this.longText.foLogin }}</li></RouterLink>
                 </ul>
             </div>
         </div>

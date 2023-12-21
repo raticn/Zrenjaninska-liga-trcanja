@@ -1,5 +1,7 @@
 <script>
 import axios from "axios"
+import adminNavBar from "@/components/adminNavBar.vue"
+import AdminNavBar from "@/components/adminNavBar.vue"
 
 export default {
     data() {
@@ -21,120 +23,127 @@ export default {
             id: 0,
             sr: "",
             en: "",
-        }
+        };
+    },
+    components: {
+        AdminNavBar,
     },
     methods: {
         async addRound() {
             try {
-                let fd = new FormData()
-                fd.append('kolo', this.poslednjeKolo + 1)
-                fd.append('datum', this.datumKola)
-                let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/kolo', fd)
-                localStorage.setItem("kolo", this.brKola)
-                this.popup = !this.popup
-            } catch (error) {
+                let fd = new FormData();
+                fd.append('kolo', this.poslednjeKolo + 1);
+                fd.append('datum', this.datumKola);
+                let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/kolo', fd);
+                localStorage.setItem("kolo", this.brKola);
+                this.popup = !this.popup;
+            }
+            catch (error) {
                 console.log(error);
             }
         },
         async addPerson() {
-            let ime = this.ime
-            let prezime = this.prezime
-            let distancaKola = this.distancaKola
-            let vremeKola = this.vreme
-            let kategorija = this.kategorija
-            let fd = new FormData()
-            fd.append('ime', ime)
-            fd.append('prezime', prezime)
-            fd.append('kategorija', kategorija)
-            fd.append('vreme', this.vreme)
-            fd.append('distancaKola', distancaKola)
-            fd.append('kolo', this.poslednjeKolo + 1)
+            let ime = this.ime;
+            let prezime = this.prezime;
+            let distancaKola = this.distancaKola;
+            let vremeKola = this.vreme;
+            let kategorija = this.kategorija;
+            let fd = new FormData();
+            fd.append('ime', ime);
+            fd.append('prezime', prezime);
+            fd.append('kategorija', kategorija);
+            fd.append('vreme', this.vreme);
+            fd.append('distancaKola', distancaKola);
+            fd.append('kolo', this.poslednjeKolo + 1);
             // fd.append('sid', sid)
-            let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/rezultati', fd)
-            let trkaciGet = await axios.get('http://238p123.mars2.mars-hosting.com/API/trkaci')
-            for(let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
+            let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/rezultati', fd);
+            let trkaciGet = await axios.get('http://238p123.mars2.mars-hosting.com/API/trkaci');
+            for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 // console.log("ime", this.ime, 'prezime', this.prezime);
                 // console.log('uslov', trkaciGet.data.SpisakTrkaca[i].Ime == this.ime);
                 // console.log('imeGet', trkaciGet.data.SpisakTrkaca[i].Ime);
-                if( ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
-                    this.trkaId = trkaciGet.data.SpisakTrkaca[i].Id
-                    this.index = i
+                if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
+                    this.trkaId = trkaciGet.data.SpisakTrkaca[i].Id;
+                    this.index = i;
                 }
-            } 
-            if(this.trkaId) {
-                let id = this.trkaId
-                let i = this.index
-                let ukupnaDistanca = trkaciGet.data.SpisakTrkaca[i].UkupnaDistanca
-                let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme
-                let distancaKola = this.distancaKola
-                let vremeKola = this.vreme
-                let trkaciPut = await axios.put('http://238p123.mars2.mars-hosting.com/API/trkaci', {id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, ukupnoVreme})
-                console.log(ime,'ime u if');
             }
-            else{
-                let trkaciPost = await axios.post('http://238p123.mars2.mars-hosting.com/API/trkaci', {ime, prezime, distancaKola, vremeKola, kategorija})
-                console.log(ime,'ime u else');
+            if (this.trkaId) {
+                let id = this.trkaId;
+                let i = this.index;
+                let ukupnaDistanca = trkaciGet.data.SpisakTrkaca[i].UkupnaDistanca;
+                let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
+                let distancaKola = this.distancaKola;
+                let vremeKola = this.vreme;
+                let trkaciPut = await axios.put('http://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, ukupnoVreme });
+                console.log(ime, 'ime u if');
             }
-            this.ime = ""
-            this.prezime = ""
-            this.kategorija = ""
-            this.vreme = ""
-            this.distancaKola = ""
+            else {
+                let trkaciPost = await axios.post('http://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+                console.log(ime, 'ime u else');
+            }
+            this.ime = "";
+            this.prezime = "";
+            this.kategorija = "";
+            this.vreme = "";
+            this.distancaKola = "";
         },
         async addNewDate() {
-            let fd = new FormData()
-            fd.append('datum', this.noviDatum)
-            fd.append('kolo', this.sledeceKolo + 1)
-            let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo', fd)
-            this.noviDatum = ""
+            let fd = new FormData();
+            fd.append('datum', this.noviDatum);
+            fd.append('kolo', this.sledeceKolo + 1);
+            let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo', fd);
+            this.noviDatum = "";
         },
         reload() {
-            location.reload()
+            location.reload();
         },
         getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2)
+                return parts.pop().split(';').shift();
         },
         posaljiSr() {
-            let fd = new FormData()
-            fd.append('textLang', 'sr')
-            fd.append('textSr', this.sr)
-            fd.append('textId', this.id)
-            let res = axios.post('http://238p123.mars2.mars-hosting.com/API/dodajText', fd)
-            this.sr = ""
+            let fd = new FormData();
+            fd.append('textLang', 'sr');
+            fd.append('textSr', this.sr);
+            fd.append('textId', this.id);
+            let res = axios.post('http://238p123.mars2.mars-hosting.com/API/dodajText', fd);
+            this.sr = "";
         },
         posaljiEn() {
-            let fd = new FormData()
-            fd.append('textLang', 'en')
-            fd.append('textEn', this.en)
-            fd.append('textId', this.id)
-            let res = axios.post('http://238p123.mars2.mars-hosting.com/API/dodajText', fd)
-            this.en = ""
-            this.id = ""
+            let fd = new FormData();
+            fd.append('textLang', 'en');
+            fd.append('textEn', this.en);
+            fd.append('textId', this.id);
+            let res = axios.post('http://238p123.mars2.mars-hosting.com/API/dodajText', fd);
+            this.en = "";
+            this.id = "";
         }
     },
     async mounted() {
-        let sid = this.getCookie("sid")
-        if(!sid){
-            this.$router.push('/')
+        let sid = this.getCookie("sid");
+        if (!sid) {
+            this.$router.push('/');
             console.log('nema sid');
         }
-        else{
-            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/kolo')
-            this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo)
-            this.poslednjiDatum = res.data.odgovor[0].Datum
-            let novoK = await axios.get('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo')
-            this.sledeceKolo = novoK.data.odgovor[0].novoKolo
+        else {
+            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/kolo');
+            this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
+            this.poslednjiDatum = res.data.odgovor[0].Datum;
+            let novoK = await axios.get('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
+            this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             console.log(novoK);
-            let trkaciGet = await axios.get('http://238p123.mars2.mars-hosting.com/API/trkaci')
-            console.log('trkaci',trkaciGet);
+            let trkaciGet = await axios.get('http://238p123.mars2.mars-hosting.com/API/trkaci');
+            console.log('trkaci', trkaciGet);
         }
-    }
+    },
+    components: { AdminNavBar }
 }
 </script>
 
 <template>
+    <AdminNavBar/>
     <div class="adminWrapper">
         <p>Pozdrav, Nemanja</p>
         <p>Poslednje kolo: {{ poslednjeKolo }}  ({{ poslednjiDatum }})</p>
