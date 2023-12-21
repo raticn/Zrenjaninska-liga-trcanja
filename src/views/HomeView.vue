@@ -1,6 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import Nav from '../components/Nav.vue'
+import Footer from '@/components/Footer.vue'
 import axios from "axios"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -27,6 +28,7 @@ export default {
   },
   components: {
     Nav,
+    Footer,
     FontAwesomeIcon,
   },
   methods: {
@@ -278,6 +280,9 @@ export default {
         <img src="/borislav.jpg" alt="">
       </div>
     </div>
+  </section>
+  <section aria-label="Sekcija: Footer">
+    <Footer/>
   </section>
 </template>
 
