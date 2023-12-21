@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 143.3 135" style="enable-background:new 0 0 143.3 135;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{fill:none;stroke:#1F3242;stroke-width:6;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#1F3242;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:#1F3242;}
+	.st4{fill:none;stroke:#FF0C46;stroke-miterlimit:10;}
+</style>
+<g id="Layer_1" class="st0">
+	
+		<image style="display:inline;overflow:visible;opacity:0.6;" width="225" height="225" xlink:href="../../../../../Pictures/Screenshots/kalendar.png"  transform="matrix(1 0 0 1 -40.1783 -45.5)">
+	</image>
+</g>
+<g id="Layer_2">
+	<g>
+		<path class="st1" d="M118.3,16h-93C14.4,16,5.6,24.8,5.6,35.7v76.1c0,10.9,8.8,19.7,19.7,19.7h93c10.9,0,19.7-8.8,19.7-19.7V35.7
+			C138,24.8,129.2,16,118.3,16z"/>
+		<line class="st2" x1="105.1" y1="3.5" x2="105.1" y2="33.4"/>
+		<line class="st2" x1="33.4" y1="3.5" x2="33.4" y2="33.4"/>
+		<line class="st2" x1="5.6" y1="46.2" x2="138" y2="46.2"/>
+		<g>
+			<rect x="13.3" y="62.1" class="st3" width="11.8" height="11.8"/>
+			<rect x="31.4" y="62.1" class="st3" width="11.8" height="11.8"/>
+			<rect x="48.3" y="62.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="66.5" y="62.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="84.2" y="62.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="102.3" y="62.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="118.6" y="62.1" class="st3" width="11.8" height="11.8"/>
+		</g>
+		<g>
+			<rect x="13.3" y="82.5" class="st3" width="11.8" height="11.8"/>
+			<rect x="31.4" y="82.5" class="st3" width="11.8" height="11.8"/>
+			<rect x="48.3" y="82.7" class="st3" width="11.8" height="11.8"/>
+			<rect x="66.5" y="82.7" class="st3" width="11.8" height="11.8"/>
+			<rect x="84.2" y="82.7" class="st3" width="11.8" height="11.8"/>
+			<rect x="102.3" y="82.7" class="st3" width="11.8" height="11.8"/>
+			<rect x="118.6" y="82.5" class="st3" width="11.8" height="11.8"/>
+		</g>
+		<g>
+			<rect x="13.3" y="102.1" class="st3" width="11.8" height="11.8"/>
+			<rect x="31.4" y="102.1" class="st3" width="11.8" height="11.8"/>
+			<rect x="48.3" y="102.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="66.5" y="102.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="84.2" y="102.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="102.3" y="102.4" class="st3" width="11.8" height="11.8"/>
+			<rect x="118.6" y="102.1" class="st3" width="11.8" height="11.8"/>
+		</g>
+	</g>
+	<g>
+		<line class="st4" x1="30.4" y1="17.5" x2="113.8" y2="118.1"/>
+		<g>
+			<line class="st4" x1="113.3" y1="16.9" x2="29.8" y2="117.5"/>
+		</g>
+	</g>
+</g>
+</svg>

@@ -22,6 +22,7 @@ export default {
       textObj: {},
       longText: {},
       lang: "",
+      asPopup: false,
     }
   },
   components: {
@@ -256,11 +257,6 @@ export default {
             </div>
           </div>
         </div>
-        <div class="clan">
-          <img src="/nemanja.jpg" alt="član tima slika" class="clanImg">
-          <p>Nemanja Djurić</p>
-          <span>Osnivač i trener</span>
-        </div>
       </div>
     </div>
   </section>
@@ -271,7 +267,16 @@ export default {
         <img src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
         <p>{{ this.textObj.maPrijP1 }}</p>
       </div>
-      <img class="asImg" src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
+      <img @click="this.asPopup = !this.asPopup" class="asImg" src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
+      <div class="asPopup" v-if="this.asPopup">
+        <button class="closeClan1" @click="this.asPopup =! this.asPopup">X</button>
+        <div class="asPopupText">
+          <p><span class="bold">Borislav Mandić</span> {{ this.longText.as1 }}</p>
+          <p>{{ this.longText.as2 }}</p>
+          <p>{{ this.longText.as3 }}</p>
+        </div>
+        <img src="/borislav.jpg" alt="">
+      </div>
     </div>
   </section>
 </template>
@@ -602,7 +607,7 @@ align-items: center;
 .tim{
   width: 80%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 2em auto;
 }
 .clan{
@@ -650,7 +655,7 @@ align-items: center;
   padding-top: 3em;
 }
 .closeClan1{
-  position: absolute;
+  position: fixed;
   top: .3em;
   right: .5em;
   background-color: transparent;
@@ -707,7 +712,7 @@ align-items: center;
 /*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
 
 
-/*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
+/*-------------------------------------PRIJATELJI LIGE SECTION -----------------------------------*/
 .prijateljiLigeHeading{
   margin: 2em 0;
 }
@@ -728,7 +733,30 @@ align-items: center;
 }
 .asImg{
   width: 15%;
+  cursor: pointer;
 }
-/*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
+.asPopup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 11;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+}
+.asPopupText{
+  width: 60%;
+  font-size: 1.3em;
+  line-height: 1.7em;
+}
+.asPopup img{
+  height: 70vh;
+  border-radius: 20px;
+}
+/*------------------------------END OF PRIJATELJI LIGE SECTION -----------------------------------*/
 
 </style>
