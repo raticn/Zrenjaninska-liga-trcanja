@@ -74,6 +74,7 @@ export default {
             <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink">Liga</li></RouterLink>
             <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">Rekordi</li></RouterLink>
             <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">O nama</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">Kontakt</li></RouterLink>
                         <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
             <li class="language" @click="changeLang">
                 <img class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
@@ -135,7 +136,7 @@ li a{
     text-decoration: none;
 }
 .logo{
-    width: 5em;
+    width: 4em;
     margin: 1em 0 1em 1em;
     cursor: pointer;
 }

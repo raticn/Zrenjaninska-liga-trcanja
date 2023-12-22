@@ -5,6 +5,7 @@ import Admin from '../views/Admin.vue'
 import AdminLogin from '../views/AdminLogin.vue'
 import Rekordi from '../views/Rekordi.vue'
 import Onama from '../views/Onama.vue'
+import Kontakt from '../views/Kontakt.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/onama',
       name: 'onama',
       component: Onama
+    },
+    {
+      path: '/kontakt',
+      name: 'kontakt',
+      component: Kontakt
     },
   ]
 })

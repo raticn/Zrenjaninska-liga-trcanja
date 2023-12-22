@@ -47,7 +47,7 @@ export default {
       const month = dateObject.getMonth() + 1; 
       const year = dateObject.getFullYear();
 
-      const formattedDate = `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year}`;
+      const formattedDate = `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year}.`;
 
       return formattedDate;
     },
@@ -667,12 +667,14 @@ align-items: center;
 }
 .clan1{
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 2em;
   font-size: 1.5em;
   line-height: 1.8em;
+  background-color: #1f3242;
+  border-radius: 20px;
+  color: #fff;
 }
 .clan1 img{
   width: 40%;
@@ -683,6 +685,7 @@ align-items: center;
 }
 .oClanu{
   width: 55%;
+  margin: 0 auto;
 }
 .oClanu a{
   color: #ff0c46;
