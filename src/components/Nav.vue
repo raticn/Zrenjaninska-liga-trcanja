@@ -8,6 +8,7 @@ export default {
     data()  {
         return {
             menu: false,
+            lang: ''
         }
     },
     components: {
@@ -47,6 +48,7 @@ export default {
     // },
     },
     mounted() {
+        this.lang = localStorage.getItem('lang')
         window.addEventListener("scroll", function(){
         const scrollHeight = window.pageYOffset
         let nav = document.querySelector(".nav")
@@ -77,9 +79,8 @@ export default {
             <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">Kontakt</li></RouterLink>
                         <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
             <li class="language" @click="changeLang">
-                <img class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
-                <FontAwesomeIcon class="changeLang" icon="fa-solid fa-arrow-right-arrow-left"></FontAwesomeIcon>
-                <img class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
+                <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
+                <img v-if="this.lang == 'sr'" class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
             </li>
         </ul>
     </div>
