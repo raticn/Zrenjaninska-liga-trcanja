@@ -65,7 +65,7 @@ export default {
     </div>
     <div class="koloPopup" v-if="this.popup == this.kolo">
         <button @click="this.kolo = null" class="closePopup">x</button>
-        <h2>{{ this.kolo }}. kolo</h2>
+        <h2>{{ this.kolo }}. {{ this.textObj.maKolo }}</h2>
         <table class="tabela">
             <thead>
             <tr>
@@ -79,8 +79,8 @@ export default {
             <tbody>
             <tr v-for="(result, index) in this.rez" :key="index" :class="result.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                 <td>{{ index + 1 }}</td>
-                <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
-                <td>{{ result.rez_kategorija }}</td>
+                <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
+                <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                 <td>{{ result.rez_vreme }}</td>
                 <td>{{ result.Tempo }}</td>
             </tr>
@@ -115,7 +115,6 @@ export default {
 .kolo{
     width: 80%;
     background-color: #1f3242;
-    color: #ff0c46;
     font-weight: 700;
     text-align: center;
     cursor: pointer;
@@ -125,9 +124,11 @@ export default {
 }
 .koloText{
     font-size: 2em;
+    color: #fff;
 }
 .koloDatum{
     font-size: 1.2em;
+    color: #ff0c46;
 }
 .koloPopup{
     position: fixed;

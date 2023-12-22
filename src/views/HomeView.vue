@@ -210,38 +210,40 @@ export default {
       <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
       <div class="tim">
         <div class="clan">
-          <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="član tima slika" class="clanImg">
+          <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="Nemanja Djurić slika" class="clanImg">
           <p class="clanIme">Nemanja Djurić</p>
           <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
           <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
           <div class="clan1Popup" v-if="this.clan1">
             <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
             <div class="clan1">
-              <img src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="">
+              <img class="popupImg1" src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="Ulična trka Ečka">
               <div class="oClanu">
                 <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
-                <p>{{ this.textObj.pup06 }} <span class="bold">{{ this.textObj.pup07 }}</span></p>
+                <p>{{ this.textObj.pup06 }} <span class="bold highlight">{{ this.textObj.pup07 }}</span></p>
               </div>
             </div>
             <div class="clan1">
-              <img src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="">
+              <img class="popupImg2" src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="Trkač - slika">
               <div class="oClanu">
                 <p>{{ this.longText.pup08 }}</p>
-                <p>{{ this.textObj.pup09 }} <span class="bold">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
+                <p>{{ this.textObj.pup09 }} <span class="bold highlight">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
               </div>
             </div>
             <div class="clan1">
-              <img src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="">
+              <img class="popupImg3" src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="Trkač - slika">
               <div class="oClanu">
-                <p>{{ this.textObj.pup12 }} <span class="bold">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
+                <p>{{ this.textObj.pup12 }} <span class="bold highlight">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
                 <p>{{ this.textObj.pup15 }}</p>
                 <p>{{ this.textObj.pup16 }}</p>
               </div>
             </div>
-            <div class="clan1Kontakt">
-              <p><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
-              <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
-              <a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon>Gostovanje na SANTOS kanalu</a>
+            <div class="personalni">
+              <h3>Potreban ti je personalni trener? Kontaktiraj me:</h3>
+              <div class="clan1Kontakt">
+                <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
+                <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
+              </div>
             </div>
           </div>
         </div>
@@ -255,7 +257,7 @@ export default {
         <img src="http://238p123.mars2.mars-hosting.com/API/pictures/7" alt="Ulična trka Ečka logo slika">
         <p>{{ this.textObj.maPrijP1 }}</p>
       </div>
-      <img @click="this.asPopup = !this.asPopup" class="asImg" src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
+      <img @click="this.asPopup = !this.asPopup" class="asImg" src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="Trkacki klub AS023 logo slika">
       <div class="asPopup" v-if="this.asPopup">
         <button class="closeClan1" @click="this.asPopup =! this.asPopup">X</button>
         <div class="asPopupText">
@@ -530,6 +532,9 @@ h2{
   position: relative;
   border-radius: 20px;
 }
+.ecka:hover .eckaNajava a{
+  color: #ff0c46;
+}
 .eckaNajava{
   color: #fff;
   font-size: 3em;
@@ -662,13 +667,21 @@ align-items: center;
   width: 80%;
   margin: 0 auto 2em;
   font-size: 1.5em;
-  line-height: 1.8em;
+  line-height: 2em;
   background-color: #1f3242;
   border-radius: 20px;
   color: #fff;
 }
-.clan1 img{
-  width: 40%;
+.popupImg1{
+  width: 60%;
+  border-radius: 20px;
+}
+.popupImg2{
+  width: 35%;
+  border-radius: 20px;
+}
+.popupImg3{
+  width: 35%;
   border-radius: 20px;
 }
 .clan1:nth-child(3) {
@@ -681,11 +694,18 @@ align-items: center;
 .oClanu a{
   color: #ff0c46;
 }
+.personalni h3{
+  font-size: 2.5em;
+  font-weight: 900;
+}
 .clan1Kontakt{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 80%;
   margin: 2em auto;
+}
+.email{
+  color: #1f3242;
 }
 .clan1Kontakt p, .clan1Kontakt a{
   display: flex;
@@ -703,16 +723,20 @@ align-items: center;
 .youtube{
   color: #ff0202;
 }
+.facebook{
+  color: #0866ff;
+}
 /*---------------------------------------END OF NAS TIM SECTION -----------------------------------*/
 
 
 /*-------------------------------------PRIJATELJI LIGE SECTION -----------------------------------*/
 .prijateljiLigeHeading{
-  margin: 2em 0;
+  margin: 1.5em 0;
 }
 .prijateljiLige{
   display: flex;
   justify-content: space-around;
+  margin: 2em 0;
 }
 .eckaLogo{
   width: 15%;
@@ -746,10 +770,17 @@ align-items: center;
   width: 60%;
   font-size: 1.3em;
   line-height: 1.7em;
+  background-color:#1f3242;
+  color:#fff;
+  padding: 30px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 .asPopup img{
-  height: 70vh;
-  border-radius: 20px;
+  /* height: 40vh; */
+  width:30%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 /*------------------------------END OF PRIJATELJI LIGE SECTION -----------------------------------*/
 

@@ -1,8 +1,8 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faXmark, faArrowRightArrowLeft, faBars} from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import axios from "axios"
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
 
@@ -67,7 +67,7 @@ export default {
 })
     },
     created() {
-        library.add(faXmark, faArrowRightArrowLeft, faBars)
+        library.add(faEnvelope, faInstagram, faYoutube, faFacebook)
     }
 }
 </script>
@@ -83,7 +83,9 @@ export default {
             <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">{{ this.longText.foRekordi }}</li></RouterLink>
             <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">{{ this.longText.foOnama }}</li></RouterLink>
             <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">{{ this.longText.foKontakt }}</li></RouterLink>
-                        <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
+            <li class="navIcon"><a href="https://www.instagram.com/nemanja_djuric/" class="facebook" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
+            <li class="navIcon"><a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
+            <li class="navIcon"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
             <li class="language" @click="changeLang">
                 <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
                 <img v-if="this.lang == 'sr'" class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
@@ -154,6 +156,9 @@ li a{
 }
 .navLista a{
     text-decoration: none;
+}
+.navIcon:first-of-type{
+    margin-left: auto;
 }
 .navLink{
     list-style: none;

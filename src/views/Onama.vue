@@ -1,42 +1,34 @@
 <script>
 import Nav from '../components/Nav.vue'
-import axios from 'axios'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
-    data(){
-        return{
-        text:'',
-        textObj:{},
-        longText:{},
-        lang: {},
+    data() {
+        return {
+            clan1: false,
         }
     },
     components: {
         Nav,
+        FontAwesomeIcon,
     },
     methods:{
-        async fetchText() {
-            this.lang = localStorage.getItem('lang');
-            try {
-                let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
-                    params: {
-                        language: this.lang
-                    }
-                })
-                this.text = res.data.trazeniTekst
-                for (let item of this.text) {
-                    this.textObj[item.tex_name] = item.tex_text
-                    this.longText[item.tex_name] = item.tex_long
-                }
-                console.log(this.text);
-            } catch (error) {
-                console.log(error);
-            }
-        },
+        ...mapActions(useLigaStore, ['fetchText']),
+    },
+    computed: {
+        ...mapState(useLigaStore, ['textObj', 'longText']),
     },
     async mounted(){
-            this.fetchText();
-        },
+        this.fetchText();
+    },
+    created() {
+        library.add(faEnvelope, faInstagram, faYoutube)
+    }
 }
 </script>
 
@@ -93,6 +85,49 @@ export default {
                 <p>{{ this.longText.onPar27 }}</p>
             </div>
         </section>
+        <section aria-label="Sekcija: Naš tim">
+        <div class="nasTim">
+        <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
+        <div class="tim">
+            <div class="clan">
+            <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="član tima slika" class="clanImg">
+            <p class="clanIme">Nemanja Djurić</p>
+            <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
+            <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
+            <div class="clan1Popup" v-if="this.clan1">
+                <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
+                <div class="clan1">
+                <img src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="">
+                <div class="oClanu">
+                    <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
+                    <p>{{ this.textObj.pup06 }} <span class="bold">{{ this.textObj.pup07 }}</span></p>
+                </div>
+                </div>
+                <div class="clan1">
+                <img src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="">
+                <div class="oClanu">
+                    <p>{{ this.longText.pup08 }}</p>
+                    <p>{{ this.textObj.pup09 }} <span class="bold">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
+                </div>
+                </div>
+                <div class="clan1">
+                <img src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="">
+                <div class="oClanu">
+                    <p>{{ this.textObj.pup12 }} <span class="bold">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
+                    <p>{{ this.textObj.pup15 }}</p>
+                    <p>{{ this.textObj.pup16 }}</p>
+                </div>
+                </div>
+                <div class="clan1Kontakt">
+                <p><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
+                <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
+                <a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon>Gostovanje na SANTOS kanalu</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
     </div>
 </template>
 
@@ -140,7 +175,7 @@ export default {
     width: 80%;
     margin: 0 auto 1em;
 } 
-h3{
+.onama h3{
     font-size: 2em;
     color: #ff0c46;
     text-align: center;

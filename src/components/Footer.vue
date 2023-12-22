@@ -4,43 +4,24 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faInstagram, faFacebook, faTiktok } from '@fortawesome/free-brands-svg-icons';
-import axios from 'axios';
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default{
     components: {
         FontAwesomeIcon,
-
-    },
-    data(){
-        return{
-            textObj: {},
-            longText: {},
-        }
     },
     methods:{
-        async fetchText() {
-        this.lang = localStorage.getItem('lang');
-        try {
-            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
-                params: {
-                    language: this.lang
-                }
-            })
-            this.text = res.data.trazeniTekst
-            for (let item of this.text) {
-                this.textObj[item.tex_name] = item.tex_text
-                this.longText[item.tex_name] = item.tex_long
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        ...mapActions(useLigaStore, ['fetchText']),
     },
-    },
-    created() {
-        library.add(faLocationDot, faPhone, faEnvelope, faInstagram, faFacebook, faTiktok)
+    computed: {
+        ...mapState(useLigaStore, ['textObj', 'longText']),
     },
     async mounted(){
         this.fetchText();
+    },
+    created() {
+        library.add(faLocationDot, faPhone, faEnvelope, faInstagram, faFacebook, faTiktok)
     },
 }
 </script>

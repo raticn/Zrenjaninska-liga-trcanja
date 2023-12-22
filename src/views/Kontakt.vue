@@ -5,6 +5,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
     data() {
@@ -25,6 +27,7 @@ export default {
         FontAwesomeIcon,
     },
     methods: {
+        ...mapActions(useLigaStore, ['fetchText']),
         onFocus(field) {
             this[field] = true;
             },
@@ -37,6 +40,12 @@ export default {
         this.$refs[inputRef].focus();
         },
     },
+    computed: {
+        ...mapState(useLigaStore, ['textObj', 'longText']),
+    },
+    mounted() {
+        this.fetchText()
+    },
     created() {
         library.add(faInstagram, faEnvelope)
     }
@@ -46,17 +55,17 @@ export default {
 <template>
     <div class="kontakt">
         <Nav />
-        <h2>Kontaktirajte nas</h2>
+        <h2>{{ this.textObj.koNaslov }}</h2>
         <div class="clan1Kontakt">
             <p><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
             <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
         </div>
-        <p class="prijavaHeading">Prijavi se</p>
+        <p class="prijavaHeading">{{ this.textObj.koPrijava }}</p>
         <section aria-label="Sekcija: Kontakt forma">
             <form id="form" action="https://formsubmit.co/@gmail.com" method="POST">
                 <div class="formInfo">
                     <div class="formField" :class="{ focused: isNameFocused || form.name !== '' }">
-                        <label for="Ime" @click="focusInput('imeInput')">Ime i prezime</label>
+                        <label for="Ime" @click="focusInput('imeInput')">{{ this.textObj.tabelaImePrez }}</label>
                         <input ref="imeInput" name="Ime" type="text" v-model="form.name" required @focus="onFocus('isNameFocused')" @blur="onBlur('isNameFocused', 'name')"/>
                     </div>
                     <div class="formField" :class="{ focused: isEmailFocused || form.email !== '' }">
@@ -64,11 +73,11 @@ export default {
                         <input ref="emailInput" name="Email" type="email" v-model="form.email" required @focus="onFocus('isEmailFocused')" @blur="onBlur('isEmailFocused', 'email')"/>
                     </div>
                     <div class="formField" :class="{ focused: isTelefonFocused || form.telefon !== '' }">
-                        <label for="Telefon" @click="focusInput('telefonInput')">Broj telefona</label>
+                        <label for="Telefon" @click="focusInput('telefonInput')">{{ this.textObj.koTel }}</label>
                         <input ref="telefonInput" name="Telefon" type="text" v-model="form.telefon" required @focus="onFocus('isTelefonFocused')" @blur="onBlur('isTelefonFocused', 'telefon')"/>
                     </div>
                 </div>
-                <button class="formBtn" type="submit">Pošalji</button>
+                <button class="formBtn" type="submit">{{ this.textObj.koPos }}</button>
             </form>
         </section>
     </div>
@@ -143,7 +152,7 @@ input:focus{
 .formBtn{
     border: none;
     width: 100%;
-    background-color: #fff;
+    background-color: #1f3242;
     color: #fff;
     font-weight: 700;
     font-size: 1.5em;

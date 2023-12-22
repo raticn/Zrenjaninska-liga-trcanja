@@ -1,7 +1,8 @@
 <script>
 import axios from "axios"
 import Nav from '../components/Nav.vue'
-
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
     data() {
@@ -18,12 +19,17 @@ export default {
         Nav,
     },
     methods: {
+        ...mapActions(useLigaStore, ['fetchText']),
         parseTempo(tempo) {
             const parts = tempo.split(':').map(Number);
             return parts[0] * 3600 + parts[1] * 60 + parts[2];
         },
     },
+    computed: {
+        ...mapState(useLigaStore, ['textObj', 'longText']),
+    },
     async mounted() {
+        this.fetchText()
         let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/rekordi')
         this.topM = res.data.Top10Muski
         this.topZ = res.data.Top10Zene
@@ -46,19 +52,19 @@ export default {
 <template>
     <div class="recordsWrapper">
         <Nav />
-        <h1>Rekordi</h1>
+        <h1>{{ this.textObj.rek }}</h1>
         <div class="topDistanca">
-            <h2>distance</h2>
+            <h2>{{ this.textObj.tabKm }}</h2>
             <table class="tabela">
                 <thead>
                 <tr>
                     <th>Rank</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Kategorija</th>
-                    <th>Distanca</th>
-                    <th>Vreme</th>
-                    <th>Tempo</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.koloV }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,7 +72,7 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.Kategorija }}</td>
+                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Distanca }} km</td>
                     <td>{{ result.UkupnoVreme }}</td>
                     <td>{{ result.Tempo }}</td>
@@ -75,17 +81,17 @@ export default {
             </table>
         </div>
         <div class="topAll">
-            <h2>Top 10 rekorda svih vremena</h2>
+            <h2>{{ this.textObj.naslovRek2 }}</h2>
             <table class="tabela">
                 <thead>
                 <tr>
                     <th>Rank</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Kategorija</th>
-                    <th>Kolo</th>
-                    <th>Vreme</th>
-                    <th>Tempo</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -93,7 +99,7 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.Kategorija }}</td>
+                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
                     <td>{{ result.Vreme }}</td>
                     <td>{{ result.Tempo }}</td>
@@ -102,17 +108,17 @@ export default {
             </table>
         </div>
         <div class="topMuski">
-            <h2>Top 10 rekorda svih vremena - Muški</h2>
+            <h2>{{ this.textObj.naslovTopM }}</h2>
             <table class="tabela">
                 <thead>
                 <tr>
                     <th>Rank</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Kategorija</th>
-                    <th>Kolo</th>
-                    <th>Vreme</th>
-                    <th>Tempo</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -120,7 +126,7 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.Kategorija }}</td>
+                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
                     <td>{{ result.Vreme }}</td>
                     <td>{{ result.Tempo }}</td>
@@ -129,17 +135,17 @@ export default {
             </table>
         </div>
         <div class="topZenski">
-            <h2>Top 10 rekorda svih vremena - Ženski</h2>
+            <h2>{{ this.textObj.naslovTopZ }}</h2>
             <table class="tabela">
                 <thead>
                 <tr>
                     <th>Rank</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Kategorija</th>
-                    <th>Kolo</th>
-                    <th>Vreme</th>
-                    <th>Tempo</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -147,7 +153,7 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.Kategorija }}</td>
+                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
                     <td>{{ result.Vreme }}</td>
                     <td>{{ result.Tempo }}</td>
@@ -156,17 +162,17 @@ export default {
             </table>
         </div>
         <div class="topGodine">
-            <h2>Top 10 rekorda 2024. godine</h2>
+            <h2>{{ this.textObj.naslovTopGod }}</h2>
             <table class="tabela">
                 <thead>
                 <tr>
                     <th>Rank</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Kategorija</th>
-                    <th>Kolo</th>
-                    <th>Vreme</th>
-                    <th>Tempo</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -174,7 +180,7 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.Kategorija }}</td>
+                    <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
                     <td>{{ result.Vreme }}</td>
                     <td>{{ result.Tempo }}</td>
