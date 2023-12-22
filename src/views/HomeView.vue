@@ -7,6 +7,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faPersonRunning, faEnvelope, faClock} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
   data() {
@@ -19,11 +21,8 @@ export default {
       popup: 0,
       id: 0,
       clan1: false,
-      text: [],
-      textObj: {},
-      longText: {},
-      lang: "",
       asPopup: false,
+      images: [],
     }
   },
   components: {
@@ -32,6 +31,7 @@ export default {
     FontAwesomeIcon,
   },
   methods: {
+    ...mapActions(useLigaStore, ['fetchText']),
       async round($event) {
           this.kolo = parseInt($event.currentTarget.getAttribute("data-id")) + 1
           let round = this.kolo
@@ -53,23 +53,9 @@ export default {
 
       return formattedDate;
     },
-    async fetchText() {
-        this.lang = localStorage.getItem('lang');
-        try {
-            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
-                params: {
-                    language: this.lang
-                }
-            })
-            this.text = res.data.trazeniTekst
-            for (let item of this.text) {
-                this.textObj[item.tex_name] = item.tex_text
-                this.longText[item.tex_name] = item.tex_long
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    },
+  },
+  computed: {
+    ...mapState(useLigaStore, ['textObj', 'longText', 'lang']),
   },
   async mounted() {
     this.fetchText()
@@ -146,7 +132,7 @@ export default {
         <p>{{ this.longText.maUkrP }}</p>
         <RouterLink class="linkOnama" aria-label="Link do stranice: O nama" to="/onama">{{ this.longText.maUkrButton }}</RouterLink>
       </div>
-      <img class="ukratkoImg" src="../assets/trcanje.jpg" alt="Trkači - slika">
+      <img class="ukratkoImg" src="http://238p123.mars2.mars-hosting.com/API/pictures/8" alt="Trkači - slika">
     </div>
   </section>
   <section aria-label="Sekcija: Kako izgleda naš trening">
@@ -224,28 +210,28 @@ export default {
       <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
       <div class="tim">
         <div class="clan">
-          <img src="/nemanja.jpg" alt="član tima slika" class="clanImg">
+          <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="član tima slika" class="clanImg">
           <p class="clanIme">Nemanja Djurić</p>
           <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
           <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
           <div class="clan1Popup" v-if="this.clan1">
             <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
             <div class="clan1">
-              <img src="/trkaEcka.jpg" alt="">
+              <img src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="">
               <div class="oClanu">
                 <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
                 <p>{{ this.textObj.pup06 }} <span class="bold">{{ this.textObj.pup07 }}</span></p>
               </div>
             </div>
             <div class="clan1">
-              <img src="/nemanjaPariz.jpg" alt="">
+              <img src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="">
               <div class="oClanu">
                 <p>{{ this.longText.pup08 }}</p>
                 <p>{{ this.textObj.pup09 }} <span class="bold">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
               </div>
             </div>
             <div class="clan1">
-              <img src="/nemanjaTrofeji.jpg" alt="">
+              <img src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="">
               <div class="oClanu">
                 <p>{{ this.textObj.pup12 }} <span class="bold">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
                 <p>{{ this.textObj.pup15 }}</p>
@@ -266,7 +252,7 @@ export default {
     <h2 class="prijateljiLigeHeading">{{ this.textObj.maPrijNaslov }}</h2>
     <div class="prijateljiLige">
       <div class="eckaLogo">
-        <img src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
+        <img src="http://238p123.mars2.mars-hosting.com/API/pictures/7" alt="Ulična trka Ečka logo slika">
         <p>{{ this.textObj.maPrijP1 }}</p>
       </div>
       <img @click="this.asPopup = !this.asPopup" class="asImg" src="../assets/logo.png" alt="Ulična trka Ečka logo slika">
@@ -277,7 +263,7 @@ export default {
           <p>{{ this.longText.as2 }}</p>
           <p>{{ this.longText.as3 }}</p>
         </div>
-        <img src="/borislav.jpg" alt="">
+        <img src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="">
       </div>
     </div>
   </section>
@@ -295,7 +281,7 @@ export default {
 }
 /*------------------------------------------ HERO SECTION --------------------------------------*/
 .heroWrapper{
-  background-image: url('../assets/zltHero.jpg');
+  background-image: url('http://238p123.mars2.mars-hosting.com/API/pictures/1');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -533,7 +519,7 @@ h2{
 
 /*-------------------------------------PRIJAVA ZA EČKU SECTION ----------------------------*/
 .ecka{
-  background-image: url('../trkaEcka.jpg');
+  background-image: url('http://238p123.mars2.mars-hosting.com/API/pictures/6');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -640,7 +626,7 @@ align-items: center;
   cursor: pointer;
 }
 .clanImg{
-  background-image: url('/nemanja.jpg');
+  background-image: url('http://238p123.mars2.mars-hosting.com/API/pictures/5');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

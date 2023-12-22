@@ -3,6 +3,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faXmark, faArrowRightArrowLeft, faBars} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from "axios"
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
     data()  {
@@ -15,6 +17,7 @@ export default {
         FontAwesomeIcon,
     },
     methods: {
+        ...mapActions(useLigaStore, ['fetchText']),
         changeLang() {
             if (localStorage.getItem("lang") == "sr") {
                 localStorage.setItem("lang", "en")
@@ -47,6 +50,9 @@ export default {
     //     }
     // },
     },
+    computed: {
+        ...mapState(useLigaStore, ['textObj', 'longText']),
+    },
     mounted() {
         this.lang = localStorage.getItem('lang')
         window.addEventListener("scroll", function(){
@@ -72,11 +78,11 @@ export default {
     <div class="nav">
         <img class="logo" src="../assets/zltLogo.svg"  alt="Zrenjaninska liga trcanja logo - slika">
         <ul class="navLista">
-            <RouterLink aria-label="Link do stranice: Početna" to="/"><li class="navLink">Početna</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink">Liga</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">Rekordi</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">O nama</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">Kontakt</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: Početna" to="/"><li class="navLink">{{ this.longText.foPocetna }}</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink">{{ this.longText.foLiga }}</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">{{ this.longText.foRekordi }}</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">{{ this.longText.foOnama }}</li></RouterLink>
+            <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">{{ this.longText.foKontakt }}</li></RouterLink>
                         <!-- <li class="navLink prijava"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></li> -->
             <li class="language" @click="changeLang">
                 <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">

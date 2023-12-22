@@ -1,7 +1,5 @@
 <script>
 import axios from "axios"
-import adminNavBar from "@/components/adminNavBar.vue"
-import AdminNavBar from "@/components/adminNavBar.vue"
 
 export default {
     data() {
@@ -24,9 +22,6 @@ export default {
             sr: "",
             en: "",
         };
-    },
-    components: {
-        AdminNavBar,
     },
     methods: {
         async addRound() {
@@ -138,12 +133,10 @@ export default {
             console.log('trkaci', trkaciGet);
         }
     },
-    components: { AdminNavBar }
 }
 </script>
 
 <template>
-    <AdminNavBar/>
     <div class="adminWrapper">
         <p>Pozdrav, Nemanja</p>
         <p>Poslednje kolo: {{ poslednjeKolo }}  ({{ poslednjiDatum }})</p>

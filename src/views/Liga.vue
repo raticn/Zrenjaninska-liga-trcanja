@@ -2,7 +2,8 @@
 import axios from "axios"
 import { RouterLink, RouterView } from 'vue-router'
 import Nav from '../components/Nav.vue'
-
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
     data() {
@@ -17,6 +18,7 @@ export default {
         Nav,
     },
     methods: {
+        ...mapActions(useLigaStore, ['fetchText']),
         async round($event) {
             this.kolo = parseInt($event.currentTarget.getAttribute("data-id")) + 1
             let round = this.kolo
@@ -40,7 +42,11 @@ export default {
             return formattedDate;
             }
     },
+    computed: {
+        ...mapState(useLigaStore, ['textObj', 'longText']),
+    },
     async mounted() {
+        this.fetchText()
         let kola = await axios.get('http://238p123.mars2.mars-hosting.com/API/svaKola')
         this.kola = kola.data.odgovor
     },
@@ -50,10 +56,10 @@ export default {
 <template>
 <div class="liga">
     <Nav v-if="this.popup != this.kolo" />
-    <h1>Zrenjaninska liga trčanja</h1>
+    <h1>{{ this.textObj.naslov }}</h1>
     <div class="kola">
         <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.kola" :key="index" :data-id="this.kola.length - index - 1">
-            <p class="koloText">{{ kolo.rez_kolo }}. kolo</p>
+            <p class="koloText">{{ kolo.rez_kolo }}. {{ this.textObj.maKolo }}</p>
             <p class="koloDatum">{{ this.formatDate(kolo.dat_datum) }}</p>
         </div>
     </div>
@@ -64,16 +70,16 @@ export default {
             <thead>
             <tr>
                 <th>Rank</th>
-                <th>Ime i prezime</th>
-                <th>Kategorija</th>
-                <th>Vreme</th>
-                <th>Tempo</th>
+                <th>{{ this.textObj.tabelaRekIme }} {{ this.textObj.and }} {{ this.textObj.tabelaRekPrezime }}</th>
+                <th>{{ this.textObj.tabelaRekKat }}</th>
+                <th>{{ this.textObj.tabelaRekVr }}</th>
+                <th>{{ this.textObj.tabelaRekTem }}</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(result, index) in this.rez" :key="index" :class="result.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                 <td>{{ index + 1 }}</td>
-                <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.rez_ime }}</td>
+                <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
                 <td>{{ result.rez_kategorija }}</td>
                 <td>{{ result.rez_vreme }}</td>
                 <td>{{ result.Tempo }}</td>
