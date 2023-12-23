@@ -1,5 +1,6 @@
 <script>
 import Nav from '../components/Nav.vue'
+import Footer from '../components/Footer.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +17,7 @@ export default {
     components: {
         Nav,
         FontAwesomeIcon,
+        Footer
     },
     methods:{
         ...mapActions(useLigaStore, ['fetchText']),
@@ -24,6 +26,7 @@ export default {
         ...mapState(useLigaStore, ['textObj', 'longText']),
     },
     async mounted(){
+        window.scrollTo(0, 0)
         this.fetchText();
     },
     created() {
@@ -129,6 +132,7 @@ export default {
         </div>
     </section>
     </div>
+    <Footer/>
 </template>
 
 <style>
@@ -190,5 +194,9 @@ export default {
 }
 /*----------------------------------------END OF O NAMA TEKST SECTION --------------------------------*/
 
-
+@media (max-width: 1350px) {
+    .onama h1{
+        margin-top: 1.5em;
+    }
+}
 </style>

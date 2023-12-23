@@ -1,7 +1,7 @@
 <script>
 import axios from "axios"
-import { RouterLink, RouterView } from 'vue-router'
 import Nav from '../components/Nav.vue'
+import Footer from '../components/Footer.vue'
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
 
@@ -16,6 +16,7 @@ export default {
     },
     components: {
         Nav,
+        Footer,
     },
     methods: {
         ...mapActions(useLigaStore, ['fetchText']),
@@ -32,20 +33,24 @@ export default {
             this.popup = this.kolo
         },
         formatDate(dateString) {
-            const dateObject = new Date(dateString);
-            const day = dateObject.getDate();
-            const month = dateObject.getMonth() + 1; 
-            const year = dateObject.getFullYear();
+        const dateObject = new Date(dateString);
+        const day = dateObject.getDate();
+        const month = dateObject.getMonth() + 1; 
+        const year = dateObject.getFullYear();
 
-            const formattedDate = `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year}.`;
+        const formattedDate = `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year}.`;
 
-            return formattedDate;
-            }
+        return formattedDate;
+        },
+        filteredResults(category) {
+            return this.rez.filter(result => result.rez_kategorija === category);
+        },
     },
     computed: {
         ...mapState(useLigaStore, ['textObj', 'longText']),
     },
     async mounted() {
+        window.scrollTo(0, 0)
         this.fetchText()
         let kola = await axios.get('http://238p123.mars2.mars-hosting.com/API/svaKola')
         this.kola = kola.data.odgovor
@@ -77,17 +82,25 @@ export default {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(result, index) in this.rez" :key="index" :class="result.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'">
-                <td>{{ index + 1 }}</td>
-                <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
-                <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
-                <td>{{ result.rez_vreme }}</td>
-                <td>{{ result.Tempo }}</td>
-            </tr>
+                <tr v-for="(result, index) in filteredResults('m')" :key="'m' + index" class="menColumn">
+                    <td>{{ index + 1 }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
+                    <td>{{ textObj.muskarci }}</td>
+                    <td>{{ result.rez_vreme }}</td>
+                    <td>{{ result.Tempo }}</td>
+                </tr>
+                <tr v-for="(result, index) in filteredResults('z')" :key="'z' + index" class="womenColumn">
+                    <td>{{ index + 1 }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
+                    <td>{{ textObj.zene }}</td>
+                    <td>{{ result.rez_vreme }}</td>
+                    <td>{{ result.Tempo }}</td>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
+<Footer />
 </template>
 
 <style>
@@ -137,6 +150,7 @@ export default {
     left: 0;
     right: 0;
     background: #fff;
+    z-index: 40;
 }
 .koloPopup h2{
     margin-top: 2em;

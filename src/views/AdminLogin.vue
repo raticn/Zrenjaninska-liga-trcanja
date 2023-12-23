@@ -63,6 +63,11 @@ export default {
         margin: 1em auto;
         cursor: pointer;
     }
+    .login input{
+        color: #000;
+        border: 2px solid #000;
+        margin-bottom: 1em;
+    }
     
     @media (max-width: 800px) {
         .adminLogin{

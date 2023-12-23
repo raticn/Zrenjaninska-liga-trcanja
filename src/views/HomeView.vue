@@ -53,6 +53,9 @@ export default {
 
       return formattedDate;
     },
+    filteredResults(category) {
+        return this.rez.filter(result => result.rez_kategorija === category);
+    },
   },
   computed: {
     ...mapState(useLigaStore, ['textObj', 'longText', 'lang']),
@@ -122,7 +125,7 @@ export default {
     <div class="najava">
       <h2>{{ this.textObj.naslovPridruzi }}</h2>
       <p class="datumNajave">{{ novoKolo  }}. {{ this.textObj.maKolo }}: {{ noviDatum }}</p>
-      <button class="prijavaBtn">{{ this.textObj.dugmeTekst }}</button>
+      <RouterLink class="prijavaBtn" aria-label="Link do stranice: Kontakt" to="/kontakt">{{ this.textObj.dugmeTekst }}</RouterLink>
     </div>
   </section>
   <section aria-label="Sekcija: Ukratko o nama">
@@ -171,8 +174,8 @@ export default {
         </div>
     </div>
     <div class="koloPopup" v-if="this.popup == this.kolo">
-      <button @click="this.kolo = null">x</button>
-      <p>{{ this.kolo }}. kolo</p>
+      <button @click="this.kolo = null" class="closePopup">x</button>
+      <h2>{{ this.kolo }}. {{ this.textObj.maKolo }}</h2>
       <table class="tabela">
           <thead>
           <tr>
@@ -184,13 +187,20 @@ export default {
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(result, index) in this.rez" :key="index">
-              <td>{{ index + 1 }}</td>
-              <td>{{ result.rez_ime }}</td>
-              <td>{{ result.rez_kategorija }}</td>
-              <td>{{ result.rez_vreme }}</td>
-              <td>{{ result.Tempo }}</td>
-          </tr>
+            <tr v-for="(result, index) in filteredResults('m')" :key="'m' + index" class="menColumn">
+                <td>{{ index + 1 }}</td>
+                <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
+                <td>{{ textObj.muskarci }}</td>
+                <td>{{ result.rez_vreme }}</td>
+                <td>{{ result.Tempo }}</td>
+            </tr>
+            <tr v-for="(result, index) in filteredResults('z')" :key="'z' + index" class="womenColumn">
+                <td>{{ index + 1 }}</td>
+                <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
+                <td>{{ textObj.zene }}</td>
+                <td>{{ result.rez_vreme }}</td>
+                <td>{{ result.Tempo }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -260,12 +270,14 @@ export default {
       <img @click="this.asPopup = !this.asPopup" class="asImg" src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="Trkacki klub AS023 logo slika">
       <div class="asPopup" v-if="this.asPopup">
         <button class="closeClan1" @click="this.asPopup =! this.asPopup">X</button>
-        <div class="asPopupText">
-          <p><span class="bold">Borislav Mandić</span> {{ this.longText.as1 }}</p>
-          <p>{{ this.longText.as2 }}</p>
-          <p>{{ this.longText.as3 }}</p>
+        <div class="popupBox">
+          <img src="http://238p123.mars2.mars-hosting.com/API/pictures/9" alt="Borislav Mandic slika">
+          <div class="asPopupText">
+            <p><span class="bold">Borislav Mandić</span> {{ this.longText.as1 }}</p>
+            <p>{{ this.longText.as2 }}</p>
+            <p>{{ this.longText.as3 }}</p>
+          </div>
         </div>
-        <img src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="">
       </div>
     </div>
   </section>
@@ -358,6 +370,8 @@ export default {
   padding: .5em 0;
 }
 .prijavaBtn{
+  text-decoration: none;
+  display: inline-block;
   border: 2px solid #fff;
   border-radius: 20px;
   color: #fff;
@@ -762,26 +776,103 @@ align-items: center;
   background-color: #fff;
   z-index: 11;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
 }
+.popupBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .asPopupText{
-  width: 60%;
+  width: 90%;
   font-size: 1.3em;
-  line-height: 1.7em;
+  line-height: 2em;
   background-color:#1f3242;
   color:#fff;
   padding: 30px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
+  margin-bottom: 2em;
 }
 .asPopup img{
-  /* height: 40vh; */
-  width:30%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  width:25%;
+  border-radius: 50%;
+  margin: 13em 0 2em;
 }
 /*------------------------------END OF PRIJATELJI LIGE SECTION -----------------------------------*/
 
+
+/* ---------------------------------------RESPONSIVE -------------------------------------*/
+
+@media (max-width: 1350px) {
+  .ukratkoText p{
+    font-size: 1.1em;
+  }
+  .ukratkoText{
+    width: 55%;
+  }
+  .ukratkoImg{
+    width: 45%;
+  }
+  .linkOnama{
+    width: 80%;
+  }
+  .poslednjeKolo{
+    width: 60%;
+  }
+  #kola .kola, .clan1{
+    width: 90%;
+  }
+  #kola .kolo{
+    width: 15%;
+  }
+  #kola .koloPopup h2{
+    margin-top: .5em;
+  }
+  .ecka{
+    height: 60vh;
+    overflow: hidden;
+  }
+  .eckaNajava{
+    font-size: 2em;
+    margin: 0;
+  }
+  .countDown{
+    font-size: 3em;
+  }
+  .countDownBtn{
+    font-size: 1.5em;
+    margin: 2em auto 0;
+  }
+  .popupImg1{
+    width: 65%;
+  }
+  .oClanu{
+    width: 45%;
+  }
+  .clan1{
+    font-size: 1.2em;
+  }
+  .closeClan1{
+    font-size: 3em;
+  }
+  .popupBox{
+    flex-direction: column;
+  }
+  .asPopup img{
+    width: 25%;
+    margin: 13em 0 2em;
+    border-radius: 50%;
+  }
+  .asPopupText{
+    font-size: 1em;
+    border-radius: 20px;
+    margin-bottom: 2em;
+  }
+  .recordsWrapper h1{
+    margin-top: 2em !important;
+  }
+}
 </style>

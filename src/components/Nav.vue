@@ -145,7 +145,7 @@ li a{
     text-decoration: none;
 }
 .logo{
-    width: 4em;
+    width: 3em;
     margin: 1em 0 1em 1em;
     cursor: pointer;
 }
@@ -153,6 +153,7 @@ li a{
     display: flex;
     margin: 0;
     width: 90vw;
+    align-items: center;
 }
 .navLista a{
     text-decoration: none;
@@ -176,10 +177,16 @@ li a{
     margin-left: auto;
 }
 .lang{
-    width: 3em;
+    width: 4em;
     height: auto;
 }
 .changeLang{
     font-size: 1.5em;
+}
+
+@media (max-width: 1350px) {
+    .navLink{
+        font-size: 1.3em;
+    }
 }
 </style>

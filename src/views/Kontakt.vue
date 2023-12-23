@@ -1,6 +1,7 @@
 <script>
 import Nav from '../components/Nav.vue'
-import axios from 'axios'
+import Footer from '../components/Footer.vue'
+import { RouterLink, RouterView } from 'vue-router';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
@@ -24,6 +25,7 @@ export default {
     },
     components: {
         Nav,
+        Footer,
         FontAwesomeIcon,
     },
     methods: {
@@ -45,6 +47,7 @@ export default {
     },
     mounted() {
         this.fetchText()
+        window.scrollTo(0 ,0)
     },
     created() {
         library.add(faInstagram, faEnvelope)
@@ -62,7 +65,7 @@ export default {
         </div>
         <p class="prijavaHeading">{{ this.textObj.koPrijava }}</p>
         <section aria-label="Sekcija: Kontakt forma">
-            <form id="form" action="https://formsubmit.co/@gmail.com" method="POST">
+            <form id="form" action="https://formsubmit.co/zrligatrcanja@gmail.com" method="POST">
                 <div class="formInfo">
                     <div class="formField" :class="{ focused: isNameFocused || form.name !== '' }">
                         <label for="Ime" @click="focusInput('imeInput')">{{ this.textObj.tabelaImePrez }}</label>
@@ -77,10 +80,15 @@ export default {
                         <input ref="telefonInput" name="Telefon" type="text" v-model="form.telefon" required @focus="onFocus('isTelefonFocused')" @blur="onBlur('isTelefonFocused', 'telefon')"/>
                     </div>
                 </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="privacy" value="saglasan" required>
+                    <label  for="privacy">{{ this.textObj.koPP1 }} <RouterLink aria-label="Link do stranice: Politika privatnosti" to="/politikaPrivatnosti" class="bold">{{ this.textObj.koPP2 }}</RouterLink></label>
+                </div>
                 <button class="formBtn" type="submit">{{ this.textObj.koPos }}</button>
             </form>
         </section>
     </div>
+    <Footer />
 </template>
 
 <style>
@@ -88,6 +96,7 @@ export default {
     background-color: #1f3242;
     color: #fff;
     min-height: 100vh;
+    padding-bottom: 5em;
 }
 .kontakt .nav{
     position: fixed;
@@ -133,7 +142,7 @@ export default {
 .formField.focused label {
     color: #ff0c46;
 }
-input{
+.kontakt input{
     padding-left: 10px;
     height: 50px;
     width: 95%;
@@ -144,20 +153,47 @@ input{
     border: 3px solid #ff0c46;
     color: #fff;
 }
-input:focus{
+.kontakt input:focus{
     outline: 2px solid #ff0c46;
     border: none;
     box-shadow: 0 0 10px #ff0c46;
 }
 .formBtn{
-    border: none;
+    border: 2px solid #fff;
     width: 100%;
     background-color: #1f3242;
     color: #fff;
-    font-weight: 700;
+    font-weight: 900;
     font-size: 1.5em;
     padding: 10px 0;
-    border-radius: 10px;
+    border-radius: 20px;
     cursor: pointer;
+}
+.formBtn:hover{
+    background-color: #fff;
+    color: #ff0c46;
+}
+.checkbox{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: #fff;
+    font-size: 1.1em;
+}
+.checkbox input{
+    width: 1em;
+    margin-right: .3em;
+}
+.checkbox a{
+    color: #fff;
+}
+.checkbox a:hover{
+    color: #ff0c46;
+}
+
+@media (max-width: 1350px) {
+    .kontakt h2{
+        margin-top: 2em;
+    }
 }
 </style>

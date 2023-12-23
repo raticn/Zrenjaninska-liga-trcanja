@@ -1,9 +1,9 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faInstagram, faFacebook, faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
 
@@ -21,7 +21,7 @@ export default{
         this.fetchText();
     },
     created() {
-        library.add(faLocationDot, faPhone, faEnvelope, faInstagram, faFacebook, faTiktok)
+        library.add(faLocationDot, faEnvelope, faInstagram, faFacebook)
     },
 }
 </script>
@@ -30,28 +30,9 @@ export default{
     <div class="footer">
         <div class="footer_wrapper">
             <div class="footer_info">
-            <p>
-                <FontAwesomeIcon class="footerIcons" icon="fa-solid fa-phone"></FontAwesomeIcon>
-                <a href="tel:+38123220698">+381 23 220698</a>
-            </p>
-            <p>
-                <FontAwesomeIcon class="footerIcons" icon="fa-solid fa-envelope"></FontAwesomeIcon>
-                <a href="mailto:ligatrcanjazr@gmail.com">ligatrcanjazr@gmail.com</a>
-            </p>
-            </div>
-            <div class="socials">
-                <p>{{ this.longText.foPrat }}</p>
-                <div class="socialsLinks">
-                    <p><a aria-label="Pogledajte nasu Instagram stranicu" href="https://www.instagram.com/" target="_blank">
-                            <FontAwesomeIcon class="socialIcons" icon="fa-brands fa-instagram"></FontAwesomeIcon>
-                        </a></p>
-                    <p><a aria-label="Pogledajte nasu Facebook stranicu" href="https://www.facebook.com/" target="_blank">
-                            <FontAwesomeIcon class="socialIcons" icon="fa-brands fa-facebook"></FontAwesomeIcon>
-                        </a></p>
-                        <p><a aria-label="Pogledajte nasu TikTok stranicu" href="https://www.tiktok.com/" target="_blank">
-                            <FontAwesomeIcon class="socialIcons" icon="fa-brands fa-tiktok"></FontAwesomeIcon>
-                        </a></p>
-                </div>
+            <p><a href="mailto:ligatrcanjazr@gmail.com"><FontAwesomeIcon class="footerIcons" icon="fa-solid fa-envelope"></FontAwesomeIcon>zrligatrcanja@gmail.com</a></p>
+            <p><a aria-label="Pogledajte nasu Instagram stranicu" href="https://www.instagram.com/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a></p>
+            <p><a aria-label="Pogledajte nasu Facebook stranicu" href="https://www.facebook.com/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-facebook"></FontAwesomeIcon>facebook.com/</a></p>
             </div>
             <div class="footer_links">
                 <ul class="quicklinks">
@@ -74,27 +55,27 @@ export default{
 .footer{
     width: 100vw;
     background: linear-gradient(to right, #1f3242, #ff0c46 );
-    margin-top: 2.5em;
 }
 .footer_wrapper{
     color:#fff;
-    font-family: Comfortaa;
     display: flex;
-    justify-content: flex-start ;
+    justify-content: space-around;
     align-items: center;
-    
 }
 .footer_info{
     font-size: 1.8em;
     color:#fff;
-    width: 100%;
-    margin: 2em;
-    flex-basis: 33%;
-    font-weight: bold;
+    width: 40%;
+    font-weight: 700;
 }
 .footer_info p{
     margin: 1em 0;
     line-height: 1.5em;
+}
+.footer_info a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 .footer_logo{
     width: 7em;
@@ -104,7 +85,7 @@ export default{
     font-size: 1.5em;
     color:#fff;
     display: flex;
-    flex-basis: 33%;
+    width: 40%;
     flex-direction: column;
     flex-wrap:wrap;
     justify-content: space-between;
@@ -116,15 +97,13 @@ export default{
 }
 .quicklinks{
     display: flex;
-    flex-basis: 60%;
     height: 15em;
     flex-direction: column;
     flex-wrap:wrap;
-    justify-content: flex-start;
+    justify-content: center;
     
 }
 .quicklinks li{
-    
     margin: 1em 0;
     font-weight: 500;
     cursor: pointer;
@@ -144,10 +123,6 @@ export default{
 .socials p{
     margin: 1em 0;
 }
-.socialIcons{
-    color: #fff;
-    font-size: 2.5em;
-}
 .copyright {
     margin-bottom: 1em;
     font-size: 1.8em;
@@ -161,6 +136,8 @@ export default{
 }
 .footerIcons{
     margin-right: 0.5em;
+    font-size: 2em;
+    cursor: pointer;
 }
 .footer a:link{
     color:#fff;
@@ -170,6 +147,15 @@ export default{
 }
 .footer a:hover, a:active{
     color: #fff;
+}
+
+@media (max-width: 1350px) {
+    .footer_info, .footer_links{
+        font-size: 1.3em;
+    }
+    .quicklinks{
+        height: 10em;
+    }
 }
 
 @media (max-width: 1150px) {

@@ -1,6 +1,7 @@
 <script>
 import axios from "axios"
 import Nav from '../components/Nav.vue'
+import Footer from '../components/Footer.vue'
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
 
@@ -17,6 +18,7 @@ export default {
     },
     components: {
         Nav,
+        Footer
     },
     methods: {
         ...mapActions(useLigaStore, ['fetchText']),
@@ -29,6 +31,7 @@ export default {
         ...mapState(useLigaStore, ['textObj', 'longText']),
     },
     async mounted() {
+        window.scrollTo(0, 0)
         this.fetchText()
         let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/rekordi')
         this.topM = res.data.Top10Muski
@@ -62,7 +65,7 @@ export default {
                     <th>{{ this.textObj.tabelaRekIme }}</th>
                     <th>{{ this.textObj.tabelaRekPrezime }}</th>
                     <th>{{ this.textObj.tabelaRekKat }}</th>
-                    <th>{{ this.textObj.koloV }}</th>
+                    <th>Km</th>
                     <th>{{ this.textObj.tabelaVreme }}</th>
                     <th>{{ this.textObj.tabelaRekTem }}</th>
                 </tr>
@@ -70,7 +73,7 @@ export default {
                 <tbody>
                 <tr v-for="(result, index) in this.topDistanca" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Distanca }} km</td>
@@ -97,7 +100,7 @@ export default {
                 <tbody>
                 <tr v-for="(result, index) in this.topAll" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
@@ -124,7 +127,7 @@ export default {
                 <tbody>
                 <tr v-for="(result, index) in this.topM" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
@@ -151,7 +154,7 @@ export default {
                 <tbody>
                 <tr v-for="(result, index) in this.topZ" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
@@ -178,7 +181,7 @@ export default {
                 <tbody>
                 <tr v-for="(result, index) in this.topGodina" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-if="index == 1">🥈</span><span v-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
@@ -189,6 +192,7 @@ export default {
             </table>
         </div>
     </div>
+    <Footer />
 </template>
 
 <style>

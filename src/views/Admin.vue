@@ -1,5 +1,6 @@
 <script>
 import axios from "axios"
+import { RouterLink, RouterView } from 'vue-router';
 
 export default {
     data() {
@@ -138,31 +139,32 @@ export default {
 
 <template>
     <div class="adminWrapper">
-        <p>Pozdrav, Nemanja</p>
-        <p>Poslednje kolo: {{ poslednjeKolo }}  ({{ poslednjiDatum }})</p>
-        <p>Novo kolo: {{ poslednjeKolo + 1 }}</p>
+        <RouterLink to="/"><img src="../assets/zltLogo.svg" alt="Zrenjaninska liga trcanja logo slika"></RouterLink>
+        <p class="adminHeading">Pozdrav, Nemanja!</p>
+        <p class="poslKolo">Poslednje kolo: {{ poslednjeKolo }}.  ({{ poslednjiDatum }})</p>
+        <p class="novKolo">Novo kolo: {{ poslednjeKolo + 1 }}.</p>
         <input type="text" v-model="datumKola" placeholder="Datum kola">
-        <button @click="addRound">Dodaj kolo</button>
+        <button class="adminBtn" @click="addRound">Dodaj kolo</button>
         <br>
         <br>
         <div class="addPerson" v-if="this.popup">
-            <input type="text" v-model="ime" placeholder="ime">
-            <input type="text" v-model="prezime" placeholder="prezime">
-            <input type="text" v-model="kategorija" placeholder="kategorija">
-            <input type="text" v-model="vreme" placeholder="vreme - format 00:00:00 (sati:minuti:sekunde)">
-            <input type="text" v-model="distancaKola" placeholder="distanca kola">
-            <button @click="addPerson">dodaj trkaca</button>
+            <input type="text" v-model="ime" placeholder="Ime">
+            <input type="text" v-model="prezime" placeholder="Prezime">
+            <input type="text" v-model="kategorija" placeholder="Kategorija">
+            <input type="text" v-model="vreme" placeholder="Vreme - format 00:00:00 (sati:minuti:sekunde)">
+            <input type="text" v-model="distancaKola" placeholder="Kilometri">
+            <button class="adminBtn" @click="addPerson">Dodaj trkača</button>
         </div>
         <br>
         <br>
         <input type="text" v-model="noviDatum" placeholder="Datum za novo kolo (najava)">
-        <button @click="addNewDate">Dodaj datum za {{ sledeceKolo + 1}}. kolo</button>
+        <button class="adminBtn" @click="addNewDate">Dodaj datum za {{ sledeceKolo + 1}}. kolo</button>
         <br>
         <br>
-        <button @click="reload">Zavrsi</button>
+        <button class="adminBtn" @click="reload">Zavrsi</button>
         <br>
         <br>
-        <input class="tekst" type="text" v-model="id" placeholder="id">
+        <!-- <input class="tekst" type="text" v-model="id" placeholder="id">
         <br>
         <br>
         <textarea name="" id=""  v-model="sr" cols="150" rows="10" placeholder="srpski"></textarea>
@@ -170,11 +172,17 @@ export default {
         <br>
         <br>
         <textarea name="" id="" v-model="en" cols="150" rows="10" placeholder="engleski"></textarea>
-        <button @click="posaljiEn" class="textBtn">EN</button>
+        <button @click="posaljiEn" class="textBtn">EN</button> -->
     </div>
 </template>
 
 <style>
+.adminHeading{
+    font-size: 3em;
+    font-weight: 900;
+    color: #1f3242;
+    text-align: center;
+}
 textarea{
     font-size: 1.2em;
     margin-top: 5em;
@@ -186,5 +194,50 @@ textarea{
 .textBtn{
     width: 10em;
     height: 10em;
+}
+.poslKolo {
+    font-size: 1.3em;
+}
+.novKolo {
+    font-size: 2em;
+    font-weight: 700;
+}
+.adminWrapper input{
+    border: 2px solid #1f3242;
+    border-radius: 20px;
+    width: 30%;
+    margin-bottom: 1em;
+    height: 50px;
+    font-weight: 700;
+    font-size: 1.3em;
+}
+.adminWrapper input:focus{
+    outline: 2px solid #1f3242;
+    box-shadow: none;
+}
+.adminWrapper img{
+    width: 5em;
+    margin: 1em auto 0;
+    display: flex;
+}
+.addPerson{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.adminBtn{
+    border: 2px solid #1f3242;
+    width: 20%;
+    background-color: #fff;
+    color: #1f3242;
+    font-weight: 900;
+    font-size: 1.5em;
+    padding: 10px 0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.adminBtn:hover{
+    background-color: #1f3242;
+    color: #fff;
 }
 </style>
