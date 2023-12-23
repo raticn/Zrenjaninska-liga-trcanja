@@ -174,9 +174,6 @@ export default {
     border-collapse: collapse;
 }
 td, th {
-    /* border: 1px solid #1f3242; */
-    /* text-align: left; */
-    /* padding: 8px; */
     width: 19%;
     text-align: center;
 }
@@ -191,5 +188,43 @@ th {
     color: #1f3242;
     font-size: 1.5em;
     font-weight: 900;
+}
+
+@media (max-width: 2000px) {
+    .liga h1{
+        font-size: 5em;
+        margin-top: 2em;
+    }
+    .koloText{
+        font-size: 3em;
+    }
+}
+
+@media (max-width: 1400px) {
+    .kolo{
+        padding: 1em;
+    }
+    .koloText{
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 1024px) {
+    .liga h1{
+        font-size: 3.5em;
+        margin-top: 2.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    .liga h1{
+        font-size: 3em;
+    }
+    .koloText{
+        font-size: 2em;
+    }
+    .tabela{
+        width: 200vw;
+    }
 }
 </style>

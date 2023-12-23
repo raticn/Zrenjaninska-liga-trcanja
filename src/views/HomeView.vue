@@ -104,9 +104,16 @@ export default {
     }
 }, 1000);
 
+if(window.screen.width <= 600) {
+    document.querySelector(".rec1").classList.add("fromTop1Small")
+    document.querySelector(".rec2").classList.add("fromTop2Small")
+    document.querySelector(".rec3").classList.add("fromTop3Small")
+}
+else if(window.screen.width > 600) {
     document.querySelector(".rec1").classList.add("fromTop1")
     document.querySelector(".rec2").classList.add("fromTop2")
     document.querySelector(".rec3").classList.add("fromTop3")
+}
   },
   created() {
     library.add(faPersonRunning, faEnvelope, faClock, faInstagram, faYoutube)
@@ -250,7 +257,7 @@ export default {
               </div>
             </div>
             <div class="clan1">
-              <img class="popupImg4" src="../assets/nemanjaPersonalni.JPG" alt="Trckac - slika">
+              <img class="popupImg4" src="http://238p123.mars2.mars-hosting.com/API/pictures/10" alt="Trckac - slika">
               <div class="clan1Kontakt">
                 <h3>{{ this.textObj.pupNaslovNem }}</h3>
                 <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
@@ -361,7 +368,96 @@ export default {
         font-size: 4em;
     }
 }
-
+/* .fromTop1Big{
+    animation: rec1Big 2s forwards;
+}
+.fromTop2Big{
+    animation: rec2Big 2s forwards 0.5s;
+}
+.fromTop3Big{
+    animation: rec3Big 2s forwards 1s;
+}
+@keyframes rec1Big {
+    0%{
+        top: -30%;
+        font-size: 12em;
+    }
+    100%{
+        right: 2%;
+        top: 20%;
+        font-size: 8em;
+    }
+}
+@keyframes rec2Big {
+    0%{
+        top: -30%;
+        font-size: 12em;
+    }
+    100%{
+        right: 2%;
+        top: 40%;
+        font-size: 8em;
+    }
+}
+@keyframes rec3Big {
+    0%{
+        top: -30%;
+        font-size: 12em;
+    }
+    100%{
+        right: 2%;
+        top: 60%;
+        font-size: 8em;
+    }
+} */
+.fromTop1Small{
+    animation: rec1Small 2s forwards;
+}
+.fromTop2Small{
+    animation: rec2Small 2s forwards 0.5s;
+}
+.fromTop3Small{
+    animation: rec3Small 2s forwards 1s;
+}
+@keyframes rec1Small {
+    0%{
+        left: 50%;
+        top: -30%;
+        font-size: 1em;
+    }
+    100%{
+        transform: translateX(-50%) translateY(50%);
+        left: 50%;
+        top: 20%;
+        font-size: 2em;
+    }
+}
+@keyframes rec2Small {
+    0%{
+        left: 50%;
+        top: -30%;
+        font-size: 1em;
+    }
+    100%{
+        transform: translateX(-50%) translateY(50%);
+        left: 50%;
+        top: 40%;
+        font-size: 2em;
+    }
+}
+@keyframes rec3Small {
+    0%{
+        left: 50%;
+        top: -30%;
+        font-size: 1em;
+    }
+    100%{
+        transform: translateX(-50%) translateY(50%);
+        left: 50%;
+        top: 60%;
+        font-size: 2em;
+    }
+}
 /*------------------------------------ END OF HERO SECTION --------------------------------------*/
 
 /*----------------------------------------- NAJAVA SECTION --------------------------------------*/
@@ -516,6 +612,7 @@ h2{
   padding: 15px;
   border-radius: 20px;
   width: 100%;
+  align-items: center;
 }
 .womenColumn{
   background-color: rgba(255, 10, 67, .8);
@@ -523,6 +620,7 @@ h2{
   padding: 15px;
   border-radius: 20px;
   width: 100%;
+  align-items: center;
 }
 /*----------------------------------END OF LAST ROUND RESULTS SECTION ----------------------------*/
 
@@ -727,7 +825,6 @@ align-items: center;
   font-weight: 900;
   overflow-y: hidden;
   width: 95%;
-  margin-bottom: 1em;
 }
 .personalni img{
   width: 50%;
@@ -912,7 +1009,27 @@ align-items: center;
   }
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1500px) {
+  .ukratkoImg, .ukratkoText{
+    width: 50%;
+  }
+  .ukratkoText p{
+    font-size: 1.3em;
+  }
+  .linkOnama{
+    width: 95%;
+    font-size: 1.7em;
+  }
+  .fazeTreningaHeading{
+    font-size: 4em;
+    margin: 1em 0;
+  }
+  .faza{
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 1400px) {
   .ukratkoText p{
     font-size: 1.1em;
   }
@@ -926,7 +1043,7 @@ align-items: center;
     width: 80%;
   }
   .poslednjeKolo{
-    width: 60%;
+    width: 70%;
   }
   #kola .kola, .clan1{
     width: 90%;
@@ -942,7 +1059,7 @@ align-items: center;
     overflow: hidden;
   }
   .eckaNajava{
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 0;
   }
   .countDown{
@@ -959,18 +1076,19 @@ align-items: center;
     width: 45%;
   }
   .clan1{
-    font-size: 1.2em;
+    font-size: 1.4em;
   }
   .closeClan1{
     font-size: 3em;
   }
+  .clanBtn{
+    font-size: 1.5em;
+  }
   .popupBox{
     flex-direction: column;
   }
-  .asPopup img{
-    width: 25%;
-    margin: 13em 0 2em;
-    border-radius: 50%;
+  .asPopup .clan1{
+    font-size: 1.2em;
   }
   .asPopupText{
     font-size: 1em;
@@ -979,6 +1097,138 @@ align-items: center;
   }
   .recordsWrapper h1{
     margin-top: 2em !important;
+  }
+}
+
+@media (max-width: 1300px) {
+  .najava{
+    width: 60%;
+  }
+  .ukratkoText h2{
+    font-size: 2.5em;
+  }
+  .linkOnama{
+    width: 95%;
+  }
+  .poslednjeKolo{
+    width: 75%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .najava{
+    width: 90%;
+  }
+  .ukratkoOnama{
+    flex-direction: column;
+    width: 90%;
+  }
+  .ukratkoText{
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
+  }
+  .ukratkoText p{
+    font-size: 1.3em;
+  }
+  .ukratkoImg{
+    width: 100%;
+    margin: 0 auto;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0;
+  }
+  .poslednjeKolo{
+    width: 90%;
+  }
+  #kola .kolo{
+    width: 30%;
+  }
+  .ecka{
+    width: 90%;
+  }
+  .countDownBtn{
+    font-size: 2em;
+  }
+  .clan1, .clan1:nth-child(3), .clan1:nth-child(5){
+    flex-direction: column;
+  }
+  .popupImg1, .popupImg2, .popupImg3{
+    width: 100%;
+  }
+  .oClanu{
+    width: 90%;
+    margin: .5em auto;
+  }
+  .clan1Kontakt h3{
+    margin: 1em 0;
+  }
+  .closeClan1{
+    top: 1em;
+    font-size: 4em;
+    color: #fff;
+  }
+  .eckaLogo, .asImg{
+    width: 30%;
+  }
+}
+
+@media (max-width: 600px) {
+  .najava h2, .fazeTreningaHeading, .poslednjeKoloHeading, .kolaHeading, .prijateljiLigeHeading{
+    font-size: 2.5em;
+  }
+  .datumNajave{
+    font-size: 2em;
+  }
+  .linkOnama{
+    text-align: center;
+  }
+  .fazeTreninga, .prijateljiLige{
+    flex-direction: column;
+  }
+  .faza{
+    width: 100%;
+    margin-bottom: 2em;
+  }
+  .poslednjeKolo{
+    align-items: center;
+  }
+  #kola .kolo, .eckaLogo, .asImg{
+    width: 100%;
+  }
+  .countDownBtn{
+    width: 90%;
+  }
+  .tim{
+    width: 95%;
+  }
+  .eckaLogo{
+    margin-bottom: 3em;
+  }
+  .clan1Popup{
+    max-width: 100vw;
+    overflow-x: hidden;
+    z-index: 100;
+  }
+  .clan1{
+    margin: 1em auto;
+  }
+  .asPopup{
+    z-index: 100;
+  }
+  .asPopup .popupImg1, .asPopup .popupImg2{
+    width: 100%;
+  }
+  .asPopup .oClanu{
+    width: 90%;
+    font-size: 1.2em;
+    margin: 1em auto;
+  }
+  .koloPopup{
+    overflow-x: auto;
   }
 }
 </style>

@@ -213,4 +213,10 @@ export default {
 .recordsWrapper h2{
     margin-top: 1em;
 }
+
+@media (max-width: 600px) {
+    .topDistanca, .topMuski, .topZenski, .topGodine, .topAll{
+        overflow-x: auto;
+    }
+}
 </style>

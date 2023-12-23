@@ -160,14 +160,12 @@ export default {
     text-align: center;
 }
 
-.onama p{
-    font-size: 1.3em;
-    line-height: 1.5em;
-    padding-top: .5em;    
-}
 .ciljevi, .pravila{
     width: 90%;
     margin: 0 auto;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    padding-top: .5em; 
 }
 .pravila{
     padding-bottom: 2em;
@@ -193,6 +191,16 @@ export default {
     text-decoration: underline;
 }
 /*----------------------------------------END OF O NAMA TEKST SECTION --------------------------------*/
+
+@media (max-width: 2000px) {
+    .onama h1{
+        font-size: 5em;
+        margin-top: 2em;
+    }
+    .pravila, .zabranjeno{
+        font-size: 1.5em;
+    }
+}
 
 @media (max-width: 1350px) {
     .onama h1{

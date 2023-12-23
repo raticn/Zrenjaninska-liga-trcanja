@@ -1,7 +1,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faBars} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
@@ -67,7 +67,7 @@ export default {
 })
     },
     created() {
-        library.add(faEnvelope, faInstagram, faYoutube, faFacebook)
+        library.add(faEnvelope, faBars, faInstagram, faYoutube, faFacebook)
     }
 }
 </script>
@@ -92,26 +92,32 @@ export default {
             </li>
         </ul>
     </div>
-    <!-- <div class="nav2">
+    <div class="nav2">
         <div class="menu">
             <div class="menuWrapper">
-                <p class="nav2Header"><img class="logo2" src="../assets/zltLogo.svg" alt="Zrenjaninska liga trcanja logo - slika" @click="this.$router.push('/')"> {{ this.shortText.nav2Naslov }}</p>
+                <p class="nav2Header"><img class="logo2" src="../assets/zltLogo.svg" alt="Zrenjaninska liga trcanja logo - slika" @click="this.$router.push('/')"> {{ this.textObj.naslov }}</p>
                 <FontAwesomeIcon @click="this.menu = !this.menu" class="bars" icon="fa-solid fa-bars"></FontAwesomeIcon>
             </div>
             <div class="dropDownMenu" v-if="this.menu">
-                <p @click="this.menu = !this.menu" class="navLink2"><a aria-label="Pregled trka" href="#trke">{{ this.shortText.dogadjajinaslov }}</a>
-                </p>
-                <p @click="this.$router.push('/rezultati'); this.menu = !this.menu" class="navLink2">{{ this.shortText.rezultatinaslov }}</p>
-                <p @click="this.menu = !this.menu; this.$router.push('/kontakt')" class="navLink2">{{ this.shortText.kontaktnaslov }}</p>
-                <p @click="this.menu = !this.menu" class="navLink2 prijava2"><span><a aria-label="Prijavi se za trku (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.shortText.prijavaNaslov }}</a></span></p>
-                <div class="lang2" @click="changeLang(); this.menu = !this.menu">
-                    <img class="langImg" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
-                    <FontAwesomeIcon class="langSw" icon="fa-solid fa-arrow-right-arrow-left"></FontAwesomeIcon>
-                    <img class="langImg" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">
-                </div>
+                <ul class="navLista2">
+                    <RouterLink aria-label="Link do stranice: Početna" to="/"><li class="navLink2">{{ this.longText.foPocetna }}</li></RouterLink>
+                    <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink2">{{ this.longText.foLiga }}</li></RouterLink>
+                    <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink2">{{ this.longText.foRekordi }}</li></RouterLink>
+                    <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink2">{{ this.longText.foOnama }}</li></RouterLink>
+                    <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink2">{{ this.longText.foKontakt }}</li></RouterLink>
+                    <div class="navIconsWrapper">
+                        <li class="navIcon2"><a href="https://www.instagram.com/nemanja_djuric/" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
+                        <li class="navIcon2"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
+                        <li class="navIcon2"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
+                    </div>
+                    <li class="language" @click="changeLang">
+                        <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
+                        <img v-if="this.lang == 'sr'" class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
+                    </li>
+                </ul>
             </div>
         </div>
-    </div> -->
+    </div>
     </nav>
 </header>
 
@@ -191,6 +197,63 @@ li a{
 @media (max-width: 1350px) {
     .navLink{
         font-size: 1.3em;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav{
+        display: none;
+    }
+    #header{
+        position: fixed;
+    }
+    .nav2{
+        display: block;
+        width: 100vw;
+        margin: 0 auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.3em;
+        z-index: 20;
+        background-color: #fff;
+        border-bottom: 2px solid #1f3242;
+        box-shadow: 0 0 10px #1f3242;
+    }
+    .menuWrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        color: #1f3242;
+    }
+    .nav2Header{
+        display: flex;
+        align-items: center;
+    }
+    .logo2{
+        width: 3em;
+    }
+    .navLink2{
+        list-style: none;
+        color: #1f3242;
+        font-size: 1.1em;
+        margin: .5em 0 .5em .5em;
+    }
+    .navLista2 a{
+        text-decoration: none;
+    }
+    .navIconsWrapper{
+        display: flex;
+        justify-content: space-around;
+    }
+    .navIcon2{
+        display: inline-block;
+    }
+    .navLista2 .language{
+        justify-content: center;
+        margin: .8em 0;
     }
 }
 </style>
