@@ -89,6 +89,7 @@ export default {
                     <td>{{ result.rez_vreme }}</td>
                     <td>{{ result.Tempo }}</td>
                 </tr>
+                <br>
                 <tr v-for="(result, index) in filteredResults('z')" :key="'z' + index" class="womenColumn">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>

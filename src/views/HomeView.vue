@@ -194,6 +194,7 @@ export default {
                 <td>{{ result.rez_vreme }}</td>
                 <td>{{ result.Tempo }}</td>
             </tr>
+            <br>
             <tr v-for="(result, index) in filteredResults('z')" :key="'z' + index" class="womenColumn">
                 <td>{{ index + 1 }}</td>
                 <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
@@ -248,9 +249,10 @@ export default {
                 <p>{{ this.textObj.pup16 }}</p>
               </div>
             </div>
-            <div class="personalni">
-              <h3>Potreban ti je personalni trener? Kontaktiraj me:</h3>
+            <div class="clan1">
+              <img class="popupImg4" src="../assets/nemanjaPersonalni.JPG" alt="Trckac - slika">
               <div class="clan1Kontakt">
+                <h3>{{ this.textObj.pupNaslovNem }}</h3>
                 <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
                 <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
               </div>
@@ -264,15 +266,22 @@ export default {
     <h2 class="prijateljiLigeHeading">{{ this.textObj.maPrijNaslov }}</h2>
     <div class="prijateljiLige">
       <div class="eckaLogo">
-        <img src="http://238p123.mars2.mars-hosting.com/API/pictures/7" alt="Ulična trka Ečka logo slika">
+        <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank"><img src="http://238p123.mars2.mars-hosting.com/API/pictures/7" alt="Ulična trka Ečka logo slika"></a>
         <p>{{ this.textObj.maPrijP1 }}</p>
       </div>
       <img @click="this.asPopup = !this.asPopup" class="asImg" src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="Trkacki klub AS023 logo slika">
       <div class="asPopup" v-if="this.asPopup">
         <button class="closeClan1" @click="this.asPopup =! this.asPopup">X</button>
-        <div class="popupBox">
-          <img src="http://238p123.mars2.mars-hosting.com/API/pictures/9" alt="Borislav Mandic slika">
-          <div class="asPopupText">
+        <div class="clan1">
+          <img class="popupImg1" src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="AS023 logo slika">
+          <div class="oClanu">
+            <p><span class="bold"> {{ this.textObj.as4 }}</span> {{ this.longText.as5 }}</p>
+            <p>{{ this.longText.as6 }}</p>
+          </div>
+        </div>
+        <div class="clan1">
+          <img class="popupImg2" src="http://238p123.mars2.mars-hosting.com/API/pictures/9" alt="Borislav Mandic - slika">
+          <div class="oClanu">
             <p><span class="bold">Borislav Mandić</span> {{ this.longText.as1 }}</p>
             <p>{{ this.longText.as2 }}</p>
             <p>{{ this.longText.as3 }}</p>
@@ -698,7 +707,11 @@ align-items: center;
   width: 35%;
   border-radius: 20px;
 }
-.clan1:nth-child(3) {
+.popupImg4{
+  width: 100%;
+  border-radius: 20px;
+}
+.clan1:nth-child(3), .clan1:nth-child(5) {
   flex-direction: row-reverse;
 }
 .oClanu{
@@ -708,27 +721,38 @@ align-items: center;
 .oClanu a{
   color: #ff0c46;
 }
-.personalni h3{
-  font-size: 2.5em;
+
+.clan1Kontakt h3{
+  font-size: 1.8em;
   font-weight: 900;
+  overflow-y: hidden;
+  width: 95%;
+  margin-bottom: 1em;
+}
+.personalni img{
+  width: 50%;
 }
 .clan1Kontakt{
   display: flex;
-  justify-content: space-around;
-  width: 80%;
-  margin: 2em auto;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 .email{
-  color: #1f3242;
+  color: #fff;
 }
 .clan1Kontakt p, .clan1Kontakt a{
   display: flex;
   align-items: center;
   text-decoration: none;
-  font-size: 1.5em;
+  font-size: 1.2em;
+}
+.clan1Kontakt a{
+  margin: .5em 0;
 }
 .popupIcon{
-  font-size: 3em;
+  font-size: 1.2em;
   margin-right: .2em;
 }
 .instagram{
@@ -750,7 +774,7 @@ align-items: center;
 .prijateljiLige{
   display: flex;
   justify-content: space-around;
-  margin: 2em 0;
+  margin: 2em 0 4em;
 }
 .eckaLogo{
   width: 15%;
@@ -773,38 +797,120 @@ align-items: center;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #fff;
   z-index: 11;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+  font-weight: 400;
+  background-color: #fff;
+  color: #1f3242;
+  padding-top: 3em;
 }
-.popupBox{
+.asPopup .clan1{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-}
-.asPopupText{
-  width: 90%;
-  font-size: 1.3em;
-  line-height: 2em;
-  background-color:#1f3242;
-  color:#fff;
-  padding: 30px;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto 2em;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  background-color: #1f3242;
   border-radius: 20px;
-  margin-bottom: 2em;
+  color: #fff;
 }
-.asPopup img{
-  width:25%;
-  border-radius: 50%;
-  margin: 13em 0 2em;
+.asPopup .popupImg1{
+  width: 30%;
+  border-radius: 20px;
+}
+.popupImg2{
+  width: 35%;
+  border-radius: 20px;
+}
+.popupImg3{
+  width: 35%;
+  border-radius: 20px;
+}
+.clan1:nth-child(3), .clan1:nth-child(5) {
+  flex-direction: row-reverse;
+}
+.asPopup .oClanu{
+  width: 75%;
+  margin: 0 auto;
 }
 /*------------------------------END OF PRIJATELJI LIGE SECTION -----------------------------------*/
 
 
 /* ---------------------------------------RESPONSIVE -------------------------------------*/
+
+@media (max-width: 2000px) {
+  .najava h2, .ukratkoText h2, .poslednjeKoloHeading, .kolaHeading, .eckaNajava, .prijateljiLigeHeading{
+    font-size: 3.5em;
+  }
+  .datumNajave{
+    font-size: 3em;
+  }
+  .prijavaBtn, .linkOnama, .faza, .clanIme, .clanBtn, .clan1{
+    font-size: 2em;
+  }
+  .ukratkoText p, .womenColumn, .menColumn, .kola .koloDatum, .clanZvanje{
+    font-size: 1.5em;
+  }
+  .linkOnama {
+    width: 80%;
+  }
+  .fazeTreningaHeading{
+    font-size: 5em;
+  }
+  .poslednjeKolo img{
+    width: 4em;
+    height: 4em;
+  }
+  .poslednjeKolo{
+    width: 60%;
+  }
+  .ecka{
+    width: 70vw;
+  }
+}
+
+@media (max-width: 1700px) {
+  .clan1{
+    font-size: 1.7em;
+  }
+  .najava h2{
+    font-size: 3em;
+  }
+  .datumNajave{
+    font-size: 2.5em;
+  }
+  #kola .kolo{
+    width: 17%;
+  }
+}
+
+@media (max-width: 1599px) {
+  .ukratkoText h2{
+    font-size: 3em;
+  }
+  .eckaNajava{
+    font-size: 3em;
+  }
+  .clan1{
+    font-size: 1.5em;
+  }
+  .asPopup .clan1{
+    /* flex-direction: column; */
+    font-size: 1.5em;
+    width: 95%;
+    margin-top: 2em;
+  }
+  .asPopup .popupImg1{
+    width: 50%;
+  }
+  .asPopup .popupImg2{
+    width: 70%;
+  }
+  .eckaLogo, .asImg{
+    width: 20%;
+  }
+}
 
 @media (max-width: 1350px) {
   .ukratkoText p{

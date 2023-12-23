@@ -59,9 +59,9 @@ export default {
     <div class="kontakt">
         <Nav />
         <h2>{{ this.textObj.koNaslov }}</h2>
-        <div class="clan1Kontakt">
-            <p><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
-            <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
+        <div class="kontaktInfo">
+            <p><FontAwesomeIcon class="kontaktIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
+            <a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="kontaktIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/zrenjaninska_ligatrcanja</a>
         </div>
         <p class="prijavaHeading">{{ this.textObj.koPrijava }}</p>
         <section aria-label="Sekcija: Kontakt forma">
@@ -97,6 +97,23 @@ export default {
     color: #fff;
     min-height: 100vh;
     padding-bottom: 5em;
+}
+.kontaktInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.kontaktInfo p, .kontaktInfo a{
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    margin:.5em;
+}
+.kontaktIcon{
+    font-size: 1.5em;
+    margin-right:.2em;
 }
 .kontakt .nav{
     position: fixed;
