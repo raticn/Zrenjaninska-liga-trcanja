@@ -229,7 +229,7 @@ th {
         font-size: 2em;
     }
     .tabela{
-        width: 200vw;
+        width: 230vw;
     }
 }
 </style>

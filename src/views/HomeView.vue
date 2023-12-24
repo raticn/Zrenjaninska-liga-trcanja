@@ -1178,6 +1178,9 @@ align-items: center;
 }
 
 @media (max-width: 600px) {
+  .rec1, .rec2, .rec3{
+    width: 10em;
+}
   .najava h2, .fazeTreningaHeading, .poslednjeKoloHeading, .kolaHeading, .prijateljiLigeHeading{
     font-size: 2.5em;
   }

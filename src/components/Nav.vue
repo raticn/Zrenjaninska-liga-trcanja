@@ -258,7 +258,7 @@ li a{
     .menuWrapper{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         color: #1f3242;
     }
     .nav2Header{
@@ -268,7 +268,7 @@ li a{
     }
     .logo2{
         width: 2.5em;
-        margin: .5em;
+        margin: .5em .5em .5em 0;
     }
     .navLink2{
         list-style: none;
