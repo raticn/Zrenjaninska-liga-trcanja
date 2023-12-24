@@ -12,6 +12,9 @@ export const useLigaStore = defineStore('liga', {
     },
     actions: {
         async fetchText() {
+            if(localStorage.getItem('lang') == '') {
+                localStorage.setItem('lang') = 'sr'
+            }
             this.lang = localStorage.getItem('lang');
             try {
                 let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/text', {
