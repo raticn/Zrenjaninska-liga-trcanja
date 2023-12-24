@@ -31,8 +31,8 @@ export default{
         <div class="footer_wrapper">
             <div class="footer_info">
             <p><a href="mailto:ligatrcanjazr@gmail.com"><FontAwesomeIcon class="footerIcons" icon="fa-solid fa-envelope"></FontAwesomeIcon>zrligatrcanja@gmail.com</a></p>
-            <p><a aria-label="Pogledajte nasu Instagram stranicu" href="https://www.instagram.com/zrenjaninska_ligatrcanja/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/zrenjaninska_ligatrcanja</a></p>
-            <p><a aria-label="Pogledajte nasu Facebook stranicu" href="https://www.facebook.com/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-facebook"></FontAwesomeIcon>facebook.com/</a></p>
+            <p><a aria-label="Pogledajte nasu Instagram stranicu" href="https://www.instagram.com/zrenjaninska_ligatrcanja/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-instagram"></FontAwesomeIcon>zrenjaninska_ligatrcanja</a></p>
+            <p><a aria-label="Pogledajte nasu Facebook stranicu" href="https://www.facebook.com/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-facebook"></FontAwesomeIcon>facebook.com</a></p>
             </div>
             <div class="footer_links">
                 <ul class="quicklinks">
@@ -166,24 +166,17 @@ export default{
         width: 90%;
         margin: 2em auto;
     }
+    .footer_info p{
+        display: flex;
+        justify-content: center;
+    }
     .footer_links{
         width: 90%;
         margin: 0 auto;
     }
-}
-
-@media (max-width: 749px) {
-    .quicklinks li{
-        font-size: 0.8em;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer_info, .footer_links p{
-        font-size: 1em;
-    }
     .quicklinks{
-        height: 25em;
+        align-items: center;
     }
 }
+
 </style>
