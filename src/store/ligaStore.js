@@ -12,8 +12,10 @@ export const useLigaStore = defineStore('liga', {
     },
     actions: {
         async fetchText() {
-            if(localStorage.getItem('lang') == '') {
+            console.log(localStorage.getItem('lang'), 'log')
+            if(localStorage.getItem('lang') == '' && localStorage.getItem('lang') == null) {
                 localStorage.setItem('lang', 'sr')
+                console.log('setovano lanf na sr');
             }
             this.lang = localStorage.getItem('lang');
             try {
