@@ -51,7 +51,7 @@ export default {
     // },
     },
     computed: {
-        ...mapState(useLigaStore, ['textObj', 'longText']),
+        ...mapState(useLigaStore, ['textObj', 'longText', 'lang']),
     },
     mounted() {
         this.lang = localStorage.getItem('lang')
