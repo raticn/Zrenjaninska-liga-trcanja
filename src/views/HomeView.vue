@@ -943,8 +943,11 @@ align-items: center;
   .datumNajave{
     font-size: 3em;
   }
-  .prijavaBtn, .linkOnama, .faza, .clanIme, .clanBtn, .clan1{
+  .prijavaBtn, .linkOnama, .faza, .clanIme, .clanBtn{
     font-size: 2em;
+  }
+  .clan1{
+    font-size: 1.8em;
   }
   .ukratkoText p, .womenColumn, .menColumn, .kola .koloDatum, .clanZvanje{
     font-size: 1.5em;
@@ -1179,7 +1182,7 @@ align-items: center;
 
 @media (max-width: 600px) {
   .rec1, .rec2, .rec3{
-    width: 10em;
+    width: 13em;
 }
   .najava h2, .fazeTreningaHeading, .poslednjeKoloHeading, .kolaHeading, .prijateljiLigeHeading{
     font-size: 2.5em;

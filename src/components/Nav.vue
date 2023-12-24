@@ -10,7 +10,6 @@ export default {
     data()  {
         return {
             menu: false,
-            lang: ''
         }
     },
     components: {
@@ -83,7 +82,7 @@ export default {
             <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">{{ this.longText.foRekordi }}</li></RouterLink>
             <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">{{ this.longText.foOnama }}</li></RouterLink>
             <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">{{ this.longText.foKontakt }}</li></RouterLink>
-            <li class="navIcon"><a href="https://www.instagram.com/nemanja_djuric/" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
+            <li class="navIcon"><a href="https://www.facebook.com/profile.php?id=61555169690681" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
             <li class="navIcon"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
             <li class="navIcon"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
             <li class="language" @click="changeLang">

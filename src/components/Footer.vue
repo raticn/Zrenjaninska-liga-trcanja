@@ -32,7 +32,7 @@ export default{
             <div class="footer_info">
             <p><a href="mailto:ligatrcanjazr@gmail.com"><FontAwesomeIcon class="footerIcons" icon="fa-solid fa-envelope"></FontAwesomeIcon>zrligatrcanja@gmail.com</a></p>
             <p><a aria-label="Pogledajte nasu Instagram stranicu" href="https://www.instagram.com/zrenjaninska_ligatrcanja/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-instagram"></FontAwesomeIcon>zrenjaninska_ligatrcanja</a></p>
-            <p><a aria-label="Pogledajte nasu Facebook stranicu" href="https://www.facebook.com/" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-facebook"></FontAwesomeIcon>facebook.com</a></p>
+            <p><a aria-label="Pogledajte nasu Facebook stranicu" href="https://www.facebook.com/profile.php?id=61555169690681" target="_blank"><FontAwesomeIcon class="footerIcons" icon="fa-brands fa-facebook"></FontAwesomeIcon>Zrenjaninska Liga Trčanja</a></p>
             </div>
             <div class="footer_links">
                 <ul class="quicklinks">

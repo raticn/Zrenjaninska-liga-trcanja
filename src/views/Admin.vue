@@ -55,9 +55,6 @@ export default {
             let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
-                // console.log("ime", this.ime, 'prezime', this.prezime);
-                // console.log('uslov', trkaciGet.data.SpisakTrkaca[i].Ime == this.ime);
-                // console.log('imeGet', trkaciGet.data.SpisakTrkaca[i].Ime);
                 if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
                     this.trkaId = trkaciGet.data.SpisakTrkaca[i].Id;
                     this.index = i;
@@ -71,11 +68,9 @@ export default {
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
                 let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, ukupnoVreme });
-                console.log(ime, 'ime u if');
             }
             else {
                 let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
-                console.log(ime, 'ime u else');
             }
             this.ime = "";
             this.prezime = "";
@@ -121,7 +116,6 @@ export default {
         let sid = this.getCookie("sid");
         if (!sid) {
             this.$router.push('/');
-            console.log('nema sid');
         }
         else {
             let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
@@ -129,9 +123,7 @@ export default {
             this.poslednjiDatum = res.data.odgovor[0].Datum;
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
-            console.log(novoK);
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
-            console.log('trkaci', trkaciGet);
         }
     },
 }
@@ -148,11 +140,11 @@ export default {
         <br>
         <br>
         <div class="addPerson" v-if="this.popup">
-            <input type="text" v-model="ime" placeholder="Ime">
-            <input type="text" v-model="prezime" placeholder="Prezime">
-            <input type="text" v-model="kategorija" placeholder="Kategorija">
+            <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
+            <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
+            <input type="text" v-model="kategorija" placeholder="Kategorija (m ili z)">
             <input type="text" v-model="vreme" placeholder="Vreme - format 00:00:00 (sati:minuti:sekunde)">
-            <input type="text" v-model="distancaKola" placeholder="Kilometri">
+            <input type="text" v-model="distancaKola" placeholder="Kilometri (samo broj)">
             <button class="adminBtn" @click="addPerson">Dodaj trkača</button>
         </div>
         <br>
@@ -239,5 +231,17 @@ textarea{
 .adminBtn:hover{
     background-color: #1f3242;
     color: #fff;
+}
+
+@media (max-width: 600px) {
+    .adminHeading{
+        font-size: 2.5em;
+    }
+    .adminBtn{
+        width: 50%;
+    }
+    .adminWrapper input{
+        width: 80%;
+    }
 }
 </style>
