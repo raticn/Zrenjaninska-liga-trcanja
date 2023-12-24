@@ -23,7 +23,7 @@ export default {
         async round($event) {
             this.kolo = parseInt($event.currentTarget.getAttribute("data-id")) + 1
             let round = this.kolo
-            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/rezultati', {
+            let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/rezultati', {
                 params: {
                     kolo: round
                 }
@@ -51,7 +51,7 @@ export default {
     async mounted() {
         window.scrollTo(0, 0)
         this.fetchText()
-        let kola = await axios.get('http://238p123.mars2.mars-hosting.com/API/svaKola')
+        let kola = await axios.get('https://238p123.mars2.mars-hosting.com/API/svaKola')
         this.kola = kola.data.odgovor
     },
 }

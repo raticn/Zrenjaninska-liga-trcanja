@@ -30,7 +30,7 @@ export default {
                 let fd = new FormData();
                 fd.append('kolo', this.poslednjeKolo + 1);
                 fd.append('datum', this.datumKola);
-                let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/kolo', fd);
+                let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/kolo', fd);
                 localStorage.setItem("kolo", this.brKola);
                 this.popup = !this.popup;
             }
@@ -52,8 +52,8 @@ export default {
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', this.poslednjeKolo + 1);
             // fd.append('sid', sid)
-            let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/rezultati', fd);
-            let trkaciGet = await axios.get('http://238p123.mars2.mars-hosting.com/API/trkaci');
+            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
+            let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 // console.log("ime", this.ime, 'prezime', this.prezime);
                 // console.log('uslov', trkaciGet.data.SpisakTrkaca[i].Ime == this.ime);
@@ -70,11 +70,11 @@ export default {
                 let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
-                let trkaciPut = await axios.put('http://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, ukupnoVreme });
+                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, ukupnoVreme });
                 console.log(ime, 'ime u if');
             }
             else {
-                let trkaciPost = await axios.post('http://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+                let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
                 console.log(ime, 'ime u else');
             }
             this.ime = "";
@@ -87,7 +87,7 @@ export default {
             let fd = new FormData();
             fd.append('datum', this.noviDatum);
             fd.append('kolo', this.sledeceKolo + 1);
-            let res = await axios.post('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo', fd);
+            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo', fd);
             this.noviDatum = "";
         },
         reload() {
@@ -104,7 +104,7 @@ export default {
             fd.append('textLang', 'sr');
             fd.append('textSr', this.sr);
             fd.append('textId', this.id);
-            let res = axios.post('http://238p123.mars2.mars-hosting.com/API/dodajText', fd);
+            let res = axios.post('https://238p123.mars2.mars-hosting.com/API/dodajText', fd);
             this.sr = "";
         },
         posaljiEn() {
@@ -112,7 +112,7 @@ export default {
             fd.append('textLang', 'en');
             fd.append('textEn', this.en);
             fd.append('textId', this.id);
-            let res = axios.post('http://238p123.mars2.mars-hosting.com/API/dodajText', fd);
+            let res = axios.post('https://238p123.mars2.mars-hosting.com/API/dodajText', fd);
             this.en = "";
             this.id = "";
         }
@@ -124,13 +124,13 @@ export default {
             console.log('nema sid');
         }
         else {
-            let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/kolo');
+            let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
             this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
             this.poslednjiDatum = res.data.odgovor[0].Datum;
-            let novoK = await axios.get('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
+            let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             console.log(novoK);
-            let trkaciGet = await axios.get('http://238p123.mars2.mars-hosting.com/API/trkaci');
+            let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             console.log('trkaci', trkaciGet);
         }
     },

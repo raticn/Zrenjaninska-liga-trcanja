@@ -14,7 +14,7 @@ export const useLigaStore = defineStore('liga', {
         async fetchText() {
             this.lang = localStorage.getItem('lang');
             try {
-                let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
+                let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/text', {
                     params: {
                         language: this.lang
                     }

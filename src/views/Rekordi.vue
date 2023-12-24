@@ -33,7 +33,7 @@ export default {
     async mounted() {
         window.scrollTo(0, 0)
         this.fetchText()
-        let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/rekordi')
+        let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/rekordi')
         this.topM = res.data.Top10Muski
         this.topZ = res.data.Top10Zene
         this.topAll = res.data.Top10Svi

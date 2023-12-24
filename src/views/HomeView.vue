@@ -35,7 +35,7 @@ export default {
       async round($event) {
           this.kolo = parseInt($event.currentTarget.getAttribute("data-id")) + 1
           let round = this.kolo
-          let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/rezultati', {
+          let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/rezultati', {
               params: {
                   kolo: round
               }
@@ -69,14 +69,14 @@ export default {
           document.cookie = `${cookie};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
       break;
       }}
-    let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo')
+    let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo')
     this.noviDatum = this.formatDate(res.data.odgovor[0].Datum)
     this.novoKolo = res.data.odgovor[0].novoKolo
 
-    let rezultati = await axios.get('http://238p123.mars2.mars-hosting.com/API/rezultati')
+    let rezultati = await axios.get('https://238p123.mars2.mars-hosting.com/API/rezultati')
     this.poslednjeKolo = rezultati.data.poslednjeKoloRezultati
 
-    let kola = await axios.get('http://238p123.mars2.mars-hosting.com/API/svaKola')
+    let kola = await axios.get('https://238p123.mars2.mars-hosting.com/API/svaKola')
     this.poslednjaCetiri = kola.data.poslednjaCetiri
     this.id = kola.data.poslednjaCetiri[0].rez_kolo
 
@@ -142,7 +142,7 @@ else if(window.screen.width > 1024) {
         <p>{{ this.longText.maUkrP }}</p>
         <RouterLink class="linkOnama" aria-label="Link do stranice: O nama" to="/onama">{{ this.longText.maUkrButton }}</RouterLink>
       </div>
-      <img class="ukratkoImg" src="http://238p123.mars2.mars-hosting.com/API/pictures/8" alt="Trkači - slika">
+      <img class="ukratkoImg" src="https://238p123.mars2.mars-hosting.com/API/pictures/8" alt="Trkači - slika">
     </div>
   </section>
   <section aria-label="Sekcija: Kako izgleda naš trening">
@@ -228,28 +228,28 @@ else if(window.screen.width > 1024) {
       <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
       <div class="tim">
         <div class="clan">
-          <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="Nemanja Djurić slika" class="clanImg">
+          <img src="https://238p123.mars2.mars-hosting.com/API/pictures/5" alt="Nemanja Djurić slika" class="clanImg">
           <p class="clanIme">Nemanja Djurić</p>
           <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
           <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
           <div class="clan1Popup" v-if="this.clan1">
             <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
             <div class="clan1">
-              <img class="popupImg1" src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="Ulična trka Ečka">
+              <img class="popupImg1" src="https://238p123.mars2.mars-hosting.com/API/pictures/6" alt="Ulična trka Ečka">
               <div class="oClanu">
                 <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
                 <p>{{ this.textObj.pup06 }} <span class="bold highlight">{{ this.textObj.pup07 }}</span></p>
               </div>
             </div>
             <div class="clan1">
-              <img class="popupImg2" src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="Trkač - slika">
+              <img class="popupImg2" src="https://238p123.mars2.mars-hosting.com/API/pictures/4" alt="Trkač - slika">
               <div class="oClanu">
                 <p>{{ this.longText.pup08 }}</p>
                 <p>{{ this.textObj.pup09 }} <span class="bold highlight">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
               </div>
             </div>
             <div class="clan1">
-              <img class="popupImg3" src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="Trkač - slika">
+              <img class="popupImg3" src="https://238p123.mars2.mars-hosting.com/API/pictures/3" alt="Trkač - slika">
               <div class="oClanu">
                 <p>{{ this.textObj.pup12 }} <span class="bold highlight">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
                 <p>{{ this.textObj.pup15 }}</p>
@@ -257,7 +257,7 @@ else if(window.screen.width > 1024) {
               </div>
             </div>
             <div class="clan1">
-              <img class="popupImg4" src="http://238p123.mars2.mars-hosting.com/API/pictures/10" alt="Trckac - slika">
+              <img class="popupImg4" src="https://238p123.mars2.mars-hosting.com/API/pictures/10" alt="Trckac - slika">
               <div class="clan1Kontakt">
                 <h3>{{ this.textObj.pupNaslovNem }}</h3>
                 <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
@@ -273,21 +273,21 @@ else if(window.screen.width > 1024) {
     <h2 class="prijateljiLigeHeading">{{ this.textObj.maPrijNaslov }}</h2>
     <div class="prijateljiLige">
       <div class="eckaLogo">
-        <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank"><img src="http://238p123.mars2.mars-hosting.com/API/pictures/7" alt="Ulična trka Ečka logo slika"></a>
+        <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank"><img src="https://238p123.mars2.mars-hosting.com/API/pictures/7" alt="Ulična trka Ečka logo slika"></a>
         <p>{{ this.textObj.maPrijP1 }}</p>
       </div>
-      <img @click="this.asPopup = !this.asPopup" class="asImg" src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="Trkacki klub AS023 logo slika">
+      <img @click="this.asPopup = !this.asPopup" class="asImg" src="https://238p123.mars2.mars-hosting.com/API/pictures/2" alt="Trkacki klub AS023 logo slika">
       <div class="asPopup" v-if="this.asPopup">
         <button class="closeClan1" @click="this.asPopup =! this.asPopup">X</button>
         <div class="clan1">
-          <img class="popupImg1" src="http://238p123.mars2.mars-hosting.com/API/pictures/2" alt="AS023 logo slika">
+          <img class="popupImg1" src="https://238p123.mars2.mars-hosting.com/API/pictures/2" alt="AS023 logo slika">
           <div class="oClanu">
             <p><span class="bold"> {{ this.textObj.as4 }}</span> {{ this.longText.as5 }}</p>
             <p>{{ this.longText.as6 }}</p>
           </div>
         </div>
         <div class="clan1">
-          <img class="popupImg2" src="http://238p123.mars2.mars-hosting.com/API/pictures/9" alt="Borislav Mandic - slika">
+          <img class="popupImg2" src="https://238p123.mars2.mars-hosting.com/API/pictures/9" alt="Borislav Mandic - slika">
           <div class="oClanu">
             <p><span class="bold">Borislav Mandić</span> {{ this.longText.as1 }}</p>
             <p>{{ this.longText.as2 }}</p>
@@ -311,7 +311,7 @@ else if(window.screen.width > 1024) {
 }
 /*------------------------------------------ HERO SECTION --------------------------------------*/
 .heroWrapper{
-  background-image: url('http://238p123.mars2.mars-hosting.com/API/pictures/1');
+  background-image: url('https://238p123.mars2.mars-hosting.com/API/pictures/1');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -642,7 +642,7 @@ h2{
 
 /*-------------------------------------PRIJAVA ZA EČKU SECTION ----------------------------*/
 .ecka{
-  background-image: url('http://238p123.mars2.mars-hosting.com/API/pictures/6');
+  background-image: url('https://238p123.mars2.mars-hosting.com/API/pictures/6');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -752,7 +752,7 @@ align-items: center;
   cursor: pointer;
 }
 .clanImg{
-  background-image: url('http://238p123.mars2.mars-hosting.com/API/pictures/5');
+  background-image: url('https://238p123.mars2.mars-hosting.com/API/pictures/5');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

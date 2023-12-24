@@ -12,7 +12,7 @@ export default {
     methods: {
         async adminLogin() {
             try {
-                let login = await axios.get('http://238p123.mars2.mars-hosting.com/API/login', {
+                let login = await axios.get('https://238p123.mars2.mars-hosting.com/API/login', {
                 params: {
                     username: this.userName,
                     password: this.pass

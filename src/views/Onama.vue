@@ -93,28 +93,28 @@ export default {
         <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
         <div class="tim">
             <div class="clan">
-            <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="Nemanja Djurić slika" class="clanImg">
+            <img src="https://238p123.mars2.mars-hosting.com/API/pictures/5" alt="Nemanja Djurić slika" class="clanImg">
             <p class="clanIme">Nemanja Djurić</p>
             <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
             <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
             <div class="clan1Popup" v-if="this.clan1">
                 <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
                 <div class="clan1">
-                <img class="popupImg1" src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="Ulična trka Ečka">
+                <img class="popupImg1" src="https://238p123.mars2.mars-hosting.com/API/pictures/6" alt="Ulična trka Ečka">
                 <div class="oClanu">
                     <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
                     <p>{{ this.textObj.pup06 }} <span class="bold highlight">{{ this.textObj.pup07 }}</span></p>
                 </div>
                 </div>
                 <div class="clan1">
-                <img class="popupImg2" src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="Trkač - slika">
+                <img class="popupImg2" src="https://238p123.mars2.mars-hosting.com/API/pictures/4" alt="Trkač - slika">
                 <div class="oClanu">
                     <p>{{ this.longText.pup08 }}</p>
                     <p>{{ this.textObj.pup09 }} <span class="bold highlight">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
                 </div>
                 </div>
                 <div class="clan1">
-                <img class="popupImg3" src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="Trkač - slika">
+                <img class="popupImg3" src="https://238p123.mars2.mars-hosting.com/API/pictures/3" alt="Trkač - slika">
                 <div class="oClanu">
                     <p>{{ this.textObj.pup12 }} <span class="bold highlight">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
                     <p>{{ this.textObj.pup15 }}</p>
@@ -122,7 +122,7 @@ export default {
                 </div>
                 </div>
                 <div class="clan1">
-                <img class="popupImg4" src="http://238p123.mars2.mars-hosting.com/API/pictures/10" alt="Trckac - slika">
+                <img class="popupImg4" src="https://238p123.mars2.mars-hosting.com/API/pictures/10" alt="Trckac - slika">
                 <div class="clan1Kontakt">
                     <h3>{{ this.textObj.pupNaslovNem }}</h3>
                     <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
