@@ -92,7 +92,7 @@ export default {
                     </div>
                     <li class="language" @click="changeLang">
                         <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
-                        <img v-if="this.lang == 'sr'" class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
+                        <img v-if="this.lang == 'sr'" class="lang" src="../assets/engleska.jpg" width="64" height="64" alt="English flag image">  
                     </li>
                 </ul>
             </div>
