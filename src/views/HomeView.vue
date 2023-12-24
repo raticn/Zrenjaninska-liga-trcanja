@@ -320,7 +320,7 @@ else if(window.screen.width > 1024) {
 }
 .rec1, .rec2, .rec3{
     position: absolute;
-    top: 20%;
+    top: -20%;
     left: -10%;
     font-weight: 900;
     color: #fff;
@@ -336,21 +336,12 @@ else if(window.screen.width > 1024) {
 .fromTop3{
     animation: rec3 2s forwards 1s;
 }
-@-webkit-keyframes rec1 {
-    0%{
-        -webkit-transform: translateX(-10%);
-    }
-    100%{
-        -webkit-transform: translateX(10%);
-        font-size: 4em;
-    }
-}
 @keyframes rec1 {
     0%{
-        transform: translateX(-10%);
+        left: -10%;
     }
     100%{
-        -webkit-transform: translateX(10%);
+        left: 10%;
         font-size: 4em;
     }
 }
@@ -367,7 +358,6 @@ else if(window.screen.width > 1024) {
 @keyframes rec3 {
     0%{
         left: -10%;
-        /* font-size: 11em; */
     }
     100%{
       top: 60%;
@@ -429,11 +419,26 @@ else if(window.screen.width > 1024) {
 @keyframes rec1Small {
     0%{
         left: 50%;
-        top: -30%;
+        top: -50%;
         font-size: 1em;
     }
     100%{
         transform: translateX(-50%) translateY(50%);
+        -webkit-transform: translateX(-50%) translateY(50%);
+        left: 50%;
+        top: 20%;
+        font-size: 1.8em;
+    }
+}
+@-webkit-keyframes rec1Small {
+    0%{
+        left: 50%;
+        top: -50%;
+        font-size: 1em;
+    }
+    100%{
+        transform: translateX(-50%) translateY(50%);
+        -webkit-transform: translateX(-50%) translateY(50%);
         left: 50%;
         top: 20%;
         font-size: 1.8em;
@@ -442,7 +447,7 @@ else if(window.screen.width > 1024) {
 @keyframes rec2Small {
     0%{
         left: 50%;
-        top: -30%;
+        top: -50%;
         font-size: 1em;
     }
     100%{
@@ -455,7 +460,7 @@ else if(window.screen.width > 1024) {
 @keyframes rec3Small {
     0%{
         left: 50%;
-        top: -30%;
+        top: -50%;
         font-size: 1em;
     }
     100%{
