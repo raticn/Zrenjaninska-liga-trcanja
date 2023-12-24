@@ -28,26 +28,7 @@ export default {
                 document.documentElement.lang = "sr"
                 location.reload()
             }
-            // this.fetchText()
         },
-    //     async fetchText() {
-    //     let lang = localStorage.getItem('lang');
-    //     try {
-    //         let res = await axios.get('http://238p123.mars2.mars-hosting.com/API/text', {
-    //             params: {
-    //                 language: lang
-    //             }
-    //         })
-    //         this.text = res.data.trazeniTekst
-    //         for (let item of this.text) {
-    //             this.textObj[item.tex_name] = item.tex_text
-    //             this.longText[item.tex_name] = item.tex_long
-    //         }
-    //         console.log(this.text);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // },
     },
     computed: {
         ...mapState(useLigaStore, ['textObj', 'longText', 'lang']),
@@ -87,7 +68,7 @@ export default {
             <li class="navIcon"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
             <li class="language" @click="changeLang">
                 <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
-                <img v-if="this.lang == 'sr'" class="lang" src="../assets/amerika.png" width="64" height="64" alt="USA flag image">  
+                <img v-if="this.lang == 'sr'" class="lang" src="../assets/engleska.jpg" width="64" height="64" alt="English flag image">  
             </li>
         </ul>
     </div>

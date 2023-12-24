@@ -336,20 +336,27 @@ else if(window.screen.width > 1024) {
 .fromTop3{
     animation: rec3 2s forwards 1s;
 }
-@keyframes rec1 {
+@-webkit-keyframes rec1 {
     0%{
-        left: -10%;
-        /* font-size: 11em; */
+        -webkit-transform: translateX(-10%);
     }
     100%{
-        left: 10%;
+        -webkit-transform: translateX(10%);
+        font-size: 4em;
+    }
+}
+@keyframes rec1 {
+    0%{
+        transform: translateX(-10%);
+    }
+    100%{
+        -webkit-transform: translateX(10%);
         font-size: 4em;
     }
 }
 @keyframes rec2 {
     0%{
         left: -10%;
-        /* font-size: 11em; */
     }
     100%{
         top: 40%;
@@ -1182,7 +1189,7 @@ align-items: center;
 
 @media (max-width: 600px) {
   .rec1, .rec2, .rec3{
-    width: 13em;
+    width: 95vw;
 }
   .najava h2, .fazeTreningaHeading, .poslednjeKoloHeading, .kolaHeading, .prijateljiLigeHeading{
     font-size: 2.5em;
