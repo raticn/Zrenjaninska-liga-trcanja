@@ -61,7 +61,7 @@ export default {
         <h2>{{ this.textObj.koNaslov }}</h2>
         <div class="kontaktInfo">
             <p><FontAwesomeIcon class="kontaktIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
-            <a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="kontaktIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/zrenjaninska_ligatrcanja</a>
+            <a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="kontaktIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>zrenjaninska_ligatrcanja</a>
         </div>
         <p class="prijavaHeading">{{ this.textObj.koPrijava }}</p>
         <section aria-label="Sekcija: Kontakt forma">
@@ -208,9 +208,51 @@ export default {
     color: #ff0c46;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 2000px) {
+    .formField label{
+        font-size: 1.5em;
+    }
+    .checkbox{
+        font-size: 1.3em;
+        margin-bottom: 1em;
+    }
+    .formBtn{
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 1400px) {
     .kontakt h2{
         margin-top: 2em;
+    }
+    .formField label{
+        font-size: 1.3em;
+    }
+    .checkbox{
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 1024px) {
+    .kontaktInfo{
+        flex-direction: column;
+    }
+    #form{
+        width: 80%;
+    }
+}
+
+@media (max-width: 600px) {
+    .kontakt h2{
+        font-size: 2.5em;
+        margin: 3em 0 1em;
+    }
+    .kontaktInfo p, .kontaktInfo a{
+        font-size: 1.5em;
+    }
+    .prijavaHeading{
+        font-size: 2.5em;
+        margin-top: 1em;
     }
 }
 </style>

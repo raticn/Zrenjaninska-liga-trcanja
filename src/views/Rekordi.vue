@@ -75,90 +75,9 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
+                    <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Distanca }} km</td>
                     <td>{{ result.UkupnoVreme }}</td>
-                    <td>{{ result.Tempo }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="topAll">
-            <h2>{{ this.textObj.naslovRek2 }}</h2>
-            <table class="tabela">
-                <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>{{ this.textObj.tabelaRekIme }}</th>
-                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
-                    <th>{{ this.textObj.tabelaRekKat }}</th>
-                    <th>{{ this.textObj.maKolo }}</th>
-                    <th>{{ this.textObj.tabelaVreme }}</th>
-                    <th>{{ this.textObj.tabelaRekTem }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(result, index) in this.topAll" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
-                    <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
-                    <td>{{ result.Prezime }}</td>
-                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
-                    <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
-                    <td>{{ result.Tempo }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="topMuski">
-            <h2>{{ this.textObj.naslovTopM }}</h2>
-            <table class="tabela">
-                <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>{{ this.textObj.tabelaRekIme }}</th>
-                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
-                    <th>{{ this.textObj.tabelaRekKat }}</th>
-                    <th>{{ this.textObj.maKolo }}</th>
-                    <th>{{ this.textObj.tabelaVreme }}</th>
-                    <th>{{ this.textObj.tabelaRekTem }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(result, index) in this.topM" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
-                    <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
-                    <td>{{ result.Prezime }}</td>
-                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
-                    <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
-                    <td>{{ result.Tempo }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="topZenski">
-            <h2>{{ this.textObj.naslovTopZ }}</h2>
-            <table class="tabela">
-                <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>{{ this.textObj.tabelaRekIme }}</th>
-                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
-                    <th>{{ this.textObj.tabelaRekKat }}</th>
-                    <th>{{ this.textObj.maKolo }}</th>
-                    <th>{{ this.textObj.tabelaVreme }}</th>
-                    <th>{{ this.textObj.tabelaRekTem }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(result, index) in this.topZ" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
-                    <td>{{ index + 1 }}</td>
-                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
-                    <td>{{ result.Prezime }}</td>
-                    <td>{{ result.rez_kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
-                    <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
                     <td>{{ result.Tempo }}</td>
                 </tr>
                 </tbody>
@@ -191,6 +110,87 @@ export default {
                 </tbody>
             </table>
         </div>
+        <div class="topMuski">
+            <h2>{{ this.textObj.naslovTopM }}</h2>
+            <table class="tabela">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(result, index) in this.topM" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
+                    <td>{{ index + 1 }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td>{{ result.Prezime }}</td>
+                    <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
+                    <td>{{ result.Kolo }}</td>
+                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Tempo }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="topZenski">
+            <h2>{{ this.textObj.naslovTopZ }}</h2>
+            <table class="tabela">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(result, index) in this.topZ" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
+                    <td>{{ index + 1 }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td>{{ result.Prezime }}</td>
+                    <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
+                    <td>{{ result.Kolo }}</td>
+                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Tempo }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="topAll">
+            <h2>{{ this.textObj.naslovRek2 }}</h2>
+            <table class="tabela">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(result, index) in this.topAll" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
+                    <td>{{ index + 1 }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td>{{ result.Prezime }}</td>
+                    <td>{{ result.rez_kategorija == 'Muškarci' ? textObj.muskarci : textObj.zene }}</td>
+                    <td>{{ result.Kolo }}</td>
+                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Tempo }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <Footer />
 </template>
@@ -214,7 +214,7 @@ export default {
     margin-top: 1em;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
     .topDistanca, .topMuski, .topZenski, .topGodine, .topAll{
         overflow-x: auto;
     }

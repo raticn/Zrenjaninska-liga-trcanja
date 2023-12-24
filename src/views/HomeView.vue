@@ -104,12 +104,12 @@ export default {
     }
 }, 1000);
 
-if(window.screen.width <= 600) {
+if(window.screen.width <= 1024) {
     document.querySelector(".rec1").classList.add("fromTop1Small")
     document.querySelector(".rec2").classList.add("fromTop2Small")
     document.querySelector(".rec3").classList.add("fromTop3Small")
 }
-else if(window.screen.width > 600) {
+else if(window.screen.width > 1024) {
     document.querySelector(".rec1").classList.add("fromTop1")
     document.querySelector(".rec2").classList.add("fromTop2")
     document.querySelector(".rec3").classList.add("fromTop3")
@@ -261,7 +261,7 @@ else if(window.screen.width > 600) {
               <div class="clan1Kontakt">
                 <h3>{{ this.textObj.pupNaslovNem }}</h3>
                 <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
-                <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
+                <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>nemanja_djuric</a>
               </div>
             </div>
           </div>
@@ -429,7 +429,7 @@ else if(window.screen.width > 600) {
         transform: translateX(-50%) translateY(50%);
         left: 50%;
         top: 20%;
-        font-size: 2em;
+        font-size: 1.8em;
     }
 }
 @keyframes rec2Small {
@@ -442,7 +442,7 @@ else if(window.screen.width > 600) {
         transform: translateX(-50%) translateY(50%);
         left: 50%;
         top: 40%;
-        font-size: 2em;
+        font-size: 1.8em;
     }
 }
 @keyframes rec3Small {
@@ -455,7 +455,7 @@ else if(window.screen.width > 600) {
         transform: translateX(-50%) translateY(50%);
         left: 50%;
         top: 60%;
-        font-size: 2em;
+        font-size: 1.8em;
     }
 }
 /*------------------------------------ END OF HERO SECTION --------------------------------------*/
@@ -1149,6 +1149,7 @@ align-items: center;
   }
   .ecka{
     width: 90%;
+    height: 80vh;
   }
   .countDownBtn{
     font-size: 2em;
@@ -1179,6 +1180,9 @@ align-items: center;
 @media (max-width: 600px) {
   .najava h2, .fazeTreningaHeading, .poslednjeKoloHeading, .kolaHeading, .prijateljiLigeHeading{
     font-size: 2.5em;
+  }
+  .najava h2{
+    padding: 10px;
   }
   .datumNajave{
     font-size: 2em;
@@ -1230,5 +1234,14 @@ align-items: center;
   .koloPopup{
     overflow-x: auto;
   }
+}
+
+@media (max-width: 450px) {
+    .clan1Kontakt a{
+      font-size: 1em;
+    }
+    .ukratkoOnama h2{
+      font-size: 2em;
+    }
 }
 </style>

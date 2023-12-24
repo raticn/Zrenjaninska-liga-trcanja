@@ -65,7 +65,7 @@ export default {
                 <p>{{ this.longText.onPar16 }}</p>
                 <p>{{ this.longText.onPar17 }}</p>
                 <p class="underline">{{ this.longText.onPar18 }}</p>
-                <h3>{{ this.textObj.pravilaNaslov }}</h3>
+                <h3 class="zabranjenoHeading">{{ this.textObj.pravilaNaslov }}</h3>
                 <div class="zabranjenoWrapper">
                     <div class="zabranjeno">
                         <img src="../assets/kalendar.svg" alt="Kalendar - slika">
@@ -93,38 +93,41 @@ export default {
         <h2 class="nasTimHeading">{{ this.textObj.maTimNaslov }}</h2>
         <div class="tim">
             <div class="clan">
-            <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="član tima slika" class="clanImg">
+            <img src="http://238p123.mars2.mars-hosting.com/API/pictures/5" alt="Nemanja Djurić slika" class="clanImg">
             <p class="clanIme">Nemanja Djurić</p>
             <span class="clanZvanje">{{ this.textObj.maTimNemanja1 }}</span>
             <button class="clanBtn" @click="this.clan1 = !this.clan1">{{ this.textObj.maTimNemanja2 }}</button>
             <div class="clan1Popup" v-if="this.clan1">
                 <button class="closeClan1" @click="this.clan1 =! this.clan1">X</button>
                 <div class="clan1">
-                <img src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="">
+                <img class="popupImg1" src="http://238p123.mars2.mars-hosting.com/API/pictures/6" alt="Ulična trka Ečka">
                 <div class="oClanu">
                     <p>{{ this.textObj.pup01 }} <span class="bold">{{ this.textObj.pup02 }}</span> {{ this.textObj.pup03 }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.pup04 }}</a> {{ this.textObj.pup05 }}</p>
-                    <p>{{ this.textObj.pup06 }} <span class="bold">{{ this.textObj.pup07 }}</span></p>
+                    <p>{{ this.textObj.pup06 }} <span class="bold highlight">{{ this.textObj.pup07 }}</span></p>
                 </div>
                 </div>
                 <div class="clan1">
-                <img src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="">
+                <img class="popupImg2" src="http://238p123.mars2.mars-hosting.com/API/pictures/4" alt="Trkač - slika">
                 <div class="oClanu">
                     <p>{{ this.longText.pup08 }}</p>
-                    <p>{{ this.textObj.pup09 }} <span class="bold">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
+                    <p>{{ this.textObj.pup09 }} <span class="bold highlight">{{ this.textObj.pup10 }}</span> {{ this.textObj.pup11 }}</p>
                 </div>
                 </div>
                 <div class="clan1">
-                <img src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="">
+                <img class="popupImg3" src="http://238p123.mars2.mars-hosting.com/API/pictures/3" alt="Trkač - slika">
                 <div class="oClanu">
-                    <p>{{ this.textObj.pup12 }} <span class="bold">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
+                    <p>{{ this.textObj.pup12 }} <span class="bold highlight">{{ this.textObj.pup13 }}</span> {{ this.textObj.pup14 }}</p>
                     <p>{{ this.textObj.pup15 }}</p>
                     <p>{{ this.textObj.pup16 }}</p>
                 </div>
                 </div>
+                <div class="clan1">
+                <img class="popupImg4" src="http://238p123.mars2.mars-hosting.com/API/pictures/10" alt="Trckac - slika">
                 <div class="clan1Kontakt">
-                <p><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</p>
-                <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>instagram.com/nemanja_djuric</a>
-                <a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon>Gostovanje na SANTOS kanalu</a>
+                    <h3>{{ this.textObj.pupNaslovNem }}</h3>
+                    <a href="mailto:zrligatrcanja@gmail.com" class="email"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-envelope"></FontAwesomeIcon> zrligatrcanja@gmail.com</a>
+                    <a href="https://www.instagram.com/nemanja_djuric/" class="instagram" target="_blank"><FontAwesomeIcon class="popupIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon>nemanja_djuric</a>
+                </div>
                 </div>
             </div>
             </div>
@@ -177,7 +180,7 @@ export default {
     width: 80%;
     margin: 0 auto 1em;
 } 
-.onama h3{
+.zabranjenoHeading{
     font-size: 2em;
     color: #ff0c46;
     text-align: center;
@@ -197,14 +200,48 @@ export default {
         font-size: 5em;
         margin-top: 2em;
     }
-    .pravila, .zabranjeno{
+    .pravila, .ciljevi{
         font-size: 1.5em;
+    }
+    .zabranjenoHeading{
+        height: 1em;
     }
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1400px) {
     .onama h1{
-        margin-top: 1.5em;
+        font-size: 4em;
+        margin-top: 2em;
+    }
+    .pravila, .ciljevi{
+        font-size: 1.2em;
     }
 }
+
+@media (max-width: 1024px) {
+    .zabranjenoWrapper{
+        width: 90%;
+    }
+    .zabranjeno{
+        width: 30%;
+    }
+}
+
+@media (max-width: 600px) {
+    .onama h1{
+        font-size: 3.5em;
+    }
+    .onama h2{
+        font-size: 2em;
+    }
+    .zabranjenoWrapper{
+        flex-direction: column;
+    }
+    .zabranjeno{
+        width: 80%;
+        margin: 0 auto 4em;
+    }
+}
+
+
 </style>

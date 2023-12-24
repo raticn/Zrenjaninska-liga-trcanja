@@ -166,7 +166,7 @@ li a{
 }
 .navBrandIcon{
     font-size: 2.5em;
-    margin-right: .2em;
+    margin-right: .8em;
 }
 .navIcon:first-of-type{
     margin-left: auto;
@@ -194,13 +194,46 @@ li a{
     font-size: 1.5em;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 2000px) {
     .navLink{
+        font-size: 1.8em;
+    }
+    .logo{
+        width: 4em;
+    }
+    .navIcon{
         font-size: 1.3em;
+    }
+    .lang{
+        width: 5em;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1700px) {
+    .navLink{
+        font-size: 1.5em;
+    }
+    .logo{
+        width: 4em;
+    }
+    .navIcon{
+        font-size: 1.2em;
+    }
+    .lang{
+        width: 4em;
+    }
+}
+
+@media (max-width: 1400px) {
+    .navLink{
+        font-size: 1.3em;
+    }
+    .navIcon{
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 1024px) {
     .nav{
         display: none;
     }
@@ -225,15 +258,17 @@ li a{
     .menuWrapper{
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         color: #1f3242;
     }
     .nav2Header{
         display: flex;
         align-items: center;
+        font-size: 1.3em;
     }
     .logo2{
-        width: 3em;
+        width: 2.5em;
+        margin: .5em;
     }
     .navLink2{
         list-style: none;
@@ -254,6 +289,21 @@ li a{
     .navLista2 .language{
         justify-content: center;
         margin: .8em 0;
+    }
+    .bars{
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav2Header{
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav2Header{
+        font-size: 1em;
     }
 }
 </style>

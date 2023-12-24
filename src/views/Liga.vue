@@ -29,7 +29,6 @@ export default {
                 }
             })
             this.rez = res.data.rezultati
-            console.log(this.rez);
             this.popup = this.kolo
         },
         formatDate(dateString) {
@@ -213,6 +212,12 @@ th {
     .liga h1{
         font-size: 3.5em;
         margin-top: 2.5em;
+    }
+    .tabela{
+        width: 150vw;
+    }
+    .koloPopup{
+        overflow-x: auto;
     }
 }
 
