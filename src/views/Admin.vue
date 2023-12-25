@@ -118,7 +118,8 @@ export default {
         ...mapState(useLigaStore, ['isAdmin']),
     },
     async mounted() {
-        if(this.isAdmin != 1) {
+        let sid = this.getCookie("sid")
+        if(this.isAdmin != 1 && sid.value != undefined) {
             this.$router.push('/')
         }
         else{

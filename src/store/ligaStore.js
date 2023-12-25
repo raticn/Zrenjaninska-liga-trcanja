@@ -44,7 +44,6 @@ export const useLigaStore = defineStore('liga', {
                 this.sidToken = login.data.sid
                 document.cookie = `sid=${this.sid};expires=1200000;`
                 this.isAdmin = login.data.sessionUser.isAdmin
-                this.$router.push('/admin')
             } catch (error) {
                 console.log(error);
             }
