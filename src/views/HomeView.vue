@@ -338,31 +338,32 @@ else if(window.screen.width > 1024) {
 }
 @keyframes rec1 {
     0%{
-        left: -10%;
+      left: -10%;
     }
     100%{
-        left: 10%;
-        font-size: 4em;
+      top: 20%;
+      left: 10%;
+      font-size: 4em;
     }
 }
 @keyframes rec2 {
     0%{
-        left: -10%;
+      left: -10%;
     }
     100%{
-        top: 40%;
-        left: 10%;
-        font-size: 4em;
+      top: 40%;
+      left: 10%;
+      font-size: 4em;
     }
 }
 @keyframes rec3 {
     0%{
-        left: -10%;
+      left: -10%;
     }
     100%{
       top: 60%;
-        left: 10%;
-        font-size: 4em;
+      left: 10%;
+      font-size: 4em;
     }
 }
 /* .fromTop1Big{

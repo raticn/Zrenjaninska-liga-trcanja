@@ -14,12 +14,21 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: "Zrenjaninska Liga Trčanja",
+        description: "Upoznajte ideju i ciljeve Zrenjaninske Lige Trčanja. Okupljamo se svake nedelje za zajedničko trčanje, zabavu i druženje. Pridružite nam se!"
+      }
     },
     {
       path: '/liga',
       name: 'liga',
-      component: Liga
+      component: Liga,
+      meta: {
+        title: "Zrenjaninska Liga Trčanja - Rezultati Prethodnih Kola",
+        description: "Saznajte više o Zrenjaninskoj Trkačkoj Ligi. Pridružite se svakog leta i zime, trčite 5km, podstičite se međusobno i postanite deo zajednice ljubitelja trčanja"
+      }
+      
     },
     {
       path: '/admin',
@@ -34,24 +43,56 @@ const router = createRouter({
     {
       path: '/rekordi',
       name: 'rekordi',
-      component: Rekordi
+      component: Rekordi,
+      meta: {
+        title: "Rekordi Zrenjaninske Lige Trčanja",
+        description: "Pogledajte najbrže rezultate u Zrenjaninskoj Trkačkoj Ligi. Postavite svoje rekorde i budite deo trkačke zajednice koja teži ka vrhunskim dostignućima."
+      }
     },
     {
       path: '/onama',
       name: 'onama',
-      component: Onama
+      component: Onama,
+      meta: {
+        title: "O Nama - Ideje i Ciljevi Zrenjaninske Lige Trčanja",
+        description: "Upoznajte ideje i ciljeve Zrenjaninske Trkačke Lige. Zajedno gradimo održivu zajednicu ljubitelja trčanja. Saznajte više o našim vrednostima i misiji."
+      }
     },
     {
       path: '/kontakt',
       name: 'kontakt',
-      component: Kontakt
+      component: Kontakt,
+      meta: {
+        title: "Kontaktirajte Nas - Zrenjaninska Trkačka Liga",
+        description: "Imate pitanja ili sugestije? Kontaktirajte nas putem naših stranica ili mejla. Radujemo se vašem feedbacku i podršci."
+      }
     },
     {
       path: '/politikaPrivatnosti',
       name: 'politikaPrivatnosti',
-      component: PolitikaPrivatnosti
+      component: PolitikaPrivatnosti,
+      meta: {
+        title: "Politika Privatnosti - Zrenjaninska Trkačka Liga",
+        description: "Pročitajte našu Politiku Privatnosti. Vaša privatnost nam je važna. Saznajte kako čuvamo i koristimo vaše podatke prilikom korišćenja našeg sajta"
+      }
     },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Zrenjaninska Liga Trčanja';
+  
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.setAttribute('content', to.meta.description || 'Default Description');
+  } else {
+    const newMetaDesc = document.createElement('meta');
+    newMetaDesc.name = "description";
+    newMetaDesc.content = to.meta.description || 'Default Description';
+    document.getElementsByTagName('head')[0].appendChild(newMetaDesc);
+  }
+
+  next();
+});
 
 export default router
