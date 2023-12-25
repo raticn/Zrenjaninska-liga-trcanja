@@ -41,7 +41,6 @@ export default{
                     <RouterLink to="/rekordi"><li>{{ this.longText.foRekordi }}</li></RouterLink> 
                     <RouterLink to="/onama"><li>{{ this.longText.foOnama }}</li></RouterLink>
                     <RouterLink to="/kontakt"> <li>{{ this.longText.foKontakt }}</li> </RouterLink>
-                    <RouterLink to="/adminLogin"><li>{{ this.longText.foLogin }}</li></RouterLink>
                 </ul>
             </div>
         </div>
