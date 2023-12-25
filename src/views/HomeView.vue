@@ -78,7 +78,7 @@ export default {
 
     let kola = await axios.get('https://238p123.mars2.mars-hosting.com/API/svaKola')
     this.poslednjaCetiri = kola.data.poslednjaCetiri
-    this.id = kola.data.poslednjaCetiri[0].rez_kolo
+    // this.id = kola.data.poslednjaCetiri[0].rez_kolo
 
     let countDownDate = new Date("Oct 26, 2024 13:00:00").getTime();
     
@@ -110,6 +110,7 @@ if(window.screen.width <= 1024) {
     document.querySelector(".rec3").classList.add("fromTop3Small")
 }
 else if(window.screen.width > 1024) {
+  console.log('u if');
     document.querySelector(".rec1").classList.add("fromTop1")
     document.querySelector(".rec2").classList.add("fromTop2")
     document.querySelector(".rec3").classList.add("fromTop3")
