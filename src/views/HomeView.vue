@@ -426,21 +426,6 @@ else if(window.screen.width > 1024) {
     }
     100%{
         transform: translateX(-50%) translateY(50%);
-        -webkit-transform: translateX(-50%) translateY(50%);
-        left: 50%;
-        top: 20%;
-        font-size: 1.8em;
-    }
-}
-@-webkit-keyframes rec1Small {
-    0%{
-        left: 50%;
-        top: -50%;
-        font-size: 1em;
-    }
-    100%{
-        transform: translateX(-50%) translateY(50%);
-        -webkit-transform: translateX(-50%) translateY(50%);
         left: 50%;
         top: 20%;
         font-size: 1.8em;

@@ -202,7 +202,7 @@ export default {
     border-bottom: 2px solid #1f3242;
     box-shadow: 0 0 10px #1f3242;
 }
-.recordsWrapper .nav li{
+.recordsWrapper .nav .navLink a{
     color: #1f3242;
 }
 .recordsWrapper h1{

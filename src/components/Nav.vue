@@ -58,11 +58,11 @@ export default {
     <div class="nav">
         <img class="logo" src="../assets/zltLogo.svg"  alt="Zrenjaninska liga trcanja logo - slika">
         <ul class="navLista">
-            <RouterLink aria-label="Link do stranice: Početna" to="/"><li class="navLink">{{ this.longText.foPocetna }}</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink">{{ this.longText.foLiga }}</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink">{{ this.longText.foRekordi }}</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink">{{ this.longText.foOnama }}</li></RouterLink>
-            <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink">{{ this.longText.foKontakt }}</li></RouterLink>
+            <li class="navLink"><RouterLink aria-label="Početna" to="/">{{ this.longText.foPocetna }}</RouterLink></li>
+            <li class="navLink"><RouterLink aria-label="Liga" to="/liga">{{ this.longText.foLiga }}</RouterLink></li>
+            <li class="navLink"><RouterLink aria-label="Rekordi" to="/rekordi">{{ this.longText.foRekordi }}</RouterLink></li>
+            <li class="navLink"><RouterLink aria-label="O nama" to="/onama">{{ this.longText.foOnama }}</RouterLink></li>
+            <li class="navLink"><RouterLink aria-label="Kontakt" to="/kontakt">{{ this.longText.foKontakt }}</RouterLink></li>
             <li class="navIcon"><a href="https://www.facebook.com/profile.php?id=61555169690681" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
             <li class="navIcon"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
             <li class="navIcon"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
@@ -80,11 +80,11 @@ export default {
             </div>
             <div class="dropDownMenu" v-if="this.menu">
                 <ul class="navLista2">
-                    <RouterLink aria-label="Link do stranice: Početna" to="/"><li class="navLink2">{{ this.longText.foPocetna }}</li></RouterLink>
-                    <RouterLink aria-label="Link do stranice: Liga" to="/liga"><li class="navLink2">{{ this.longText.foLiga }}</li></RouterLink>
-                    <RouterLink aria-label="Link do stranice: Rekordi" to="/rekordi"><li class="navLink2">{{ this.longText.foRekordi }}</li></RouterLink>
-                    <RouterLink aria-label="Link do stranice: O nama" to="/onama"><li class="navLink2">{{ this.longText.foOnama }}</li></RouterLink>
-                    <RouterLink aria-label="Link do stranice: O nama" to="/kontakt"><li class="navLink2">{{ this.longText.foKontakt }}</li></RouterLink>
+                    <li class="navLink2"><RouterLink aria-label="Početna" to="/">{{ this.longText.foPocetna }}</RouterLink></li>
+                    <li class="navLink2"><RouterLink aria-label="Liga" to="/liga">{{ this.longText.foLiga }}</RouterLink></li>
+                    <li class="navLink2"><RouterLink aria-label="Rekordi" to="/rekordi">{{ this.longText.foRekordi }}</RouterLink></li>
+                    <li class="navLink2"><RouterLink aria-label="O nama" to="/onama">{{ this.longText.foOnama }}</RouterLink></li>
+                    <li class="navLink2"><RouterLink aria-label="Kontakt" to="/kontakt">{{ this.longText.foKontakt }}</RouterLink></li>
                     <div class="navIconsWrapper">
                         <li class="navIcon2"><a href="https://www.instagram.com/nemanja_djuric/" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
                         <li class="navIcon2"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
@@ -117,16 +117,20 @@ export default {
     width: 100%;
     z-index: 10;
 }
+.navLink a{
+    text-decoration: none;
+    color: #fff;
+}
 .fixedNav{
     position: fixed;
     background-color: #fff;
     border-bottom: 2px solid #1f3242;
     box-shadow: 0 0 10px #1f3242;
 }
-.fixedNav li{
+.fixedNav .navLink a{
     color: #1f3242;
 }
-li a{
+a li{
     color: #fff;
     text-decoration: none;
 }
@@ -141,9 +145,7 @@ li a{
     width: 90vw;
     align-items: center;
 }
-.navLista a{
-    text-decoration: none;
-}
+
 .navBrandIcon{
     font-size: 2.5em;
     margin-right: .8em;
@@ -250,7 +252,8 @@ li a{
         width: 2.5em;
         margin: .5em .5em .5em 0;
     }
-    .navLink2{
+    .navLink2 a{
+        display: flex;
         list-style: none;
         color: #1f3242;
         font-size: 1.1em;

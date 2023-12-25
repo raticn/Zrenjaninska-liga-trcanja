@@ -121,7 +121,7 @@ export default {
     border-bottom: 2px solid #0b3c68;
     box-shadow: 0 0 10px #0b3c68;
 }
-.kontakt .nav li{
+.kontakt .nav .navLink a{
     color: #0b3c68;
 }
 .kontakt h2{

@@ -148,7 +148,7 @@ export default {
     border-bottom: 2px solid #0b3c68;
     box-shadow: 0 0 10px #0b3c68;
 }
-.onama .nav li{
+.onama .nav .navLink a{
     color: #0b3c68;
 }
 .onama h1{
