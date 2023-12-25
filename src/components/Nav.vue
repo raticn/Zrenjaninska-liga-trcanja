@@ -63,9 +63,9 @@ export default {
             <li class="navLink"><RouterLink aria-label="Rekordi" to="/rekordi">{{ this.longText.foRekordi }}</RouterLink></li>
             <li class="navLink"><RouterLink aria-label="O nama" to="/onama">{{ this.longText.foOnama }}</RouterLink></li>
             <li class="navLink"><RouterLink aria-label="Kontakt" to="/kontakt">{{ this.longText.foKontakt }}</RouterLink></li>
-            <li class="navIcon"><a href="https://www.facebook.com/profile.php?id=61555169690681" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
-            <li class="navIcon"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
-            <li class="navIcon"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
+            <li class="navIcon"><a href="https://www.facebook.com/profile.php?id=61555169690681" class="facebook" aria-label="Link do naše Facebook stranice" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
+            <li class="navIcon"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank" aria-label="Link do naše Instagram stranice"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
+            <li class="navIcon"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank" aria-label="Link do mog Youtube gostovanja"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
             <li class="language" @click="changeLang">
                 <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
                 <img v-if="this.lang == 'sr'" class="lang" src="../assets/engleska.jpg" width="64" height="64" alt="English flag image">  
@@ -86,9 +86,9 @@ export default {
                     <li class="navLink2"><RouterLink aria-label="O nama" to="/onama">{{ this.longText.foOnama }}</RouterLink></li>
                     <li class="navLink2"><RouterLink aria-label="Kontakt" to="/kontakt">{{ this.longText.foKontakt }}</RouterLink></li>
                     <div class="navIconsWrapper">
-                        <li class="navIcon2"><a href="https://www.instagram.com/nemanja_djuric/" class="facebook" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
-                        <li class="navIcon2"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
-                        <li class="navIcon2"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
+                        <li class="navIcon2"><a href="https://www.facebook.com/profile.php?id=61555169690681" class="facebook" aria-label="Link do naše Facebook stranice" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-facebook"></FontAwesomeIcon></a></li>
+                        <li class="navIcon2"><a href="https://www.instagram.com/zrenjaninska_ligatrcanja/"  aria-label="Link do naše Instagram stranice" class="instagram" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-instagram"></FontAwesomeIcon></a></li>
+                        <li class="navIcon2"><a href="https://youtu.be/wY4txhNQxdI?si=9q3vZ2ACCalIoaeu" aria-label="Link do mog Youtube gostovanja" class="youtube" target="_blank"><FontAwesomeIcon class="navBrandIcon" icon="fa-brands fa-youtube"></FontAwesomeIcon></a></li>
                     </div>
                     <li class="language" @click="changeLang">
                         <img v-if="this.lang == 'en'" class="lang" src="../assets/srbija.webp" width="64" height="64" alt="Serbian flag image">
