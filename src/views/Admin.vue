@@ -113,18 +113,12 @@ export default {
         }
     },
     async mounted() {
-        let sid = this.getCookie("sid");
-        if (!sid) {
-            this.$router.push('/');
-        }
-        else {
             let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
             this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
             this.poslednjiDatum = res.data.odgovor[0].Datum;
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
-        }
     },
 }
 </script>
@@ -135,7 +129,7 @@ export default {
         <p class="adminHeading">Pozdrav, Nemanja!</p>
         <p class="poslKolo">Poslednje kolo: {{ poslednjeKolo }}.  ({{ poslednjiDatum }})</p>
         <p class="novKolo">Novo kolo: {{ poslednjeKolo + 1 }}.</p>
-        <input type="text" v-model="datumKola" placeholder="Datum kola">
+        <input type="text" v-model="datumKola" placeholder="Datum kola (0000:00:00)">
         <button class="adminBtn" @click="addRound">Dodaj kolo</button>
         <br>
         <br>
@@ -149,6 +143,7 @@ export default {
         </div>
         <br>
         <br>
+        <p>Format godina:mesec:dan (0000:00:00 - primer 2024:01:02)</p>
         <input type="text" v-model="noviDatum" placeholder="Datum za novo kolo (najava)">
         <button class="adminBtn" @click="addNewDate">Dodaj datum za {{ sledeceKolo + 1}}. kolo</button>
         <br>

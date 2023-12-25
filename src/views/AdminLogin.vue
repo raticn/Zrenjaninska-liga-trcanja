@@ -1,5 +1,7 @@
 <script>
 import axios from "axios"
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
     data() {
@@ -10,22 +12,21 @@ export default {
         }
     },
     methods: {
-        async adminLogin() {
-            try {
-                let login = await axios.get('https://238p123.mars2.mars-hosting.com/API/login', {
-                params: {
-                    username: this.userName,
-                    password: this.pass
-                }
-                })
-                this.sidToken = login.data.sid
-                document.cookie = `sid=${this.sid};expires=1200000;`
+        ...mapActions(useLigaStore, ['adminLogin']),
+        async login() {
+            await this.adminLogin(this.userName, this.pass)
+            if(this.isAdmin == 1) {
                 this.$router.push('/admin')
-            } catch (error) {
-                console.log(error);
+            }
+            else{
+                alert('Username ili lozinka nisu tačni!')
+                return
             }
         }
-    }
+    },
+    computed: {
+        ...mapState(useLigaStore, ['isAdmin']),
+    },
 }
 </script>
 
@@ -35,7 +36,7 @@ export default {
         <input v-model="userName" class="adminLogin" type="text">
         <p>Lozinka:</p>
         <input v-model="pass" class="adminLogin" type="password">
-        <button class="loginBtn" @click="adminLogin">Log in</button>
+        <button class="loginBtn" @click="login">Log in</button>
     </div>
     </template>
     
