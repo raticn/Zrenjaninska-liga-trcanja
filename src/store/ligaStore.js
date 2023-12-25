@@ -35,11 +35,7 @@ export const useLigaStore = defineStore('liga', {
         },
         async adminLogin(user, pass) {
             try {
-                let login = await axios.get('https://238p123.mars2.mars-hosting.com/API/login', {
-                params: {
-                    username: user,
-                    password: pass
-                }
+                let login = await axios.post('https://238p123.mars2.mars-hosting.com/API/login', {user, pass
                 })
                 this.sidToken = login.data.sid
                 document.cookie = `sid=${this.sid};expires=1200000;`

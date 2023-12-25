@@ -119,7 +119,8 @@ export default {
     },
     async mounted() {
         let sid = this.getCookie("sid")
-        if(this.isAdmin != 1 && sid.value != undefined) {
+        console.log(sid, this.isAdmin);
+        if(this.isAdmin != 1 || sid.value != undefined) {
             this.$router.push('/')
         }
         else{
