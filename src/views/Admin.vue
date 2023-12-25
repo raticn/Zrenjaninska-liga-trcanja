@@ -1,6 +1,8 @@
 <script>
 import axios from "axios"
 import { RouterLink, RouterView } from 'vue-router';
+import { mapActions, mapState } from 'pinia'
+import { useLigaStore } from '../store/ligaStore'
 
 export default {
     data() {
@@ -112,13 +114,21 @@ export default {
             this.id = "";
         }
     },
+    computed: {
+        ...mapState(useLigaStore, ['isAdmin']),
+    },
     async mounted() {
+        if(this.isAdmin != 1) {
+            this.$router.push('/')
+        }
+        else{
             let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
             this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
             this.poslednjiDatum = res.data.odgovor[0].Datum;
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
+        }
     },
 }
 </script>
