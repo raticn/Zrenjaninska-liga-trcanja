@@ -5,7 +5,7 @@ import Footer from '@/components/Footer.vue'
 import axios from "axios"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faPersonRunning, faEnvelope, faClock} from '@fortawesome/free-solid-svg-icons'
+import { faPersonRunning, faEnvelope, faClock, faLocationDot} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
@@ -110,14 +110,13 @@ if(window.screen.width <= 1024) {
     document.querySelector(".rec3").classList.add("fromTop3Small")
 }
 else if(window.screen.width > 1024) {
-  console.log('u if');
     document.querySelector(".rec1").classList.add("fromTop1")
     document.querySelector(".rec2").classList.add("fromTop2")
     document.querySelector(".rec3").classList.add("fromTop3")
 }
   },
   created() {
-    library.add(faPersonRunning, faEnvelope, faClock, faInstagram, faYoutube)
+    library.add(faPersonRunning, faEnvelope, faClock, faLocationDot, faInstagram, faYoutube)
   }
 }
 </script>
@@ -133,6 +132,7 @@ else if(window.screen.width > 1024) {
     <div class="najava">
       <h2>{{ this.textObj.naslovPridruzi }}</h2>
       <p class="datumNajave">{{ novoKolo  }}. {{ this.textObj.maKolo }}: {{ noviDatum }}</p>
+      <p class="najavaLokacija"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-location-dot"></FontAwesomeIcon> Karadjordjev Park, 12:00h</p>
       <RouterLink class="prijavaBtn" aria-label="Link do stranice: Kontakt" to="/kontakt">{{ this.textObj.dugmeTekst }}</RouterLink>
     </div>
   </section>
@@ -472,6 +472,10 @@ else if(window.screen.width > 1024) {
 .datumNajave{
   font-size: 2em;
   padding: .5em 0;
+}
+.najavaLokacija{
+  font-size: 2.5em;
+  margin-bottom: .5em;
 }
 .prijavaBtn{
   text-decoration: none;
@@ -976,7 +980,7 @@ align-items: center;
   .najava h2{
     font-size: 3em;
   }
-  .datumNajave{
+  .datumNajave, .najavaLokacija{
     font-size: 2.5em;
   }
   #kola .kolo{
@@ -1189,7 +1193,7 @@ align-items: center;
   .najava h2{
     padding: 10px;
   }
-  .datumNajave{
+  .datumNajave, .najavaLokacija{
     font-size: 2em;
   }
   .linkOnama{

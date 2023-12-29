@@ -57,6 +57,7 @@ export default {
             <div class="pravila">
                 <p>{{ this.longText.onPar09 }}</p>
                 <p>{{ this.longText.onPar10 }}</p>
+                <p>{{ this.longText.onPar28 }}</p>
                 <p>{{ this.longText.onPar11 }}</p>
                 <p>{{ this.longText.onPar12 }}</p>
                 <p>{{ this.longText.onPar13 }}</p>
