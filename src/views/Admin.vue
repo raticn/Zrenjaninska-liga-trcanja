@@ -55,6 +55,7 @@ export default {
             fd.append('kolo', this.poslednjeKolo + 1);
             // fd.append('sid', sid)
             let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
+            console.log(this.ime, this.prezime, this.kategorija, this.vreme, this.distancaKola, 'post',res);
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {

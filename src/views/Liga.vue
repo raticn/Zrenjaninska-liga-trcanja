@@ -30,6 +30,7 @@ export default {
             })
             this.rez = res.data.rezultati
             this.popup = this.kolo
+            console.log(this.rez, 'rez', round);
         },
         formatDate(dateString) {
         const dateObject = new Date(dateString);
@@ -53,6 +54,7 @@ export default {
         this.fetchText()
         let kola = await axios.get('https://238p123.mars2.mars-hosting.com/API/svaKola')
         this.kola = kola.data.odgovor
+        // console.log(this.textObj);
     },
 }
 </script>

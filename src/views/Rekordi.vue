@@ -183,7 +183,7 @@ export default {
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
-                    <td>{{ result.rez_kategorija == 'Muškarci' ? textObj.muskarci : textObj.zene }}</td>
+                    <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
                     <td>{{ result.Vreme }}</td>
                     <td>{{ result.Tempo }}</td>
