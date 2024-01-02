@@ -7,6 +7,7 @@ import Rekordi from '../views/Rekordi.vue'
 import Onama from '../views/Onama.vue'
 import Kontakt from '../views/Kontakt.vue'
 import PolitikaPrivatnosti from '../views/PolitikaPrivatnosti.vue'
+import Proba from '../views/Proba.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,6 +76,11 @@ const router = createRouter({
         title: "Politika Privatnosti - Zrenjaninska Trkačka Liga",
         description: "Pročitajte našu Politiku Privatnosti. Vaša privatnost nam je važna. Saznajte kako čuvamo i koristimo vaše podatke prilikom korišćenja našeg sajta"
       }
+    },
+    {
+      path: '/proba',
+      name: 'proba',
+      component: Proba,
     },
   ]
 })

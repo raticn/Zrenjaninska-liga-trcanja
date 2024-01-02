@@ -23,6 +23,7 @@ export default {
       clan1: false,
       asPopup: false,
       images: [],
+      rez: [],
     }
   },
   components: {
@@ -42,6 +43,7 @@ export default {
           })
           this.rez = res.data.rezultati
           this.popup = this.kolo
+          console.log(this.rez, this.kolo);
       },
       formatDate(dateString) {
       const dateObject = new Date(dateString);
@@ -56,6 +58,11 @@ export default {
     filteredResults(category) {
         return this.rez.filter(result => result.rez_kategorija === category);
     },
+    moreResults() {
+      document.querySelector(".poslednjeKoloWrapper").style.height = "auto"
+      document.querySelector(".poslednjeKoloWrapper").style.overflowY = "auto"
+      document.querySelector(".moreResults").style.display = "none"
+    }
   },
   computed: {
     ...mapState(useLigaStore, ['textObj', 'longText', 'lang']),
@@ -78,7 +85,7 @@ export default {
 
     let kola = await axios.get('https://238p123.mars2.mars-hosting.com/API/svaKola')
     this.poslednjaCetiri = kola.data.poslednjaCetiri
-    // this.id = kola.data.poslednjaCetiri[0].rez_kolo
+    this.id = kola.data.poslednjaCetiri[0].rez_kolo
 
     let countDownDate = new Date("Oct 26, 2024 13:00:00").getTime();
     
@@ -169,9 +176,12 @@ else if(window.screen.width > 1024) {
   </section>
   <section aria-label="Sekcija: Rezultati poslednjeg kola">
     <h2 class="poslednjeKoloHeading">{{ this.textObj.naslovRezPosK }}</h2>
-    <div class="poslednjeKolo" v-for="(res, index) in this.poslednjeKolo" :key="index">
-      <img :src="res.rez_kategorija == 'm' ? '/men.svg' : '/women.svg'" alt="trkač slika"><p :class="res.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'"><span class="bold">{{ res.rez_ime }} {{ res.rez_prezime }}</span> <span v-if="this.lang == 'sr'">{{ res.rez_kategorija == 'm' ? ('je istrčao') : ("je istrčala") }}</span> <span v-if="this.lang == 'en'">ran</span> <span class="bold">{{ res.rez_vreme }}</span> {{ this.textObj.maU }} {{ res.rez_kolo }} {{ this.textObj.maZbrlj }}</p>
+    <div class="poslednjeKoloWrapper">
+      <div class="poslednjeKolo" v-for="(res, index) in this.poslednjeKolo" :key="index">
+        <img :src="res.rez_kategorija == 'm' ? '/men.svg' : '/women.svg'" alt="trkač slika"><p :class="res.rez_kategorija == 'm' ? 'menColumn' : 'womenColumn'"><span class="bold">{{ res.rez_ime }} {{ res.rez_prezime }}</span> <span v-if="this.lang == 'sr'">{{ res.rez_kategorija == 'm' ? ('je istrčao') : ("je istrčala") }}</span> <span v-if="this.lang == 'en'">ran</span> <span class="bold">{{ res.rez_vreme }}</span> {{ this.textObj.maU }} {{ res.rez_kolo }} {{ this.textObj.maZbrlj }}</p>
+      </div>
     </div>
+    <button @click="moreResults" class="moreResults">Vidi više</button>
   </section>
   <section aria-label="Sekcija: Prethodna kola" id="kola">
     <h2 class="kolaHeading">{{ this.textObj.maPretKNaslov }}</h2>
@@ -581,7 +591,28 @@ h2{
 
 
 /*-------------------------------------LAST ROUND RESULTS SECTION --------------------------------*/
-
+.poslednjeKoloWrapper{
+  height: 35vh;
+  overflow-y: hidden;
+}
+.moreResults{
+  display: flex;
+  justify-content: center;
+  border: 2px solid #1f3242;
+  width: 40%;
+  padding: 5px 0;
+  border-radius: 20px;
+  color: #1f3242;
+  font-size: 2em;
+  position: relative;
+  z-index: 3;
+  font-weight: 700;
+  text-align: center;
+  margin: .4em auto 0;
+  text-decoration: none;
+  background-color: #fff;
+  cursor: pointer;
+}
 .poslednjeKolo{
   width: 45%;
   margin: .5em auto;

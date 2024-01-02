@@ -119,27 +119,28 @@ export default {
         ...mapState(useLigaStore, ['isAdmin']),
     },
     async mounted() {
-        let sid = this.getCookie("sid")
-        console.log(sid, this.isAdmin);
-        if(this.isAdmin != 1 || sid.value != undefined) {
-            this.$router.push('/')
-        }
-        else{
+        // let sid = this.getCookie("sid")
+        // console.log(sid, this.isAdmin);
+        // if(this.isAdmin != 1 || sid.value != undefined) {
+        //     this.$router.push('/')
+        // }
+        // else{
             let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
             this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
             this.poslednjiDatum = res.data.odgovor[0].Datum;
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
-        }
+        // }
     },
 }
 </script>
 
 <template>
     <div class="adminWrapper">
+
         <RouterLink to="/"><img src="../assets/zltLogo.svg" alt="Zrenjaninska liga trcanja logo slika"></RouterLink>
-        <p class="adminHeading">Pozdrav, Nemanja!</p>
+        <p class="adminHeading">PROBA</p>
         <p class="poslKolo">Poslednje kolo: {{ poslednjeKolo }}.  ({{ poslednjiDatum }})</p>
         <p class="novKolo">Novo kolo: {{ poslednjeKolo + 1 }}.</p>
         <input type="text" v-model="datumKola" placeholder="Datum kola (0000-00-00)">
