@@ -36,6 +36,7 @@ export default {
         let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/rekordi')
         this.topM = res.data.Top10Muski
         this.topZ = res.data.Top10Zene
+        console.log(this.topZ);
         this.topAll = res.data.Top10Svi
         this.topGodina = res.data.Top10OvaGodina
         this.topDistanca = res.data.Top10Distanca
@@ -104,7 +105,7 @@ export default {
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Vreme }} <span v-if="result.Distanca < 5">({{ result.Distanca }}km)</span></td>
                     <td>{{ result.Tempo }}</td>
                 </tr>
                 </tbody>
@@ -131,7 +132,7 @@ export default {
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Vreme }} <span v-if="result.Distanca < 5">({{ result.Distanca }}km)</span></td>
                     <td>{{ result.Tempo }}</td>
                 </tr>
                 </tbody>
@@ -158,7 +159,7 @@ export default {
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Vreme }} <span v-if="result.Distanca < 5">({{ result.Distanca }}km)</span></td>
                     <td>{{ result.Tempo }}</td>
                 </tr>
                 </tbody>
@@ -185,7 +186,7 @@ export default {
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Kolo }}</td>
-                    <td>{{ result.Vreme }}</td>
+                    <td>{{ result.Vreme }} <span v-if="result.Distanca < 5">({{ result.Distanca }}km)</span></td>
                     <td>{{ result.Tempo }}</td>
                 </tr>
                 </tbody>

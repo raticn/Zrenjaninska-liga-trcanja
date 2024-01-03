@@ -24,6 +24,9 @@ export default {
             id: 0,
             sr: "",
             en: "",
+            rezultati: [],
+            poslIme: "",
+            poslPrezime: "",
         };
     },
     methods: {
@@ -55,7 +58,6 @@ export default {
             fd.append('kolo', this.poslednjeKolo + 1);
             // fd.append('sid', sid)
             let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
-            console.log(this.ime, this.prezime, this.kategorija, this.vreme, this.distancaKola, 'post',res);
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
@@ -70,10 +72,12 @@ export default {
                 let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
-                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, ukupnoVreme });
+                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola });
+                this.trkaId = null
             }
             else {
                 let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+                this.trkaId = null
             }
             this.ime = "";
             this.prezime = "";
@@ -119,34 +123,45 @@ export default {
         ...mapState(useLigaStore, ['isAdmin']),
     },
     async mounted() {
-        let sid = this.getCookie("sid")
-        console.log(sid, this.isAdmin);
-        if(this.isAdmin != 1 || sid.value != undefined) {
-            this.$router.push('/')
-        }
-        else{
+        // let sid = this.getCookie("sid")
+        // console.log(sid, this.isAdmin);
+        // if(this.isAdmin != 1 || sid.value != undefined) {
+        //     this.$router.push('/')
+        // }
+        // else{
             let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
             this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
             this.poslednjiDatum = res.data.odgovor[0].Datum;
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
-        }
+        // }
+
+            let round = res.data.odgovor[0].poslednje_kolo
+            this.rezultati = await axios.get('https://238p123.mars2.mars-hosting.com/API/rezultati', {
+                params: {
+                    kolo: round
+                }
+            })
+            this.poslIme = this.rezultati.data.poslednjeKoloRezultati[this.rezultati.data.poslednjeKoloRezultati.length - 1].rez_ime
+            this.poslPrezime = this.rezultati.data.poslednjeKoloRezultati[this.rezultati.data.poslednjeKoloRezultati.length - 1].rez_prezime
     },
 }
 </script>
 
 <template>
     <div class="adminWrapper">
+
         <RouterLink to="/"><img src="../assets/zltLogo.svg" alt="Zrenjaninska liga trcanja logo slika"></RouterLink>
-        <p class="adminHeading">Pozdrav, Nemanja!</p>
+        <p class="adminHeading">PROBA</p>
         <p class="poslKolo">Poslednje kolo: {{ poslednjeKolo }}.  ({{ poslednjiDatum }})</p>
         <p class="novKolo">Novo kolo: {{ poslednjeKolo + 1 }}.</p>
         <input type="text" v-model="datumKola" placeholder="Datum kola (0000-00-00)">
         <button class="adminBtn" @click="addRound">Dodaj kolo</button>
         <br>
         <br>
-        <div class="addPerson" v-if="this.popup">
+        <div class="addPerson" v-if="!this.popup">
+            <p class="novKolo">Poslednjeg si dodao: {{ this.poslIme }} {{ this.poslPrezime }}</p>
             <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
             <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
             <input type="text" v-model="kategorija" placeholder="Kategorija (m ili z)">
