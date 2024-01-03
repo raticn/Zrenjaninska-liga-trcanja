@@ -147,7 +147,6 @@ else if(window.screen.width > 1024) {
     document.querySelector(".rec1").classList.add("fromTop1")
     document.querySelector(".rec2").classList.add("fromTop2")
     document.querySelector(".rec3").classList.add("fromTop3")
-}
     let images = document.querySelectorAll(".slike")
         images.forEach(function(img, index){
         img.style.left = `${index * 100}%`
@@ -156,14 +155,17 @@ else if(window.screen.width > 1024) {
         this.counter++
         this.carousel()
       }, 4000)
-    let images2 = document.querySelectorAll(".slike2")
-        images2.forEach(function(img, index){
-        img.style.left = `${index * 100}%`
-      });
-      setInterval(() =>{
-        this.counter++
-        this.carousel2()
-      }, 4000)
+}
+    if(window.screen.width < 600) {
+      let images2 = document.querySelectorAll(".slike2")
+          images2.forEach(function(img, index){
+          img.style.left = `${index * 100}%`
+        });
+        setInterval(() =>{
+          this.counter++
+          this.carousel2()
+        }, 4000)
+    }
   },
   created() {
     library.add(faPersonRunning, faEnvelope, faClock, faLocationDot, faChevronLeft, faChevronRight, faInstagram, faYoutube)
@@ -1314,6 +1316,9 @@ align-items: center;
   }
   .carousel2{
     display: block;
+  }
+  .left, .right{
+    top: 40%;
   }
   .rec1, .rec2, .rec3{
     width: 95vw;
