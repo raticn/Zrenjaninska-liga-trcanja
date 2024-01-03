@@ -108,6 +108,15 @@ export default {
     display: none;
 }
 .nav{
+    position: fixed;
+    background-color: #fff;
+    border-bottom: 2px solid #1f3242;
+    box-shadow: 0 0 10px #1f3242;
+}
+.nav .navLink a{
+    color: #1f3242;
+}
+.nav{
     position: absolute;
     top: 0;
     left: 0;

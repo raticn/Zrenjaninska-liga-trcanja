@@ -5,7 +5,7 @@ import Footer from '@/components/Footer.vue'
 import axios from "axios"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faPersonRunning, faEnvelope, faClock, faLocationDot} from '@fortawesome/free-solid-svg-icons'
+import { faPersonRunning, faEnvelope, faClock, faLocationDot, faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { mapActions, mapState } from 'pinia'
 import { useLigaStore } from '../store/ligaStore'
@@ -24,6 +24,7 @@ export default {
       asPopup: false,
       images: [],
       rez: [],
+      counter: 0,
     }
   },
   components: {
@@ -62,7 +63,33 @@ export default {
       document.querySelector(".poslednjeKoloWrapper").style.height = "auto"
       document.querySelector(".poslednjeKoloWrapper").style.overflowY = "auto"
       document.querySelector(".moreResults").style.display = "none"
-    }
+    },
+    carousel(){
+      let images = document.querySelectorAll(".slike")
+      if(this.counter === images.length){
+          this.counter = 0
+      }
+      if(this.counter < 0){
+          this.counter = images.length -1
+      }
+
+      images.forEach((slide) => {
+          slide.style.transform = `translateX(-${ this.counter * 100}%)`
+      })
+      },
+      carousel2(){
+      let images = document.querySelectorAll(".slike2")
+      if(this.counter === images.length){
+          this.counter = 0
+      }
+      if(this.counter < 0){
+          this.counter = images.length -1
+      }
+
+      images.forEach((slide) => {
+          slide.style.transform = `translateX(-${ this.counter * 100}%)`
+      })
+      }
   },
   computed: {
     ...mapState(useLigaStore, ['textObj', 'longText', 'lang']),
@@ -121,9 +148,25 @@ else if(window.screen.width > 1024) {
     document.querySelector(".rec2").classList.add("fromTop2")
     document.querySelector(".rec3").classList.add("fromTop3")
 }
+    let images = document.querySelectorAll(".slike")
+        images.forEach(function(img, index){
+        img.style.left = `${index * 100}%`
+      });
+      setInterval(() =>{
+        this.counter++
+        this.carousel()
+      }, 4000)
+    let images2 = document.querySelectorAll(".slike2")
+        images2.forEach(function(img, index){
+        img.style.left = `${index * 100}%`
+      });
+      setInterval(() =>{
+        this.counter++
+        this.carousel2()
+      }, 4000)
   },
   created() {
-    library.add(faPersonRunning, faEnvelope, faClock, faLocationDot, faInstagram, faYoutube)
+    library.add(faPersonRunning, faEnvelope, faClock, faLocationDot, faChevronLeft, faChevronRight, faInstagram, faYoutube)
   }
 }
 </script>
@@ -132,6 +175,18 @@ else if(window.screen.width > 1024) {
   <Nav />
   <section aria-label="Sekcija: Hero">
     <div class="heroWrapper">
+      <div class="carousel">
+        <FontAwesomeIcon @click=" this.counter--; carousel()" class="carouselIcons left" icon="fa-solid fa-chevron-left"></FontAwesomeIcon>
+        <img class="slike" src="https://238p123.mars2.mars-hosting.com/API/pictures/12" alt="Grupna slika trkača">
+        <img class="slike" src="https://238p123.mars2.mars-hosting.com/API/pictures/11" alt="Grupna slika trkača">
+        <FontAwesomeIcon @click=" this.counter++;carousel()" class="carouselIcons right" icon="fa-solid fa-chevron-right"></FontAwesomeIcon>
+      </div>
+      <div class="carousel2">
+        <FontAwesomeIcon @click=" this.counter--; carousel2()" class="carouselIcons left" icon="fa-solid fa-chevron-left"></FontAwesomeIcon>
+        <img class="slike2" src="https://238p123.mars2.mars-hosting.com/API/pictures/13" alt="Grupna slika trkača">
+        <img class="slike2" src="https://238p123.mars2.mars-hosting.com/API/pictures/14" alt="Grupna slika trkača">
+        <FontAwesomeIcon @click=" this.counter++;carousel2()" class="carouselIcons right" icon="fa-solid fa-chevron-right"></FontAwesomeIcon>
+      </div>
       <h1 class="heroText"><span class="rec1">{{ this.textObj.animePrva }}</span> <span class="rec2">{{ this.textObj.animeDruga }}</span> <span class="rec3">{{ this.textObj.animeTreca }}</span></h1>
     </div>
   </section>
@@ -322,12 +377,51 @@ else if(window.screen.width > 1024) {
 }
 /*------------------------------------------ HERO SECTION --------------------------------------*/
 .heroWrapper{
-  background-image: url('https://238p123.mars2.mars-hosting.com/API/pictures/1');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 100vw;
-  height: 97vh;
+  height: 100vh;
+}
+.carousel2{
+  display: none;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.carousel{
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.slike{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.slike2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.left{
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(45%);
+  z-index: 3;
+  font-size: 4em;
+  cursor: pointer;
+  color: #fff;
+}
+.right{
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(45%);
+  z-index: 3;
+  font-size: 4em;
 }
 .rec1, .rec2, .rec3{
     position: absolute;
@@ -1215,6 +1309,12 @@ align-items: center;
 }
 
 @media (max-width: 600px) {
+  .carousel{
+    display: none;
+  }
+  .carousel2{
+    display: block;
+  }
   .rec1, .rec2, .rec3{
     width: 95vw;
 }

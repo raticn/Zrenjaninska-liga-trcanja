@@ -153,14 +153,14 @@ export default {
     <div class="adminWrapper">
 
         <RouterLink to="/"><img src="../assets/zltLogo.svg" alt="Zrenjaninska liga trcanja logo slika"></RouterLink>
-        <p class="adminHeading">PROBA</p>
+        <p class="adminHeading">Pozdrav, Nemanja!</p>
         <p class="poslKolo">Poslednje kolo: {{ poslednjeKolo }}.  ({{ poslednjiDatum }})</p>
         <p class="novKolo">Novo kolo: {{ poslednjeKolo + 1 }}.</p>
         <input type="text" v-model="datumKola" placeholder="Datum kola (0000-00-00)">
         <button class="adminBtn" @click="addRound">Dodaj kolo</button>
         <br>
         <br>
-        <div class="addPerson" v-if="!this.popup">
+        <div class="addPerson" v-if="this.popup">
             <p class="novKolo">Poslednjeg si dodao: {{ this.poslIme }} {{ this.poslPrezime }}</p>
             <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
             <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
