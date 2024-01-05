@@ -187,6 +187,7 @@ else if(window.screen.width > 1024) {
         <FontAwesomeIcon @click=" this.counter--; carousel2()" class="carouselIcons left" icon="fa-solid fa-chevron-left"></FontAwesomeIcon>
         <img class="slike2" src="https://238p123.mars2.mars-hosting.com/API/pictures/13" alt="Grupna slika trkača">
         <img class="slike2" src="https://238p123.mars2.mars-hosting.com/API/pictures/14" alt="Grupna slika trkača">
+        <img class="slike2" src="https://238p123.mars2.mars-hosting.com/API/pictures/15" alt="Grupna slika trkača">
         <FontAwesomeIcon @click=" this.counter++;carousel2()" class="carouselIcons right" icon="fa-solid fa-chevron-right"></FontAwesomeIcon>
       </div>
       <h1 class="heroText"><span class="rec1">{{ this.textObj.animePrva }}</span> <span class="rec2">{{ this.textObj.animeDruga }}</span> <span class="rec3">{{ this.textObj.animeTreca }}</span></h1>
