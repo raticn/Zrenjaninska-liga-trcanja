@@ -15,6 +15,7 @@ export default {
             distancaKola: "",
             popup: false,
             poslednjeKolo: 0,
+            kolo: 0,
             poslednjiDatum: "",
             noviDatum: "",
             trkaId: 0,
@@ -84,6 +85,50 @@ export default {
             this.kategorija = "";
             this.vreme = "";
             this.distancaKola = "";
+        },
+        async addPersonLater() {
+            let ime = this.ime;
+            let prezime = this.prezime;
+            let distancaKola = this.distancaKola;
+            let vremeKola = this.vreme;
+            let kategorija = this.kategorija;
+            let kolo = this.kolo;
+            let fd = new FormData();
+            fd.append('ime', ime);
+            fd.append('prezime', prezime);
+            fd.append('kategorija', kategorija);
+            fd.append('vreme', this.vreme);
+            fd.append('distancaKola', distancaKola);
+            fd.append('kolo', kolo);
+            // fd.append('sid', sid)
+            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
+            let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
+            for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
+                if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
+                    this.trkaId = trkaciGet.data.SpisakTrkaca[i].Id;
+                    this.index = i;
+                }
+            }
+            if (this.trkaId) {
+                let id = this.trkaId;
+                let i = this.index;
+                let ukupnaDistanca = trkaciGet.data.SpisakTrkaca[i].UkupnaDistanca;
+                let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
+                let distancaKola = this.distancaKola;
+                let vremeKola = this.vreme;
+                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola });
+                this.trkaId = null
+            }
+            else {
+                let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+                this.trkaId = null
+            }
+            this.ime = "";
+            this.prezime = "";
+            this.kategorija = "";
+            this.vreme = "";
+            this.distancaKola = "";
+            this.kolo = "";
         },
         async addNewDate() {
             let fd = new FormData();
@@ -178,6 +223,18 @@ export default {
         <br>
         <button class="adminBtn" @click="reload">Zavrsi</button>
         <br>
+        <br>
+        <br>
+        <div class="addPerson" >
+            <p class="novKolo">Naknadno dodavanje trkača u kolo: </p>
+            <input type="text" v-model="kolo" placeholder="Unesi broj kola u koje se dodaje trkač">
+            <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
+            <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
+            <input type="text" v-model="kategorija" placeholder="Kategorija (m ili z)">
+            <input type="text" v-model="vreme" placeholder="Vreme - format 00:00:00 (sati:minuti:sekunde)">
+            <input type="text" v-model="distancaKola" placeholder="Kilometri (samo broj)">
+            <button class="adminBtn" @click="addPersonLater">Dodaj trkača</button>
+        </div>
         <br>
         <!-- <input class="tekst" type="text" v-model="id" placeholder="id">
         <br>
