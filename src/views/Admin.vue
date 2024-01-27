@@ -28,6 +28,7 @@ export default {
             rezultati: [],
             poslIme: "",
             poslPrezime: "",
+            personPopup: false,
         };
     },
     methods: {
@@ -58,7 +59,6 @@ export default {
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', this.poslednjeKolo + 1);
             // fd.append('sid', sid)
-            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
@@ -77,14 +77,31 @@ export default {
                 this.trkaId = null
             }
             else {
-                let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
-                this.trkaId = null
+                this.personPopup = true
             }
+        },
+        async addPerson2() {
+            let ime = this.ime;
+            let prezime = this.prezime;
+            let distancaKola = this.distancaKola;
+            let vremeKola = this.vreme;
+            let kategorija = this.kategorija;
+            let fd = new FormData();
+            fd.append('ime', ime);
+            fd.append('prezime', prezime);
+            fd.append('kategorija', kategorija);
+            fd.append('vreme', this.vreme);
+            fd.append('distancaKola', distancaKola);
+            fd.append('kolo', this.poslednjeKolo + 1);
+            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
+            let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+            this.trkaId = null
             this.ime = "";
             this.prezime = "";
             this.kategorija = "";
             this.vreme = "";
             this.distancaKola = "";
+            this.personPopup = false
         },
         async addPersonLater() {
             let ime = this.ime;
@@ -101,7 +118,6 @@ export default {
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', kolo);
             // fd.append('sid', sid)
-            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
@@ -120,15 +136,32 @@ export default {
                 this.trkaId = null
             }
             else {
-                let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
-                this.trkaId = null
+                this.personPopup = true
             }
+        },
+        async addPersonLater2() {
+            let ime = this.ime;
+            let prezime = this.prezime;
+            let distancaKola = this.distancaKola;
+            let vremeKola = this.vreme;
+            let kategorija = this.kategorija;
+            let kolo = this.kolo;
+            let fd = new FormData();
+            fd.append('ime', ime);
+            fd.append('prezime', prezime);
+            fd.append('kategorija', kategorija);
+            fd.append('vreme', this.vreme);
+            fd.append('distancaKola', distancaKola);
+            fd.append('kolo', kolo);
+            let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
+            let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
             this.ime = "";
             this.prezime = "";
             this.kategorija = "";
             this.vreme = "";
             this.distancaKola = "";
             this.kolo = "";
+            this.personPopup = !this.personPopup
         },
         async addNewDate() {
             let fd = new FormData();
@@ -205,7 +238,7 @@ export default {
         <button class="adminBtn" @click="addRound">Dodaj kolo</button>
         <br>
         <br>
-        <div class="addPerson" v-if="this.popup">
+        <div class="addPerson" v-if="!this.popup">
             <p class="novKolo">Poslednjeg si dodao: {{ this.poslIme }} {{ this.poslPrezime }}</p>
             <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
             <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
@@ -213,15 +246,17 @@ export default {
             <input type="text" v-model="vreme" placeholder="Vreme - format 00:00:00 (sati:minuti:sekunde)">
             <input type="text" v-model="distancaKola" placeholder="Kilometri (samo broj)">
             <button class="adminBtn" @click="addPerson">Dodaj trkača</button>
+            <div class="personPopup" v-if="this.personPopup">
+                <p>Da li je ovo novi trkač?</p>
+                <button class="yesBtn" @click="addPerson2">Da</button>
+                <button class="noBtn" @click="this.personPopup = !this.personPopup">Ne</button>
+            </div>
         </div>
         <br>
         <br>
         <p>Format godina:mesec:dan (0000-00-00 - primer 2024-01-02)</p>
         <input type="text" v-model="noviDatum" placeholder="Datum za novo kolo (najava)">
         <button class="adminBtn" @click="addNewDate">Dodaj datum za {{ sledeceKolo + 1}}. kolo</button>
-        <br>
-        <br>
-        <button class="adminBtn" @click="reload">Zavrsi</button>
         <br>
         <br>
         <br>
@@ -234,7 +269,15 @@ export default {
             <input type="text" v-model="vreme" placeholder="Vreme - format 00:00:00 (sati:minuti:sekunde)">
             <input type="text" v-model="distancaKola" placeholder="Kilometri (samo broj)">
             <button class="adminBtn" @click="addPersonLater">Dodaj trkača</button>
+            <div class="personPopup" v-if="this.personPopup">
+                <p>Da li je ovo novi trkač?</p>
+                <button class="yesBtn" @click="addPersonLater2">Da</button>
+                <button class="noBtn" @click="this.personPopup = !this.personPopup">Ne</button>
+            </div>
         </div>
+        <br>
+        <button class="adminBtn" @click="reload">Zavrsi</button>
+        <br>
         <br>
         <!-- <input class="tekst" type="text" v-model="id" placeholder="id">
         <br>
@@ -296,6 +339,41 @@ textarea{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.personPopup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .8);
+}
+.personPopup p{
+    font-size: 3em;
+    color: #fff;
+    text-align: center;
+    padding-top: 10%;
+    margin-bottom: 1em;
+}
+.yesBtn{
+    font-size: 1.5em;
+    color: #fff;
+    background: green;
+    padding: 10px 20px;
+    border: none;
+    display: inline-block;
+    margin-left: 40%;
+    cursor: pointer;
+}
+.noBtn{
+    font-size: 1.5em;
+    color: #fff;
+    background: red;
+    padding: 10px 20px;
+    border: none;
+    display: inline-block;
+    margin-left: 50px;
+    cursor: pointer;
 }
 .adminBtn{
     border: 2px solid #1f3242;

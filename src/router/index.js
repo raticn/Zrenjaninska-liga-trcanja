@@ -16,7 +16,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        title: "Zrenjaninska Liga Trčanja",
+        title: "Zrenjaninska Liga Trčanja: Sve što Treba da Znate",
         description: "Upoznajte ideju i ciljeve Zrenjaninske Lige Trčanja. Okupljamo se svake nedelje za zajedničko trčanje, zabavu i druženje. Pridružite nam se!"
       }
     },
@@ -26,7 +26,7 @@ const router = createRouter({
       component: Liga,
       meta: {
         title: "Zrenjaninska Liga Trčanja - Rezultati Prethodnih Kola",
-        description: "Saznajte više o Zrenjaninskoj Trkačkoj Ligi. Pridružite se svakog leta i zime, trčite 5km, podstičite se međusobno i postanite deo zajednice ljubitelja trčanja"
+        description: "Saznajte više o Zrenjaninskoj Trkačkoj Ligi. Pridružite nam se, trčite 5km, podstičite se međusobno i postanite deo zajednice ljubitelja trčanja!"
       }
       
     },
@@ -45,7 +45,7 @@ const router = createRouter({
       name: 'rekordi',
       component: Rekordi,
       meta: {
-        title: "Rekordi Zrenjaninske Lige Trčanja",
+        title: "Tabele Rekorda Zrenjaninske Lige Trčanja",
         description: "Pogledajte najbrže rezultate u Zrenjaninskoj Trkačkoj Ligi. Postavite svoje rekorde i budite deo trkačke zajednice koja teži ka vrhunskim dostignućima."
       }
     },
@@ -92,7 +92,20 @@ router.beforeEach((to, from, next) => {
     document.getElementsByTagName('head')[0].appendChild(newMetaDesc);
   }
 
+  const canonicalLink = document.querySelector('link[rel="canonical"]');
+  if (canonicalLink) {
+    canonicalLink.setAttribute('href', getCanonicalUrl(to));
+  } else {
+    const newCanonicalLink = document.createElement('link');
+    newCanonicalLink.rel = "canonical";
+    newCanonicalLink.href = getCanonicalUrl(to);
+    document.getElementsByTagName('head')[0].appendChild(newCanonicalLink);
+  }
+
   next();
 });
 
+function getCanonicalUrl(route) {
+  return window.location.origin + route.fullPath;
+}
 export default router

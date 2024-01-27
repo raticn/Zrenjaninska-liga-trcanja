@@ -159,7 +159,7 @@ export default {
     font-size: 3em;
 }
 .closePopup{
-    position: absolute;
+    position: fixed;
     top: .3em;
     right: .5em;
     background-color: transparent;

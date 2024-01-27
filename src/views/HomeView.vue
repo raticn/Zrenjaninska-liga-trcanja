@@ -44,7 +44,6 @@ export default {
           })
           this.rez = res.data.rezultati
           this.popup = this.kolo
-          console.log(this.rez, this.kolo);
       },
       formatDate(dateString) {
       const dateObject = new Date(dateString);
