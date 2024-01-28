@@ -29,6 +29,7 @@ export default {
             poslIme: "",
             poslPrezime: "",
             personPopup: false,
+            addPersonPopup: false,
         };
     },
     methods: {
@@ -73,8 +74,14 @@ export default {
                 let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
+                let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
                 let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola });
                 this.trkaId = null
+                this.ime = "";
+                this.prezime = "";
+                this.kategorija = "";
+                this.vreme = "";
+                this.distancaKola = "";
             }
             else {
                 this.personPopup = true
@@ -136,7 +143,7 @@ export default {
                 this.trkaId = null
             }
             else {
-                this.personPopup = true
+                this.addPersonPopup = true
             }
         },
         async addPersonLater2() {
@@ -161,7 +168,7 @@ export default {
             this.vreme = "";
             this.distancaKola = "";
             this.kolo = "";
-            this.personPopup = !this.personPopup
+            this.addPersonPopup = !this.addPersonPopup
         },
         async addNewDate() {
             let fd = new FormData();
@@ -204,11 +211,12 @@ export default {
         // let sid = this.getCookie("sid")
         // console.log(sid, this.isAdmin);
         // if(this.isAdmin != 1 || sid.value != undefined) {
-        //     this.$router.push('/')
-        // }
-        // else{
-            let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
-            this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
+            //     this.$router.push('/')
+            // }
+            // else{
+                let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/kolo');
+                this.poslednjeKolo = Number(res.data.odgovor[0].poslednje_kolo);
+                console.log(this.poslednjeKolo,'pk');
             this.poslednjiDatum = res.data.odgovor[0].Datum;
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
@@ -238,7 +246,7 @@ export default {
         <button class="adminBtn" @click="addRound">Dodaj kolo</button>
         <br>
         <br>
-        <div class="addPerson" v-if="!this.popup">
+        <div class="addPerson" v-if="this.popup">
             <p class="novKolo">Poslednjeg si dodao: {{ this.poslIme }} {{ this.poslPrezime }}</p>
             <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
             <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
@@ -262,6 +270,7 @@ export default {
         <br>
         <div class="addPerson" >
             <p class="novKolo">Naknadno dodavanje trkača u kolo: </p>
+            <label for="">Upisi broj kola u koje se dodaje trkač:</label>
             <input type="text" v-model="kolo" placeholder="Unesi broj kola u koje se dodaje trkač">
             <input type="text" v-model="ime" placeholder="Ime (koristi š,č...)">
             <input type="text" v-model="prezime" placeholder="Prezime (koristi š,č...)">
@@ -269,10 +278,10 @@ export default {
             <input type="text" v-model="vreme" placeholder="Vreme - format 00:00:00 (sati:minuti:sekunde)">
             <input type="text" v-model="distancaKola" placeholder="Kilometri (samo broj)">
             <button class="adminBtn" @click="addPersonLater">Dodaj trkača</button>
-            <div class="personPopup" v-if="this.personPopup">
+            <div class="personPopup" v-if="this.addPersonPopup">
                 <p>Da li je ovo novi trkač?</p>
                 <button class="yesBtn" @click="addPersonLater2">Da</button>
-                <button class="noBtn" @click="this.personPopup = !this.personPopup">Ne</button>
+                <button class="noBtn" @click="this.addPersonPopup = !this.addPersonPopup">Ne</button>
             </div>
         </div>
         <br>
@@ -316,6 +325,11 @@ textarea{
 .novKolo {
     font-size: 2em;
     font-weight: 700;
+}
+label{
+    font-size: 1.3em;
+    font-weight: 900;
+    margin-top: .3em;
 }
 .adminWrapper input{
     border: 2px solid #1f3242;
