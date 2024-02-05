@@ -36,9 +36,13 @@ export default {
         let res = await axios.get('https://238p123.mars2.mars-hosting.com/API/rekordi')
         this.topM = res.data.Top10Muski
         this.topZ = res.data.Top10Zene
-        console.log(this.topZ);
         this.topAll = res.data.Top10Svi
+        // this.topAll.sort((a, b) => b.Distanca - a.Distanca);
+        this.topAll = this.topAll.filter(result => result.Distanca === 5)
+        console.log(this.topAll,'all');
         this.topGodina = res.data.Top10OvaGodina
+        this.topGodina = this.topAll.filter(result => result.Distanca === 5)
+        console.log(this.topGodina);
         this.topDistanca = res.data.Top10Distanca
         this.topDistanca.sort((a, b) => {
             if (a.Distanca !== b.Distanca) {
