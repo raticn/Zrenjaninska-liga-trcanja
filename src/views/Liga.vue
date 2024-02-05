@@ -42,8 +42,9 @@ export default {
 
         return formattedDate;
         },
-        filteredResults(category) {
-            return this.rez.filter(result => result.rez_kategorija === category);
+        sortedAndFilteredResults(category) {
+            const sortedResults = this.rez.filter(result => result.rez_kategorija === category).sort((a, b) => b.rez_distanca - a.rez_distanca);
+            return sortedResults;
         },
     },
     computed: {
@@ -83,7 +84,7 @@ export default {
             </tr>
             </thead>
             <tbody>
-                <tr v-for="(result, index) in filteredResults('m')" :key="'m' + index" class="menColumn">
+                <tr v-for="(result, index) in sortedAndFilteredResults('m')" :key="'m' + index" class="menColumn">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
                     <td>{{ textObj.muskarci }}</td>
@@ -91,7 +92,7 @@ export default {
                     <td>{{ result.Tempo }}</td>
                 </tr>
                 <br>
-                <tr v-for="(result, index) in filteredResults('z')" :key="'z' + index" class="womenColumn">
+                <tr v-for="(result, index) in sortedAndFilteredResults('z')" :key="'z' + index" class="womenColumn">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.rez_ime }} {{ result.rez_prezime }}</td>
                     <td>{{ textObj.zene }}</td>
