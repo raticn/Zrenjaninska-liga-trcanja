@@ -44,6 +44,7 @@ export default {
         },
         sortedAndFilteredResults(category) {
             const sortedResults = this.rez.filter(result => result.rez_kategorija === category).sort((a, b) => b.rez_distanca - a.rez_distanca);
+            console.log(sortedResults,'sort');
             return sortedResults;
         },
     },
