@@ -76,7 +76,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topDistanca" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
+                <tr v-for="(result, index) in this.topDistanca.slice(0, 10)" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
