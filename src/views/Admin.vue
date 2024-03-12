@@ -111,7 +111,8 @@ export default {
             this.personPopup = false
         },
         async addPersonLater() {
-            let ime = this.ime;
+            try {
+                let ime = this.ime;
             let prezime = this.prezime;
             let distancaKola = this.distancaKola;
             let vremeKola = this.vreme;
@@ -140,10 +141,20 @@ export default {
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
                 let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola });
+                let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
                 this.trkaId = null
+                this.ime = "";
+                this.prezime = "";
+                this.kategorija = "";
+                this.vreme = "";
+                this.distancaKola = "";
+                this.kolo = "";
             }
             else {
                 this.addPersonPopup = true
+            }
+            } catch (error) {
+                console.log('error', error);
             }
         },
         async addPersonLater2() {
