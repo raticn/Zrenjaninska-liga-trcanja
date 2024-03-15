@@ -1066,6 +1066,48 @@ align-items: center;
 
 /* ---------------------------------------RESPONSIVE -------------------------------------*/
 
+@media (min-width: 2000px) and (max-width: 2600px) {
+  .najava h2, .ukratkoText h2, .poslednjeKoloHeading, .kolaHeading, .eckaNajava, .prijateljiLigeHeading{
+    font-size: 4em;
+  }
+  .datumNajave{
+    font-size: 3em;
+  }
+  .prijavaBtn, .linkOnama, .faza, .clanIme, .clanBtn{
+    font-size: 2em;
+  }
+  .clan1{
+    font-size: 1.8em;
+  }
+  .ukratkoText p, .womenColumn, .menColumn, .kola .koloDatum, .clanZvanje{
+    font-size: 1.8em;
+  }
+  .koloText{
+    font-size: 3em !important;
+  }
+  .fazeTreningaHeading{
+    font-size: 5em;
+  }
+  .poslednjeKolo img{
+    width: 4em;
+    height: 4em;
+  }
+  .poslednjeKolo{
+    width: 60%;
+  }
+  .ecka{
+    width: 70vw;
+  }
+  .countDown{
+    margin-top: 4em;
+  }
+  .countDownBtn{
+    margin: 8em auto 0;
+    font-size: 2.5em;
+  }
+}
+
+
 @media (max-width: 2000px) {
   .najava h2, .ukratkoText h2, .poslednjeKoloHeading, .kolaHeading, .eckaNajava, .prijateljiLigeHeading{
     font-size: 3.5em;

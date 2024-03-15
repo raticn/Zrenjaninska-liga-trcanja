@@ -155,6 +155,7 @@ export default {
     padding: 0 0 .5em .8em;
     align-self: flex-start;
     font-weight: 700;
+    overflow-y: hidden;
 }
 .formField.focused label {
     color: #ff0c46;
@@ -206,6 +207,22 @@ export default {
 }
 .checkbox a:hover{
     color: #ff0c46;
+}
+
+@media (min-width: 2000px) and (max-width: 2600px) {
+    .formField label, .kontakt input{
+        font-size: 1.8em;
+    }
+    input{
+        height: 80px !important;
+    }
+    .checkbox{
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+    .formBtn{
+        font-size: 2em;
+    }
 }
 
 @media (max-width: 2000px) {

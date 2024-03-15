@@ -96,6 +96,12 @@ export default {
     padding-bottom: 3em;
 }
 
+@media (max-width: 2600px) {
+    .politikaPrivatnosti p, .ppList{
+        font-size: 1.8em;
+    }
+}
+
 @media (max-width: 600px) {
     .politikaPrivatnosti h2{
         padding-top: 3em;

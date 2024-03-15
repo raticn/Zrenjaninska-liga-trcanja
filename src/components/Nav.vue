@@ -185,6 +185,21 @@ a li{
     font-size: 1.5em;
 }
 
+@media (min-width: 2000px) and (max-width: 2600px) {
+    .navLink{
+        font-size: 2em;
+    }
+    .logo{
+        width: 6em;
+    }
+    .navIcon{
+        font-size: 1.5em;
+    }
+    .lang{
+        width: 8em;
+    }
+}
+
 @media (max-width: 2000px) {
     .navLink{
         font-size: 1.8em;

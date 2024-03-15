@@ -196,6 +196,12 @@ export default {
 }
 /*----------------------------------------END OF O NAMA TEKST SECTION --------------------------------*/
 
+@media (min-width: 2000px) and (max-width: 2600px) {
+    .pravila, .ciljevi{
+        font-size: 1.8em;
+    }
+}
+
 @media (max-width: 2000px) {
     .onama h1{
         font-size: 5em;

@@ -148,6 +148,12 @@ export default{
     color: #fff;
 }
 
+@media (min-width: 2000px) and (max-width: 2600px) {
+    .footer_info, .footer_links{
+        font-size: 1.8em;
+    }
+}
+
 @media (max-width: 1350px) {
     .footer_info, .footer_links{
         font-size: 1.3em;
