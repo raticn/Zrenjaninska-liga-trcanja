@@ -196,7 +196,7 @@ else if(window.screen.width > 1024) {
     <div class="najava">
       <h2>{{ this.textObj.naslovPridruzi }}</h2>
       <p class="datumNajave">{{ novoKolo  }}. {{ this.textObj.maKolo }}: {{ noviDatum }}</p>
-      <p class="najavaLokacija"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-location-dot"></FontAwesomeIcon> Karadjordjev Park, 12:00h</p>
+      <p class="najavaLokacija"><FontAwesomeIcon class="popupIcon" icon="fa-solid fa-location-dot"></FontAwesomeIcon> {{ this.textObj.mesto }}, 12:00h</p>
       <RouterLink class="prijavaBtn" aria-label="Link do stranice: Kontakt" to="/kontakt">{{ this.textObj.dugmeTekst }}</RouterLink>
     </div>
   </section>
