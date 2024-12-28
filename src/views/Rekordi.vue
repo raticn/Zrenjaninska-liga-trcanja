@@ -14,6 +14,7 @@ export default {
             topAll: [],
             topGodina: [],
             topDistanca: [],
+            topTrenutnaGodina: [],
         }
     },
     components: {
@@ -26,6 +27,19 @@ export default {
             const parts = tempo.split(':').map(Number);
             return parts[0] * 3600 + parts[1] * 60 + parts[2];
         },
+        formatTime(seconds) {
+            const roundedSeconds = Math.round(seconds);
+            const hours = Math.floor(roundedSeconds / 3600);
+            const minutes = Math.floor((roundedSeconds % 3600) / 60);
+            const remainingSeconds = roundedSeconds % 60;
+
+            // Formatiraj sa vodećim nulama
+            const formattedHours = String(hours).padStart(2, '0');
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+            return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        }
     },
     computed: {
         ...mapState(useLigaStore, ['textObj', 'longText']),
@@ -40,7 +54,9 @@ export default {
         // this.topAll.sort((a, b) => b.Distanca - a.Distanca);
         this.topAll = this.topAll.filter(result => result.Distanca === 5)
         console.log(this.topAll,'all');
-        this.topGodina = res.data.Top10OvaGodina
+        console.log(res.data.Top10Distanca,'res');
+        this.topGodina = res.data.Top10god2024
+        this.topTrenutnaGodina = res.data.topTrenutnaGodina
         this.topGodina = this.topAll.filter(result => result.Distanca === 5)
         console.log(this.topGodina);
         this.topDistanca = res.data.Top10Distanca
@@ -48,9 +64,7 @@ export default {
             if (a.Distanca !== b.Distanca) {
                 return b.Distanca - a.Distanca; 
             } else {
-                const tempoA = this.parseTempo(a.Tempo);
-                const tempoB = this.parseTempo(b.Tempo);
-                return tempoA - tempoB; 
+                return a.TempoSekunde - b.TempoSekunde; 
             }
         });
     },
@@ -82,14 +96,14 @@ export default {
                     <td>{{ result.Prezime }}</td>
                     <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
                     <td>{{ result.Distanca }} km</td>
-                    <td>{{ result.UkupnoVreme }}</td>
-                    <td>{{ result.Tempo }}</td>
+                    <td>{{ this.formatTime(result.UkupnoVremeSekunde) }}</td>
+                    <td>{{ this.formatTime(result.TempoSekunde) }}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="topGodine">
-            <h2>{{ this.textObj.naslovTopGod }}</h2>
+            <h2>{{ this.textObj.naslovTop25God }}</h2>
             <table class="tabela">
                 <thead>
                 <tr>
@@ -103,7 +117,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(result, index) in this.topGodina" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
+                <tr v-for="(result, index) in this.topTrenutnaGodina" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
                     <td>{{ index + 1 }}</td>
                     <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
                     <td>{{ result.Prezime }}</td>
@@ -197,6 +211,33 @@ export default {
             </table>
         </div>
     </div>
+    <div class="topGodine">
+            <h2>{{ this.textObj.naslovTopGod }}</h2>
+            <table class="tabela">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>{{ this.textObj.tabelaRekIme }}</th>
+                    <th>{{ this.textObj.tabelaRekPrezime }}</th>
+                    <th>{{ this.textObj.tabelaRekKat }}</th>
+                    <th>{{ this.textObj.maKolo }}</th>
+                    <th>{{ this.textObj.tabelaVreme }}</th>
+                    <th>{{ this.textObj.tabelaRekTem }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(result, index) in this.topGodina" :key="index" :class="result.Kategorija == 'm' ? 'menColumn' : 'womenColumn'">
+                    <td>{{ index + 1 }}</td>
+                    <td><span v-if="index == 0">🥇</span><span v-else-if="index == 1">🥈</span><span v-else-if="index == 2">🥉</span>{{ result.Ime }}</td>
+                    <td>{{ result.Prezime }}</td>
+                    <td>{{ result.Kategorija == 'm' ? textObj.muskarci : textObj.zene }}</td>
+                    <td>{{ result.Kolo }}</td>
+                    <td>{{ result.Vreme }} <span v-if="result.Distanca < 5">({{ result.Distanca }}km)</span></td>
+                    <td>{{ result.Tempo }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     <Footer />
 </template>
 

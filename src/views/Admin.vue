@@ -30,9 +30,15 @@ export default {
             poslPrezime: "",
             personPopup: false,
             addPersonPopup: false,
+            vremeKolaSekunde: 0,
+            vremeUkupnoSekunde: 0
         };
     },
     methods: {
+        parseTempo(tempo) {
+            const parts = tempo.split(':').map(Number);
+            return parts[0] * 3600 + parts[1] * 60 + parts[2];
+        },
         async addRound() {
             try {
                 let fd = new FormData();
@@ -51,16 +57,18 @@ export default {
             let prezime = this.prezime;
             let distancaKola = this.distancaKola;
             let vremeKola = this.vreme;
+            let vremeKolaSekunde = this.parseTempo(vremeKola)
             let kategorija = this.kategorija;
             let fd = new FormData();
             fd.append('ime', ime);
             fd.append('prezime', prezime);
             fd.append('kategorija', kategorija);
             fd.append('vreme', this.vreme);
+            fd.append('vremeSekunde', this.parseTempo(vremeKola));
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', this.poslednjeKolo + 1);
             // fd.append('sid', sid)
-            let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
+            let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');            
             for (let i = 0; i < trkaciGet.data.SpisakTrkaca.length; i++) {
                 if (ime.trim() == trkaciGet.data.SpisakTrkaca[i].Ime && prezime.trim() == trkaciGet.data.SpisakTrkaca[i].Prezime) {
                     this.trkaId = trkaciGet.data.SpisakTrkaca[i].Id;
@@ -74,8 +82,10 @@ export default {
                 let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
+                let vremeKolaSekunde = this.parseTempo(vremeKola)
+                let vremeUkupnoSekunde = trkaciGet.data.SpisakTrkaca[i].vremeUkupnoSekunde
                 let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
-                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola });
+                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, vremeKolaSekunde, vremeUkupnoSekunde });
                 this.trkaId = null
                 this.ime = "";
                 this.prezime = "";
@@ -98,10 +108,15 @@ export default {
             fd.append('prezime', prezime);
             fd.append('kategorija', kategorija);
             fd.append('vreme', this.vreme);
+            fd.append('vremeSekunde', this.parseTempo(vremeKola));
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', this.poslednjeKolo + 1);
+
+            let vremeKolaSekunde = this.parseTempo(vremeKola)
+            let vremeUkupnoSekunde = this.parseTempo(vremeKola)
+
             let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
-            let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+            let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija, vremeKolaSekunde, vremeUkupnoSekunde });
             this.trkaId = null
             this.ime = "";
             this.prezime = "";
@@ -123,6 +138,7 @@ export default {
             fd.append('prezime', prezime);
             fd.append('kategorija', kategorija);
             fd.append('vreme', this.vreme);
+            fd.append('vremeSekunde', this.parseTempo(vremeKola));
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', kolo);
             // fd.append('sid', sid)
@@ -140,7 +156,9 @@ export default {
                 let ukupnoVreme = trkaciGet.data.SpisakTrkaca[i].UkupnoVreme;
                 let distancaKola = this.distancaKola;
                 let vremeKola = this.vreme;
-                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola });
+                let vremeKolaSekunde = this.parseTempo(vremeKola)
+                let vremeUkupnoSekunde = trkaciGet.data.SpisakTrkaca[i].vremeUkupnoSekunde
+                let trkaciPut = await axios.put('https://238p123.mars2.mars-hosting.com/API/trkaci', { id, ukupnaDistanca, distancaKola, ukupnoVreme, vremeKola, vremeKolaSekunde, vremeUkupnoSekunde });
                 let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
                 this.trkaId = null
                 this.ime = "";
@@ -169,10 +187,13 @@ export default {
             fd.append('prezime', prezime);
             fd.append('kategorija', kategorija);
             fd.append('vreme', this.vreme);
+            fd.append('vremeSekunde', this.parseTempo(vremeKola));
             fd.append('distancaKola', distancaKola);
             fd.append('kolo', kolo);
+            let vremeKolaSekunde = this.parseTempo(vremeKola)
+            let vremeUkupnoSekunde = this.parseTempo(vremeKola)
             let res = await axios.post('https://238p123.mars2.mars-hosting.com/API/rezultati', fd);
-            let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija });
+            let trkaciPost = await axios.post('https://238p123.mars2.mars-hosting.com/API/trkaci', { ime, prezime, distancaKola, vremeKola, kategorija, vremeKolaSekunde, vremeUkupnoSekunde });
             this.ime = "";
             this.prezime = "";
             this.kategorija = "";
@@ -232,8 +253,7 @@ export default {
             let novoK = await axios.get('https://238p123.mars2.mars-hosting.com/API/dodavanjeSledKolo');
             this.sledeceKolo = novoK.data.odgovor[0].novoKolo;
             let trkaciGet = await axios.get('https://238p123.mars2.mars-hosting.com/API/trkaci');
-        // }
-
+        // }            
             let round = res.data.odgovor[0].poslednje_kolo
             this.rezultati = await axios.get('https://238p123.mars2.mars-hosting.com/API/rezultati', {
                 params: {

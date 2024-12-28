@@ -8,6 +8,18 @@ import Onama from '../views/Onama.vue'
 import Kontakt from '../views/Kontakt.vue'
 import PolitikaPrivatnosti from '../views/PolitikaPrivatnosti.vue'
 
+
+// function isAuthenticated() {
+//   const sid = localStorage.getItem('sid'); 
+//   const isAdmin = JSON.parse(localStorage.getItem('isAdmin')); 
+
+//   if (!sid || !isAdmin) {
+//     return false; 
+//   }
+
+//   return true; 
+// }
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,7 +45,10 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: Admin
+      component: Admin,
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/adminLogin',
@@ -101,8 +116,13 @@ router.beforeEach((to, from, next) => {
     newCanonicalLink.href = getCanonicalUrl(to);
     document.getElementsByTagName('head')[0].appendChild(newCanonicalLink);
   }
-
-  next();
+  // if (to.meta.requiresAuth && !isAuthenticated()) {
+    // Ako ruta zahteva autentifikaciju, a korisnik nije autentifikovan, preusmeri na login stranicu
+    // next({ path: '/adminLogin', query: { redirect: to.fullPath } });
+  // } else {
+    // Ako je sve u redu, dozvoli navigaciju
+    next();
+  // }
 });
 
 function getCanonicalUrl(route) {
