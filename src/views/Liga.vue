@@ -66,9 +66,9 @@ export default {
     <Nav v-if="this.popup != this.kolo" />
     <h1>{{ this.textObj.naslov }}</h1>
     <div class="kola">
-        <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.kola" :key="index" :data-id="this.kola.length - index - 1">
+        <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.kola" :key="index" :data-id="this.kola.length - index - 1" :style="{ backgroundColor: kolo.rez_kolo < 53 ? '#1f3242' : '#ff0c46' }">
             <p class="koloText">{{ kolo.rez_kolo }}. {{ this.textObj.maKolo }}</p>
-            <p class="koloDatum">{{ this.formatDate(kolo.dat_datum) }}</p>
+            <p class="koloDatum" :style="{ color: kolo.rez_kolo < 53 ? '#ff0c46' : '#1f3242' }">{{ this.formatDate(kolo.dat_datum) }}</p>
         </div>
     </div>
     <div class="koloPopup" v-if="this.popup == this.kolo">
@@ -131,7 +131,7 @@ export default {
 }
 .kolo{
     width: 80%;
-    background-color: #1f3242;
+    /* background-color: #1f3242; */
     font-weight: 700;
     text-align: center;
     cursor: pointer;
@@ -145,7 +145,7 @@ export default {
 }
 .koloDatum{
     font-size: 1.2em;
-    color: #ff0c46;
+    /* color: #ff0c46; */
 }
 .koloPopup{
     position: fixed;
