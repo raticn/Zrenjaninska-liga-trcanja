@@ -286,7 +286,7 @@ else if(window.screen.width > 1024) {
       <p class="eckaNajava">{{ this.textObj.maEckaNajava }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.maEckaLink }}</a></p>
       <div class="odbrojavanjeWrapper">
           <p class="countDown" aria-live="polite" aria-atomic="true"></p>
-          <a class="countDownBtn" aria-label="Prijavi se za 5. Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/479/" target="_blank">{{ this.textObj.maEckaPrijava }}</a>
+          <a class="countDownBtn" aria-label="Prijavi se za 5. Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/698-5-ulicna-trka-ecka/" target="_blank">{{ this.textObj.maEckaPrijava }}</a>
       </div>
       <div class="overlay"></div>
     </div>
