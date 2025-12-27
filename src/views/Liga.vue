@@ -12,6 +12,11 @@ export default {
             rez: [],
             kolo: null,
             popup: 0,
+            colorRanges: [
+            { max: 52,  bg: '#1f3242', text: '#ff0c46' },
+            { max: 104, bg: '#ff0c46', text: '#1f3242' },
+            { max: Infinity, bg: '#00a86b', text: '#ffffff' }, 
+            ]
         }
     },
     components: {
@@ -47,6 +52,15 @@ export default {
             console.log(sortedResults,'sort');
             return sortedResults;
         },
+        getColors(rezKolo) {
+            return this.colorRanges.find(r => rezKolo <= r.max) || this.colorRanges[this.colorRanges.length - 1]
+        },
+        getBg(rezKolo) {
+            return this.getColors(rezKolo).bg
+        },
+        getTextColor(rezKolo) {
+            return this.getColors(rezKolo).text
+        },
     },
     computed: {
         ...mapState(useLigaStore, ['textObj', 'longText']),
@@ -65,12 +79,27 @@ export default {
 <div class="liga">
     <Nav v-if="this.popup != this.kolo" />
     <h1>{{ this.textObj.naslov }}</h1>
-    <div class="kola">
+    <!-- <div class="kola">
         <div class="kolo" @click="round($event)" v-for="(kolo, index) in this.kola" :key="index" :data-id="this.kola.length - index - 1" :style="{ backgroundColor: kolo.rez_kolo < 53 ? '#1f3242' : '#ff0c46' }">
             <p class="koloText">{{ kolo.rez_kolo }}. {{ this.textObj.maKolo }}</p>
             <p class="koloDatum" :style="{ color: kolo.rez_kolo < 53 ? '#ff0c46' : '#1f3242' }">{{ this.formatDate(kolo.dat_datum) }}</p>
         </div>
-    </div>
+    </div> -->
+    <div class="kola">
+  <div
+    class="kolo"
+    @click="round($event)"
+    v-for="(kolo, index) in kola"
+    :key="index"
+    :data-id="kola.length - index - 1"
+    :style="{ backgroundColor: this.getBg(kolo.rez_kolo) }"
+  >
+    <p class="koloText">{{ kolo.rez_kolo }}. {{ textObj.maKolo }}</p>
+    <p class="koloDatum" :style="{ color: this.getTextColor(kolo.rez_kolo) }">
+      {{ this.formatDate(kolo.dat_datum) }}
+    </p>
+  </div>
+</div>
     <div class="koloPopup" v-if="this.popup == this.kolo">
         <button @click="this.kolo = null" class="closePopup">x</button>
         <h2>{{ this.kolo }}. {{ this.textObj.maKolo }}</h2>
