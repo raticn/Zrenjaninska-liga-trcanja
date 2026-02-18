@@ -113,7 +113,7 @@ export default {
     this.poslednjaCetiri = kola.data.poslednjaCetiri
     this.id = kola.data.poslednjaCetiri[0].rez_kolo
 
-    let countDownDate = new Date("Oct 25, 2025 13:00:00").getTime();
+    let countDownDate = new Date("Oct 31, 2026 13:00:00").getTime();
     
     let x = setInterval(function() {
 
@@ -286,7 +286,7 @@ else if(window.screen.width > 1024) {
       <p class="eckaNajava">{{ this.textObj.maEckaNajava }} <a href="https://ulicnatrkaecka.com/" aria-label="Link do web sajta ulicnatrkaecka.com" target="_blank">{{ this.textObj.maEckaLink }}</a></p>
       <div class="odbrojavanjeWrapper">
           <p class="countDown" aria-live="polite" aria-atomic="true"></p>
-          <a class="countDownBtn" aria-label="Prijavi se za 5. Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/698-5-ulicna-trka-ecka/" target="_blank">{{ this.textObj.maEckaPrijava }}</a>
+          <a class="countDownBtn" aria-label="Prijavi se za 6 . Uličnu trku Ečka (otvara se u novom prozoru)" href="https://trka.rs/events/867-6-ulicna-trka-ecka/" target="_blank">{{ this.textObj.maEckaPrijava }}</a>
       </div>
       <div class="overlay"></div>
     </div>
